@@ -3,1092 +3,221 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ESOA Walkthrough Spine — Imaginova change event</title>
-<meta name="description" content="Full-breadth alignment artifact. High fidelity, zero finality.">
+<title>Imaginova</title>
+<meta name="description" content="One surface. The change loop as the show.">
+<meta name="color-scheme" content="dark">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/chrome.css">
 <link rel="stylesheet" href="assets/css/beats.css">
 </head>
-<body>
+<body data-run="1" data-loop="0" data-conf="steady">
 
 <div class="deck">
+
+<nav class="nav" aria-label="Actions">
+  <div class="nav__actions" id="actions">
+    <button class="nav__act" type="button" data-go="0">Resting</button>
+    <button class="nav__act" type="button" data-go="1">The Friday email</button>
+    <button class="nav__act" type="button" data-go="2">The change</button>
+    <button class="nav__act" type="button" data-go="3">Everyone hears</button>
+    <button class="nav__act" type="button" data-go="4">After</button>
+  </div>
+</nav>
+
 <main class="stage" id="stage">
+  <article class="portal">
+    <h1 class="portal__title">Imaginova</h1>
 
-<!-- ═══════════════════════════════════════════════════════════
-     BEAT 0 — FRAME
-     ═══════════════════════════════════════════════════════════ -->
-<section class="screen" id="beat-0"
-  data-tick="0" data-label="Frame"
-  data-tool="—" data-status="FAKED"
-  data-honesty="None needed; it's the framing."
-  data-why="Kills the &quot;platform = dashboard&quot; confusion in ten seconds and sets the push-first expectation before any screen.">
-
-  <div class="plain">
-    <span class="plain__eyebrow">Before the scenario</span>
-
-    <div class="frame-pair">
-      <div class="frame-box frame-box--muted">
-        <span class="frame-box__label">One</span>
-        <span class="frame-box__name">The delivery engine</span>
-        <p class="frame-box__note">Helps us build. Invisible to you.</p>
+    <section class="portal__section" aria-label="Estimate">
+      <div class="envelope envelope--before">
+        <span class="envelope__figure">$180–220K</span>
+        <span class="tier">directional</span>
       </div>
-
-      <div class="frame-pair__div">not this</div>
-
-      <div class="frame-box frame-box--live">
-        <span class="frame-box__label">Two</span>
-        <span class="frame-box__name">This</span>
-        <p class="frame-box__note">What you're about to see. The experience.</p>
+      <div class="envelope envelope--after" hidden>
+        <span class="envelope__figure">$260–340K</span>
+        <span class="tier">directional</span>
+        <span class="envelope__spread">$80k spread · was $40k</span>
+        <span class="money money--was">was $180–220K</span>
+        <p class="envelope__note">Until we test that, the estimate widens.</p>
       </div>
-    </div>
+      <div class="confidence" aria-live="polite">
+        <div class="confidence__row">
+          <span class="confidence__k">Confidence</span>
+          <span class="confidence__state" id="confState">Steady</span>
+        </div>
+        <p class="confidence__note" id="confNote" hidden></p>
+      </div>
+    </section>
 
-    <p class="plain__line">You don't check on the work.<br>The work <em>checks in with you.</em></p>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     BEAT 1 — RESTING STATE (the Living Record, before anything changes)
-     ═══════════════════════════════════════════════════════════ -->
-<section class="screen" id="beat-1"
-  data-tick="1" data-label="Resting state"
-  data-tool="confidence-lineage (stores it) → artifact agent (renders it)"
-  data-status="FAKED"
-  data-honesty="The &quot;still a bet&quot; column is populated, not empty. Envelope is a range with a confidence tier, not a number."
-  data-why="Establishes that the record exists and is alive before any change — the client isn't only contacted on events. Sets the baseline the change will move.">
-
-  <div class="beat-head">
-    <span class="beat-head__no">01</span>
-    <h2 class="beat-head__title edit">Resting state<span class="beat-head__sub"> — the living record, before anything changes</span></h2>
-  </div>
-
-  <article class="record">
-    <header class="record__masthead">
-      <h3 class="record__title"><small>Engagement · living record</small>Imaginova — AR pool sales</h3>
-      <div class="record__live"><i></i> live · updated 4 days ago</div>
-    </header>
-
-    <!-- The three columns. Only three. -->
-    <section class="record__section">
+    <section class="portal__section">
       <div class="tri">
         <div class="tri__col">
-          <div class="tri__head">What's true now</div>
+          <h2 class="tri__head">What’s true</h2>
           <ul class="tri__list">
-            <li><b>Auth and account provisioning</b> — shipped, in production behind the pilot flag.</li>
-            <li><b>Catalogue navigation</b> — shipped. Saved designs sync across devices.</li>
-            <li><b>AR measurement capture</b> — running on device. Holds on flat, rectangular yards.</li>
-            <li><b>Pricing rules</b> — spec'd and hand-tuned. A rep confirms every number before it goes to the customer.</li>
+            <li><b>Auth</b> — in production, limited to the pilot.</li>
+            <li><b>Catalogue</b> — shipped. Designs sync across devices.</li>
+            <li><b>AR capture</b> — holds on flat, rectangular yards.</li>
+            <li><b>Pricing</b> — a rep confirms every number.</li>
           </ul>
         </div>
-
-        <div class="tri__col">
-          <div class="tri__head">What changed</div>
-          <ul class="tri__list">
-            <li><b>AR under load</b> moved <span class="chip chip--open">open</span> → <span class="chip chip--validating">validating</span> after the 40-device on-site test.</li>
-            <li>Envelope tightened from <span class="money">$165–235K</span> to <span class="money">$180–220K</span> as AR load risk came down.</li>
-            <li>Two pricing rule sets retired — regional variance was narrower than assumed.</li>
-          </ul>
-        </div>
-
-        <!-- Never empty. An empty bet column is a simulation of certainty. -->
         <div class="tri__col tri__col--bet">
-          <div class="tri__head">What's still a bet</div>
+          <h2 class="tri__head">Still a bet</h2>
           <ul class="tri__list">
-            <li><b>Measurement accuracy</b> holds within tolerance on sloped and irregular yards. Untested.</li>
-            <li><b>Pricing logic</b> survives contact with the three regional rule sets we haven't seen yet.</li>
-            <li><b>Rep adoption</b> — we assume reps trust a scanned measurement enough to quote from it.</li>
+            <li class="bet--bounded"><b>Measurement accuracy</b> — holds on flat yards. Untested on slopes, curves, or obstructions.</li>
+            <li class="bet--escalated" hidden><b>Measurement accuracy</b> — a wrong measurement becomes a wrong shipped price.</li>
+            <li><b>Pricing</b> in regions we haven’t seen yet.</li>
+            <li><b>Rep adoption</b> — whether reps will quote from a scan.</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- The one chart. -->
-    <section class="record__section">
-      <h4 class="record__h">Confidence over time</h4>
-      <div class="chart-wrap">
-        <svg class="chart" viewBox="0 0 560 140" role="img" aria-label="Confidence trending up from January to now.">
-          <line class="chart__base" x1="24" y1="120" x2="536" y2="120"></line>
-          <path class="chart__line" d="M40 104 L123 97 L206 82 L289 74 L372 56 L455 44"></path>
-          <circle class="chart__dot" cx="40"  cy="104" r="3"></circle>
-          <circle class="chart__dot" cx="123" cy="97"  r="3"></circle>
-          <circle class="chart__dot" cx="206" cy="82"  r="3"></circle>
-          <circle class="chart__dot" cx="289" cy="74"  r="3"></circle>
-          <circle class="chart__dot" cx="372" cy="56"  r="3"></circle>
-          <circle class="chart__dot chart__dot--now" cx="455" cy="44" r="4.5"></circle>
-          <text class="chart__tick" x="40"  y="135" text-anchor="middle">Jan</text>
-          <text class="chart__tick" x="123" y="135" text-anchor="middle">Feb</text>
-          <text class="chart__tick" x="206" y="135" text-anchor="middle">Mar</text>
-          <text class="chart__tick" x="289" y="135" text-anchor="middle">Apr</text>
-          <text class="chart__tick" x="372" y="135" text-anchor="middle">May</text>
-          <text class="chart__mark" x="455" y="135" text-anchor="middle">now</text>
-        </svg>
-        <p class="chart-caption"><b>Trending up.</b> Every risk we've retired since January has tightened the envelope. None of it makes the open ones smaller.</p>
+    <div class="inbound" hidden>
+      <div class="inbound__when">
+        <canvas class="orb" data-orb="listening" data-orb-when="email" data-orb-size="20" width="20" height="20" aria-hidden="true"></canvas>
+        <time>Fri 16 May · 4:47pm</time>
       </div>
+      <p class="inbound__from"><b>Dana Kellner</b> <span class="inbound__role">client</span></p>
+      <blockquote class="inbound__text">
+        <p>Hey — leadership sat with the prototype Wednesday. Can the app set the price off the scan, no rep in the loop? We want pricing to run itself before the fall selling season. Can you get us a number by early next week?</p>
+      </blockquote>
+    </div>
+
+    <div class="triage" hidden>
+      <section class="triage__block">
+        <h2 class="portal__h">Received — under review</h2>
+        <p>Received. Here’s what we’re looking at.</p>
+      </section>
+
+      <section class="triage__block">
+        <h2 class="portal__h">Asks</h2>
+        <ul class="asks">
+          <li class="asks__item asks__item--scope">
+            <span class="asks__ask">Price off the scan, no rep in the loop</span>
+            <span class="asks__status">Scoping — affects estimate</span>
+          </li>
+          <li class="asks__item">
+            <span class="asks__ask">Before fall selling season</span>
+            <span class="asks__status">Timeline noted</span>
+          </li>
+          <li class="asks__item">
+            <span class="asks__ask">A number by early next week</span>
+            <span class="asks__status">Estimate in progress</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="triage__block">
+        <h2 class="portal__h">What it touches</h2>
+        <p>This leans on measurement accuracy — which we've validated on flat yards, but not on slopes, curves, or obstructions.</p>
+      </section>
+
+      <section class="gate">
+        <h2 class="portal__h">Pending review</h2>
+        <p>The new range waits on a person.</p>
+      </section>
+    </div>
+
+    <div class="change" hidden>
+      <div class="change__head">
+        <canvas class="orb" data-orb="solving" data-orb-when="change" data-orb-size="20" width="20" height="20" aria-hidden="true"></canvas>
+        <p class="change__lede">You asked for pricing to run off the scan, no rep in the loop.</p>
+      </div>
+      <div class="change__body">
+        <div class="loop-step step-fire">
+          <h3 class="loop-step__k">What it leans on</h3>
+          <p>That leans on <em>measurement accuracy</em> — which we've validated on flat yards, but not on slopes, curves, or obstructions.</p>
+          <p>A wrong measurement used to be caught by a person. Take the person out and a wrong price ships.</p>
+        </div>
+
+        <div class="loop-step step-level">
+          <h3 class="loop-step__k">Until we test that</h3>
+          <p>We can’t treat the estimate as tight. Confidence is shaken because the measurement hasn’t been proven on the yards this ask would run on.</p>
+        </div>
+
+        <div class="loop-step step-price">
+          <h3 class="loop-step__k">The estimate</h3>
+          <div class="reprice">
+            <div class="reprice__col reprice__col--was">
+              <span class="reprice__label">Was</span>
+              <span class="reprice__figure">$180–220K</span>
+              <span class="reprice__spread">$40k spread</span>
+              <span class="tier">directional</span>
+            </div>
+            <div class="reprice__arrow" aria-hidden="true">→</div>
+            <div class="reprice__col reprice__col--now">
+              <span class="reprice__label">Now</span>
+              <span class="reprice__figure">$260–340K</span>
+              <span class="reprice__spread">$80k spread · widened</span>
+              <span class="tier">directional</span>
+            </div>
+          </div>
+          <p class="why-range">Until we test that, the estimate widens. Lower confidence is extra width — not only a higher number.</p>
+          <p class="provenance">Reviewed by Rae Oyelaran</p>
+        </div>
+      </div>
+    </div>
+
+    <section class="portal__section pending-block" hidden>
+      <h2 class="portal__h">Pending</h2>
+      <p class="pending__lede">Don’t run pricing off the scan until measurement accuracy is proven.</p>
+      <p class="pending__why">Proving accuracy is cheaper than unwinding a wrong price in front of a buyer.</p>
+      <p class="provenance">Reviewed by Rae Oyelaran</p>
     </section>
 
-    <!-- Risks, with state. -->
-    <section class="record__section">
-      <h4 class="record__h">Open risks</h4>
-      <div class="risks">
-        <div class="risk">
-          <span class="risk__name">Measurement accuracy</span>
-          <span class="chip chip--open">open</span>
-          <span class="risk__sev">severity · high</span>
-          <p class="risk__note">Holds on flat rectangular yards. Never tested on slope, curve, or obstruction.</p>
-        </div>
-        <div class="risk">
-          <span class="risk__name">AR performance under load</span>
-          <span class="chip chip--validating">validating</span>
-          <span class="risk__sev">severity · medium</span>
-          <p class="risk__note">40-device on-site test passed. Second test scheduled before the pilot widens.</p>
-        </div>
+    <section class="ask" id="ask" hidden>
+      <div class="ask__field">
+        <div class="ask__prompt" id="ask-prompt">Why did the estimate move — and why is it wider?</div>
+        <button class="tap ask__go" type="button" data-ask aria-describedby="ask-prompt">Ask</button>
       </div>
-    </section>
-
-    <!-- Envelope: a range with a tier. Never a bare number. -->
-    <section class="record__section">
-      <h4 class="record__h">Commercial envelope</h4>
-      <div class="envelope">
-        <span class="envelope__figure">$180–220K</span>
-        <span class="chip chip--definitive">high confidence</span>
-        <p class="envelope__note">Narrow because the risks carrying it are validating, not open. The range is the honest width of what we know.</p>
-      </div>
-    </section>
-
-    <!-- Capabilities at their levels. -->
-    <section class="record__section">
-      <h4 class="record__h">Capabilities in play</h4>
-      <div class="caps">
-        <div class="cap">
-          <span class="cap__name">Core systems engineering</span>
-          <span class="level">L3</span>
-          <span class="cap__surface">surface · 4 services</span>
-        </div>
-        <div class="cap">
-          <span class="cap__name">Production hardening</span>
-          <span class="level">L3</span>
-          <span class="cap__surface">surface · 1 pilot estate</span>
-        </div>
-        <div class="cap">
-          <span class="cap__name">AI systems engineering</span>
-          <span class="level">in-the-loop</span>
-          <span class="cap__surface">surface · pricing assist</span>
-          <p class="cap__note">A rep confirms every price the system proposes. The human is the check.</p>
-        </div>
+      <div class="ask__answer">
+        <p>You asked for pricing to run off the scan, no rep in the loop. That leans on measurement accuracy — which we've validated on flat yards, but not on slopes, curves, or obstructions. Until we test that, the estimate widens. Here's the plan to close it: validate accuracy on slopes, curves, and obstructions (~2 weeks). If it holds, the range tightens toward $180–220K.</p>
+        <button class="cite" type="button" data-source="src-accuracy" aria-controls="src-accuracy" aria-expanded="false">DEC-0114 · 12 Mar</button>
+        <aside class="source" id="src-accuracy" hidden>
+          <span class="source__id">DEC-0114</span>
+          Accuracy before pricing off the scan.
+          <span class="source__date">12 Mar</span>
+          <p>A rep stays in the loop until measurement accuracy is proven on irregular yards.</p>
+        </aside>
       </div>
     </section>
   </article>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     BEAT 2 — THE TRIGGER (the Friday email lands)
-     ═══════════════════════════════════════════════════════════ -->
-<section class="screen is-channel" id="beat-2"
-  data-tick="2" data-label="The trigger"
-  data-tool="channel (ingest)" data-status="FAKED"
-  data-honesty="Shows the input in the client's own words before the system touches it — no premature confidence."
-  data-why="This is the change event entering the system. It's the exact real moment from Change Order #2 — the email that resequenced the build.">
-
-  <div class="beat-head">
-    <span class="beat-head__no">02</span>
-    <h2 class="beat-head__title edit">The trigger<span class="beat-head__sub"> — the Friday email lands</span></h2>
-  </div>
-
-  <div class="channel">
-    <div class="channel__bar">
-      <span class="channel__dots"><i></i><i></i><i></i></span>
-      <span class="channel__name">imaginova · build</span>
-      <span class="channel__meta">client + delivery</span>
-    </div>
-
-    <div class="thread">
-      <div class="msg">
-        <div class="msg__avatar">DK</div>
-        <div class="msg__body">
-          <div class="msg__head">
-            <span class="msg__who">Dana Kellner</span>
-            <span class="msg__role">Imaginova</span>
-            <span class="msg__time">Fri 16 May · 4:12 PM</span>
-          </div>
-          <!-- Raw. Unprocessed. The client's own words. -->
-          <div class="msg__text msg__text--raw">
-            <p>Hey — leadership sat with the prototype on Wednesday and they want to push further before the fall selling season. Four things:</p>
-            <ol>
-              <li>Pricing should run itself. Right now a rep still confirms the number — we want the app to set the price off the scan, no rep in the loop.</li>
-              <li>More AR realism. The water and the coping still read as CG.</li>
-              <li>We need the last six years of quote history out of the old system and into this one.</li>
-              <li>Photoreal renderings the customer keeps — something they'd put on the fridge.</li>
-            </ol>
-            <p>Can you get us a number by early next week? Board meets on the 28th.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Subtle working state. Never a spinner. -->
-      <div class="working">
-        <i></i><i></i><i></i>
-        <span>scoping…</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     BEAT 3 — THE CHANGE CARD  ★ HERO
-     ═══════════════════════════════════════════════════════════ -->
-<section class="screen is-channel" id="beat-3"
-  data-tick="3" data-label="The Change Card ★"
-  data-tool="change runner (re-fires risk, re-levels, re-counts) → artifact agent (writes the card) → channel (pushes it)"
-  data-status="FAKED"
-  data-honesty="Revised number is a range, tagged directional. The card names the one open risk driving the range. A small note: commercial re-estimate reviewed by a person."
-  data-why="The one artifact nothing else in the market sends. It proves the model by doing — repricing against retired-and-open risk — not describing.">
-
-  <div class="beat-head">
-    <span class="beat-head__no">03</span>
-    <h2 class="beat-head__title edit">The Change Card<span class="beat-head__sub"> — pushed back, ~20 minutes later</span></h2>
-  </div>
-
-  <div class="channel">
-    <div class="channel__bar">
-      <span class="channel__dots"><i></i><i></i><i></i></span>
-      <span class="channel__name">imaginova · build</span>
-      <span class="channel__meta">client + delivery</span>
-    </div>
-
-    <div class="thread">
-      <div class="msg">
-        <div class="msg__avatar msg__avatar--system">E</div>
-        <div class="msg__body">
-          <div class="msg__head">
-            <span class="msg__who">Engagement</span>
-            <span class="msg__role">pushed · no one asked</span>
-            <span class="msg__time">Fri 16 May · 4:31 PM</span>
-          </div>
-
-          <div class="card">
-            <div class="card__kicker">
-              <span class="label label--accent">Change scoped</span>
-              <span class="chip chip--directional">directional</span>
-            </div>
-
-            <p class="card__lede">Your change is scoped.</p>
-
-            <div class="card__body">
-              <p>Autonomous pricing moves <strong>AI systems engineering</strong> from <span class="level">in-the-loop</span> → <span class="level level--step">autonomous</span> — a deeper level of judgment on that capability.</p>
-              <p>That re-opens <em>measurement accuracy</em> as the risk now carrying your estimate.</p>
-
-              <!-- The reprice. Was / Now, both ranges, both tiered. -->
-              <div class="reprice">
-                <div class="reprice__col reprice__col--was">
-                  <span class="reprice__label">Was</span>
-                  <span class="reprice__figure">$180–220K</span>
-                  <span class="chip chip--definitive">high confidence</span>
-                </div>
-
-                <div class="reprice__arrow" aria-hidden="true">
-                  <svg width="22" height="12" viewBox="0 0 22 12" fill="none">
-                    <path d="M1 6 H20 M15 1.5 L20.5 6 L15 10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-
-                <div class="reprice__col reprice__col--now">
-                  <span class="reprice__label">Now</span>
-                  <span class="reprice__figure">$260–340K</span>
-                  <span class="chip chip--directional">directional until accuracy is proven</span>
-                </div>
-              </div>
-
-              <p class="why-range"><b>Why a range:</b><span>One open risk gates it. Measurement accuracy decides how much of autonomous pricing is buildable — and we haven't proven it yet.</span></p>
-
-              <button class="tap" type="button" data-goto="beat-4">
-                see the reasoning
-                <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true">
-                  <path d="M1 5 H12 M8.5 1.5 L12.5 5 L8.5 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
-            </div>
-
-            <!-- Judgment labelled as judgment. -->
-            <p class="provenance">
-              <span class="chip chip--human chip--bare">reviewed by a person</span>
-              Commercial re-estimate reviewed by Rae Oyelaran, delivery lead — 4:29 PM.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     BEAT 4 — TAP IN (the change, expanded in the Living Record)
-     ═══════════════════════════════════════════════════════════ -->
-<section class="screen" id="beat-4"
-  data-tick="4" data-label="Tap in"
-  data-tool="change runner + confidence-lineage" data-status="FAKED"
-  data-honesty="The go/redirect/stop is shown as a judgment call, not an automated verdict. The count/staffing derivation is flagged reviewed by a person today — the honest status of the automation."
-  data-why="Shows the model doing the thing the whole deck was about — a change landing on a system, re-firing cleanly, traceably.">
-
-  <div class="beat-head">
-    <span class="beat-head__no">04</span>
-    <h2 class="beat-head__title edit">Tap in<span class="beat-head__sub"> — the change, expanded in the living record</span></h2>
-  </div>
-
-  <article class="record">
-    <header class="record__masthead">
-      <h3 class="record__title"><small>Engagement · living record</small>Imaginova — AR pool sales</h3>
-      <div class="record__live"><i></i> live · updated 2 minutes ago</div>
-    </header>
-
-    <!-- Framing re-fires first. The judgment call, shown as a judgment call. -->
-    <section class="record__section">
-      <h4 class="record__h">Framing re-fired <span class="chip chip--human chip--bare">a call, not a verdict</span></h4>
-
-      <div class="verdict">
-        <div class="verdict__choices">
-          <span class="verdict__choice">Go</span>
-          <span class="verdict__choice is-taken">Redirect</span>
-          <span class="verdict__choice">Stop</span>
-        </div>
-        <div class="verdict__body">
-          <p class="verdict__lede">Don't commit autonomous pricing until measurement accuracy is proven.</p>
-          <p class="verdict__why">Autonomous pricing depends on it. Today a rep catches a bad measurement before it reaches a customer; take the rep out and nothing catches it. Proving accuracy is cheaper than unwinding a wrong price in front of a buyer — so we sequence accuracy first and hold the pricing commitment open.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- The risk relocates: it now carries the estimate. -->
-    <section class="record__section">
-      <h4 class="record__h">Risk re-fired</h4>
-      <div class="risks">
-        <div class="risk risk--carrying">
-          <span class="risk__name">Measurement accuracy</span>
-          <span class="chip chip--open">re-opened</span>
-          <span class="risk__sev">now carrying the estimate</span>
-          <p class="risk__note">Was a quality question. Under autonomous pricing it becomes a commercial one — it sets the width of the range.</p>
-        </div>
-        <div class="risk">
-          <span class="risk__name">AR performance under load</span>
-          <span class="chip chip--validating">validating</span>
-          <span class="risk__sev">unchanged</span>
-          <p class="risk__note">More AR realism raises the load ceiling but does not change the state.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- One candidate level step. Everything else grows sideways. -->
-    <section class="record__section">
-      <h4 class="record__h">Capability response</h4>
-      <div class="caps">
-        <div class="cap cap--stepping">
-          <span class="cap__name">AI systems engineering</span>
-          <span class="level">in-the-loop</span>
-          <span aria-hidden="true" class="muted">→</span>
-          <span class="level level--step">autonomous</span>
-          <span class="chip chip--new">candidate level step</span>
-          <p class="cap__note">The only level step in this change. A deeper level of judgment: the system owns the price, not a suggestion about the price.</p>
-        </div>
-        <div class="cap">
-          <span class="cap__name">Core systems engineering</span>
-          <span class="level">L3 — unchanged</span>
-          <span class="cap__surface">surface · 4 → 6 services</span>
-          <p class="cap__note">Migration and rendering add surface area at the level we already operate at.</p>
-        </div>
-        <div class="cap">
-          <span class="cap__name">Production hardening</span>
-          <span class="level">L3 — unchanged</span>
-          <span class="cap__surface">surface · 1 → 2 estates</span>
-          <p class="cap__note">More to harden, not harder to harden.</p>
-        </div>
-      </div>
-
-      <div class="count" style="margin-top: var(--s2);">
-        <span class="count__figure">+2 to +3</span>
-        <span class="chip chip--directional">directional</span>
-        <span class="chip chip--human chip--bare">reviewed by a person</span>
-        <p class="count__note">Surface area grew on existing capabilities at their existing levels — so this reads as more seats, same levels. The count/staffing derivation is manual today; no layer does it automatically.</p>
-      </div>
-    </section>
-
-    <!-- New, unscoped, low confidence. Said plainly. -->
-    <section class="record__section">
-      <h4 class="record__h">New and unscoped</h4>
-      <div class="risks">
-        <div class="risk">
-          <span class="risk__name">Quote-history data migration</span>
-          <span class="chip chip--new">new</span>
-          <span class="risk__sev">low confidence · unscoped</span>
-          <p class="risk__note">Six years, one legacy system we have not opened. We can't range this honestly until we've seen the data.</p>
-        </div>
-        <div class="risk">
-          <span class="risk__name">Photoreal rendering</span>
-          <span class="chip chip--new">new</span>
-          <span class="risk__sev">low confidence · unscoped</span>
-          <p class="risk__note">Independent of the pricing question. Sized separately once accuracy is settled.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- The same chart, showing the change land. -->
-    <section class="record__section">
-      <h4 class="record__h">Confidence over time</h4>
-      <div class="chart-wrap">
-        <svg class="chart" viewBox="0 0 560 140" role="img" aria-label="Confidence trending up, then dropping where the change lands.">
-          <line class="chart__base" x1="24" y1="120" x2="536" y2="120"></line>
-          <path class="chart__line" d="M40 104 L123 97 L206 82 L289 74 L372 56 L455 44"></path>
-          <path class="chart__line chart__line--fore" d="M455 44 L520 88"></path>
-          <line class="chart__drop" x1="520" y1="88" x2="520" y2="120"></line>
-          <circle class="chart__dot" cx="40"  cy="104" r="3"></circle>
-          <circle class="chart__dot" cx="123" cy="97"  r="3"></circle>
-          <circle class="chart__dot" cx="206" cy="82"  r="3"></circle>
-          <circle class="chart__dot" cx="289" cy="74"  r="3"></circle>
-          <circle class="chart__dot" cx="372" cy="56"  r="3"></circle>
-          <circle class="chart__dot" cx="455" cy="44"  r="3"></circle>
-          <circle class="chart__dot chart__dot--now" cx="520" cy="88" r="4.5"></circle>
-          <text class="chart__tick" x="40"  y="135" text-anchor="middle">Jan</text>
-          <text class="chart__tick" x="123" y="135" text-anchor="middle">Feb</text>
-          <text class="chart__tick" x="206" y="135" text-anchor="middle">Mar</text>
-          <text class="chart__tick" x="289" y="135" text-anchor="middle">Apr</text>
-          <text class="chart__tick" x="372" y="135" text-anchor="middle">May</text>
-          <text class="chart__mark" x="516" y="135" text-anchor="end">change lands</text>
-        </svg>
-        <p class="chart-caption"><b>It goes down, and that's correct.</b> A change that re-opens a risk should cost confidence. A line that only ever rises is a line that isn't measuring anything.</p>
-      </div>
-    </section>
-
-    <!-- Envelope re-stated, still a range, now directional. -->
-    <section class="record__section">
-      <h4 class="record__h">Commercial envelope</h4>
-      <div class="envelope">
-        <span class="envelope__figure">$260–340K</span>
-        <span class="chip chip--directional">directional</span>
-        <span class="money money--was">was $180–220K</span>
-        <p class="envelope__note">Wider than it was, because one open risk gates it. The range narrows when measurement accuracy moves to proven — not before. Commercial re-estimate is manual work today; no layer does it automatically.</p>
-      </div>
-    </section>
-  </article>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     BEAT 5 — ASK THE ENGAGEMENT   (the one partway-real piece)
-     ═══════════════════════════════════════════════════════════ -->
-<section class="screen is-channel" id="beat-5"
-  data-tick="5" data-label="Ask the engagement"
-  data-tool="context-lake" data-status="PARTWAY REAL"
-  data-honesty="The answer cites the real decision with a date — trust, not vibes. No answer without a source."
-  data-why="The &quot;magic&quot; beat, and the one we can most honestly stand behind. Retrieval is the one piece that exists — the real anchor of the demo.">
-
-  <div class="beat-head">
-    <span class="beat-head__no">05</span>
-    <h2 class="beat-head__title edit">Ask the engagement<span class="beat-head__sub"> — no answer without a source</span></h2>
-  </div>
-
-  <div class="channel">
-    <div class="channel__bar">
-      <span class="channel__dots"><i></i><i></i><i></i></span>
-      <span class="channel__name">imaginova · build</span>
-      <span class="channel__meta">client + delivery</span>
-    </div>
-
-    <div class="thread">
-      <div class="msg">
-        <div class="msg__avatar">DK</div>
-        <div class="msg__body">
-          <div class="msg__head">
-            <span class="msg__who">Dana Kellner</span>
-            <span class="msg__role">Imaginova</span>
-            <span class="msg__time">Fri 16 May · 4:44 PM</span>
-          </div>
-          <div class="msg__text msg__text--raw">
-            <p>Why did measurement accuracy re-open? I thought we'd parked that one.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="msg">
-        <div class="msg__avatar msg__avatar--system">E</div>
-        <div class="msg__body">
-          <div class="msg__head">
-            <span class="msg__who">Engagement</span>
-            <span class="msg__role">answered from the record</span>
-            <span class="msg__time">Fri 16 May · 4:44 PM</span>
-          </div>
-          <div class="msg__text">
-            <p>Autonomous pricing sets price from the measured yard; if the measurement is off, the price is off. Today a rep confirms the number, so a bad measurement gets caught before a customer sees it. Take the rep out and nothing catches it.</p>
-            <p>It was parked as a quality question. Autonomous pricing makes it a commercial one.</p>
-            <p>
-              <button class="cite" type="button" data-source="src-dec-0114">Decision logged 12 Mar — accuracy gates pricing autonomy</button>
-            </p>
-
-            <!-- The citation is tappable. The chain underneath it is the point. -->
-            <div class="source" id="src-dec-0114">
-              <div class="source__head">
-                <span class="source__id">DEC-0114</span>
-                <span class="source__title edit">Accuracy gates pricing autonomy</span>
-                <span class="source__date">12 Mar</span>
-              </div>
-              <p class="msg__text">"We will not remove the rep confirmation step until measured area is within tolerance on non-rectangular yards. The rep is currently the only check on a bad scan. Any move toward pricing autonomy re-opens this."</p>
-              <div class="chain">
-                <span class="chain__node">risk</span>
-                <span class="chain__arrow">→</span>
-                <span class="chain__node">assumption</span>
-                <span class="chain__arrow">→</span>
-                <span class="chain__node">signal</span>
-                <span class="chain__arrow">→</span>
-                <span class="chain__node">decision</span>
-                <span class="chain__arrow">→</span>
-                <span class="chain__node chain__node--end">confidence</span>
-              </div>
-              <p class="provenance" style="border-top:0; margin-top: var(--s1); padding-top: 0;">Logged by Rae Oyelaran · confidence at the time: high · 2 signals attached</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     BEAT 6 — THE DELIVERABLE REGENERATES (confidence-tiered)
-     ═══════════════════════════════════════════════════════════ -->
-<section class="screen" id="beat-6"
-  data-tick="6" data-label="Deliverable regenerates"
-  data-tool="artifact agent" data-status="FAKED"
-  data-honesty="The deliverable refuses to simulate certainty — thin work reads as hypothesis, not as a confident line item."
-  data-why="This is how we sell honesty as a product — the deliverable that tells the truth about what's known.">
-
-  <div class="beat-head">
-    <span class="beat-head__no">06</span>
-    <h2 class="beat-head__title edit">The deliverable regenerates<span class="beat-head__sub"> — language tiered to the evidence</span></h2>
-  </div>
-
-  <article class="record">
-    <header class="record__masthead">
-      <h3 class="record__title"><small>Statement of work · rev 4 · auto-regenerated</small>Scope — Imaginova</h3>
-      <div class="record__live"><i></i> regenerated 4:33 PM</div>
-    </header>
-
-    <section class="record__section">
-      <h4 class="record__h">
-        Language tiers
-        <span class="chip chip--definitive">definitive</span>
-        <span class="chip chip--directional">directional</span>
-        <span class="chip chip--hypothesis">hypothesis</span>
-      </h4>
-      <p class="muted" style="font-size:13.5px;">Each line is written at the confidence its evidence supports. Thin work is not dressed up as a line item.</p>
-    </section>
-
-    <section class="record__section">
-      <div class="sow">
-
-        <div class="sow__line">
-          <div>
-            <span class="sow__no">1.0</span>
-            <div class="sow__title">Authentication and account provisioning</div>
-            <p class="sow__text">Delivered. SSO against the existing identity provider, role-based provisioning for reps and branch managers. In production behind the pilot flag.</p>
-          </div>
-          <div class="sow__tier"><span class="chip chip--definitive">definitive</span></div>
-        </div>
-
-        <div class="sow__line">
-          <div>
-            <span class="sow__no">2.0</span>
-            <div class="sow__title">Catalogue navigation and saved designs</div>
-            <p class="sow__text">Delivered. Full catalogue browse, saved designs synchronised across devices, offline read.</p>
-          </div>
-          <div class="sow__tier"><span class="chip chip--definitive">definitive</span></div>
-        </div>
-
-        <div class="sow__line sow__line--gating">
-          <div>
-            <span class="sow__no">3.0</span>
-            <div class="sow__title">AR measurement capture</div>
-            <p class="sow__text">Capture and measurement of yard geometry on device. Tolerance proven on flat rectangular yards; work to extend to sloped and irregular yards is scoped but the result is not yet known.</p>
-            <span class="sow__flag"><span class="chip chip--open">gating risk</span> Measurement accuracy — this line gates 4.0 and carries the estimate.</span>
-          </div>
-          <div class="sow__tier"><span class="chip chip--directional">directional</span></div>
-        </div>
-
-        <div class="sow__line sow__line--hypothesis">
-          <div>
-            <span class="sow__no">4.0</span>
-            <div class="sow__title">Autonomous pricing</div>
-            <p class="sow__text">We believe price can be set from the measured yard without rep confirmation, once measurement tolerance is proven on irregular yards. We have not proven that. This line is a hypothesis, not a commitment, and is written so it cannot be read as one. It becomes scopeable when 3.0 resolves.</p>
-            <span class="sow__flag"><span class="chip chip--hypothesis">thin</span> Depends on 3.0. No delivery date is offered.</span>
-          </div>
-          <div class="sow__tier"><span class="chip chip--hypothesis">hypothesis</span></div>
-        </div>
-
-        <div class="sow__line sow__line--hypothesis">
-          <div>
-            <span class="sow__no">5.0</span>
-            <div class="sow__title">Quote-history migration</div>
-            <p class="sow__text">Six years of quote history from the legacy system. We have not opened that data. Any number here would be invented, so there isn't one until we have.</p>
-            <span class="sow__flag"><span class="chip chip--new">new · unscoped</span> Discovery required before this can be ranged.</span>
-          </div>
-          <div class="sow__tier"><span class="chip chip--hypothesis">hypothesis</span></div>
-        </div>
-
-        <div class="sow__line sow__line--hypothesis">
-          <div>
-            <span class="sow__no">6.0</span>
-            <div class="sow__title">Photoreal rendering</div>
-            <p class="sow__text">Customer-retained photorealistic renderings. Independent of the pricing question; can be sized on its own once 3.0 and 4.0 settle.</p>
-            <span class="sow__flag"><span class="chip chip--new">new · unscoped</span> Sized separately.</span>
-          </div>
-          <div class="sow__tier"><span class="chip chip--hypothesis">hypothesis</span></div>
-        </div>
-
-      </div>
-    </section>
-
-    <section class="record__section">
-      <h4 class="record__h">Envelope</h4>
-      <div class="envelope">
-        <span class="envelope__figure">$260–340K</span>
-        <span class="chip chip--directional">directional</span>
-        <p class="envelope__note">Lines 5.0 and 6.0 are not in this range. They cannot be until they are scoped, and saying otherwise would be the kind of number that gets defended for six months.</p>
-      </div>
-    </section>
-  </article>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     BEAT 7 — DECISION LEDGER (confidence-stamped)
-     ═══════════════════════════════════════════════════════════ -->
-<section class="screen" id="beat-7"
-  data-tick="7" data-label="Decision ledger"
-  data-tool="confidence-lineage" data-status="FAKED"
-  data-honesty="Every decision carries the confidence it was made under, so future re-litigation starts from &quot;here's what we knew then.&quot;"
-  data-why="Shows continuity — the reasoning survives the moment, the person, the handoff.">
-
-  <div class="beat-head">
-    <span class="beat-head__no">07</span>
-    <h2 class="beat-head__title edit">Decision ledger<span class="beat-head__sub"> — every call stamped with the confidence it was made under</span></h2>
-  </div>
-
-  <article class="record">
-    <header class="record__masthead">
-      <h3 class="record__title"><small>Engagement · decision ledger</small>What we decided, and what we knew</h3>
-      <div class="record__live"><i></i> 14 entries</div>
-    </header>
-
-    <section class="record__section">
-      <div class="ledger">
-
-        <div class="entry entry--latest">
-          <div class="entry__when"><b>16 May</b>4:29 PM</div>
-          <div>
-            <div class="entry__what">Redirect — hold the autonomous pricing commitment</div>
-            <p class="entry__detail">Don't commit autonomous pricing until measurement accuracy is proven on irregular yards. Sequence accuracy work first. Migration and rendering scoped separately, not folded into this range.</p>
-            <div class="entry__meta">
-              <span>confidence at decision · <b>directional</b></span>
-              <span>by <b>Rae Oyelaran</b>, delivery lead</span>
-              <span class="entry__evidence">3 signals attached</span>
-              <span class="chip chip--human chip--bare">a call, not a verdict</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="entry">
-          <div class="entry__when"><b>2 Apr</b>11:05 AM</div>
-          <div>
-            <div class="entry__what">AR under load moved open → validating</div>
-            <p class="entry__detail">40-device on-site test held frame rate within tolerance. State moved, not retired — a second test is required before the pilot widens.</p>
-            <div class="entry__meta">
-              <span>confidence at decision · <b>directional</b></span>
-              <span>by <b>Marisol Chen</b>, engineering</span>
-              <span class="entry__evidence">test run 0412 attached</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="entry">
-          <div class="entry__when"><b>12 Mar</b>3:20 PM</div>
-          <div>
-            <div class="entry__what">Accuracy gates pricing autonomy</div>
-            <p class="entry__detail">The rep confirmation step stays until measured area is within tolerance on non-rectangular yards. The rep is currently the only check on a bad scan. Any move toward pricing autonomy re-opens this.</p>
-            <div class="entry__meta">
-              <span>confidence at decision · <b>high</b></span>
-              <span>by <b>Rae Oyelaran</b>, delivery lead</span>
-              <span class="entry__evidence">2 signals attached</span>
-              <span class="chip chip--directional chip--bare">re-fired 16 May</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <section class="record__section">
-      <p class="muted" style="font-size:13.5px; max-width:64ch;">The March decision was made at <strong>high</strong> confidence and it was still right. Re-opening it isn't a reversal — it's the same decision meeting a change it anticipated. That is what a stamped ledger buys you: the argument in six months starts from what was known then, not from who remembers what.</p>
-    </section>
-  </article>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     BEAT 8 — EARLY RISK SURFACING (the outbound push)
-     ═══════════════════════════════════════════════════════════ -->
-<section class="screen is-channel" id="beat-8"
-  data-tick="8" data-label="Early risk surfacing"
-  data-tool="change runner (watches the risk) → channel" data-status="FAKED"
-  data-honesty="Framed as a heads-up with a why now, not an alarm; still a range, still directional."
-  data-why="The payoff of &quot;no surprises,&quot; and the proof that value arrives without opening anything. Internally: highest emotional value, least built.">
-
-  <div class="beat-head">
-    <span class="beat-head__no">08</span>
-    <h2 class="beat-head__title edit">Early risk surfacing<span class="beat-head__sub"> — days later, with no one asking</span></h2>
-  </div>
-
-  <div class="channel">
-    <div class="channel__bar">
-      <span class="channel__dots"><i></i><i></i><i></i></span>
-      <span class="channel__name">imaginova · build</span>
-      <span class="channel__meta">client + delivery</span>
-    </div>
-
-    <div class="thread">
-      <div class="msg">
-        <div class="msg__avatar msg__avatar--system">E</div>
-        <div class="msg__body">
-          <div class="msg__head">
-            <span class="msg__who">Engagement</span>
-            <span class="msg__role">pushed · no one asked</span>
-            <span class="msg__time">Wed 21 May · 8:02 AM</span>
-          </div>
-
-          <div class="card">
-            <div class="card__kicker">
-              <span class="label label--accent">Heads up</span>
-              <span class="chip chip--directional">directional</span>
-            </div>
-
-            <p class="card__lede">Measurement accuracy is trending toward your estimate.</p>
-
-            <div class="card__body">
-              <p>Two of the last three sloped-yard captures came back outside tolerance. That's not a failure yet — it's the risk that carries your range moving in the wrong direction.</p>
-
-              <p class="why-range"><b>Why now:</b><span>Cheaper to address now than after the steering meeting. Your board sits on the 28th; if this is still moving then, the range widens in front of them instead of in front of us.</span></p>
-
-              <div class="reprice">
-                <div class="reprice__col reprice__col--now">
-                  <span class="reprice__label">Envelope, unchanged</span>
-                  <span class="reprice__figure">$260–340K</span>
-                  <span class="chip chip--directional">directional</span>
-                </div>
-                <div class="reprice__col">
-                  <span class="reprice__label">If accuracy doesn't hold</span>
-                  <span class="reprice__figure muted">widens</span>
-                  <span class="chip chip--hypothesis">not yet a number</span>
-                </div>
-              </div>
-
-              <p class="muted" style="font-size:13.5px;">We're not repricing on two captures. We're telling you early because you'd rather hear it now.</p>
-            </div>
-
-            <p class="provenance">
-              <span class="chip chip--human chip--bare">watched automatically</span>
-              Risk watch on DEC-0114 · triggered on the second out-of-tolerance capture.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     SEEDS — horizon frames. Dimmed and tagged. Not built.
-     ═══════════════════════════════════════════════════════════ -->
-
-<!-- BEAT 9 — Seed 1 -->
-<section class="screen seed is-channel" id="beat-9"
-  data-tick="9" data-label="Seed 1 — agent fleet" data-seed="true"
-  data-tool="—" data-status="HORIZON / BET"
-  data-honesty="Tagged HORIZON / BET. The line is greyed as not-yet-real."
-  data-why="Shows the thesis extended to machines — when building is free, the model is the throttle.">
-
-  <div class="beat-head">
-    <span class="beat-head__no">09</span>
-    <h2 class="beat-head__title edit">Seed 1<span class="beat-head__sub"> — evidence governs the agent fleet</span></h2>
-  </div>
-
-  <div class="seed__banner">
-    <span class="chip chip--horizon">Horizon / bet</span>
-    <p class="seed__banner-text"><b>Where this goes — not built, not committed.</b> Rendered dimmed on purpose. If this reads as a shipped feature, the screen is wrong.</p>
-  </div>
-
-  <div class="seed__stage">
-    <div class="channel">
-      <div class="channel__bar">
-        <span class="channel__dots"><i></i><i></i><i></i></span>
-        <span class="channel__name">imaginova · build</span>
-        <span class="channel__meta">client + delivery</span>
-      </div>
-
-      <div class="thread">
-        <div class="msg">
-          <div class="msg__avatar msg__avatar--system">E</div>
-          <div class="msg__body">
-            <div class="msg__head">
-              <span class="msg__who">Engagement</span>
-              <span class="msg__role">pushed · no one asked</span>
-              <span class="msg__time">—</span>
-            </div>
-
-            <div class="card">
-              <div class="card__kicker">
-                <span class="label label--accent">Change scoped</span>
-                <span class="chip chip--directional">directional</span>
-              </div>
-              <p class="card__lede">Your change is scoped.</p>
-              <div class="card__body">
-                <p>Autonomous pricing moves <strong>AI systems engineering</strong> from <span class="level">in-the-loop</span> → <span class="level level--step">autonomous</span>. That re-opens <em>measurement accuracy</em> as the risk now carrying your estimate.</p>
-              </div>
-
-              <!-- The card grows one new line. -->
-              <div class="seed-line">
-                <div class="row" style="margin-bottom: var(--s1);">
-                  <span class="chip chip--horizon">Horizon / bet</span>
-                </div>
-                <p class="seed-line__text">Agent fleet built the pricing module — <strong>2 checks passed, 1 awaiting human trust.</strong></p>
-                <div class="trust-gate">
-                  <span class="gate-pip gate-pip--pass">tolerance suite</span>
-                  <span class="gate-pip gate-pip--pass">regression against 6 yrs of quotes</span>
-                  <span class="gate-pip gate-pip--wait">price authority — awaiting human trust</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <p class="muted" style="max-width: var(--channel-w); margin: var(--s3) auto 0; font-size:13.5px;">The fleet can build the module. It cannot grant itself the authority to price. The trust gate is set by a human, and the evidence — not the output — is what opens it. When building is free, the model is the throttle.</p>
-</section>
-
-
-<!-- BEAT 10 — Seed 2 -->
-<section class="screen seed" id="beat-10"
-  data-tick="10" data-label="Seed 2 — the record as source" data-seed="true"
-  data-tool="—" data-status="HORIZON / BET"
-  data-honesty="Tagged HORIZON / BET."
-  data-why="The most aggressive bet — the ESOA as the origin of the work, not a view onto it.">
-
-  <div class="beat-head">
-    <span class="beat-head__no">10</span>
-    <h2 class="beat-head__title edit">Seed 2<span class="beat-head__sub"> — the living record becomes the source the build regenerates from</span></h2>
-  </div>
-
-  <div class="seed__banner">
-    <span class="chip chip--horizon">Horizon / bet</span>
-    <p class="seed__banner-text"><b>The most aggressive bet in the deck.</b> The arrow inverts. Nothing here is built.</p>
-  </div>
-
-  <div class="seed__stage">
-    <div class="invert">
-      <div class="invert__row invert__row--was">
-        <div class="invert__node">The build<small>the work</small></div>
-        <div class="invert__arrow"><b>→</b>reports to</div>
-        <div class="invert__node">The record<small>a view onto it</small></div>
-      </div>
-
-      <p class="invert__caption">today</p>
-
-      <div class="invert__row invert__row--now">
-        <div class="invert__node">The record<small>the source</small></div>
-        <div class="invert__arrow"><b>→</b>regenerates</div>
-        <div class="invert__node">The build<small>the output</small></div>
-      </div>
-
-      <p class="invert__caption">the bet</p>
-    </div>
-
-    <div class="record" style="margin-top: var(--s5); max-width: 720px;">
-      <h4 class="record__h">Commitment state as a throttle</h4>
-      <div class="caps">
-        <div class="cap">
-          <span class="cap__name">Auth · catalogue</span>
-          <span class="chip chip--definitive">definitive</span>
-          <span class="cap__surface">may regenerate freely</span>
-        </div>
-        <div class="cap">
-          <span class="cap__name">AR measurement capture</span>
-          <span class="chip chip--directional">directional</span>
-          <span class="cap__surface">regenerates behind a gate</span>
-        </div>
-        <div class="cap">
-          <span class="cap__name">Autonomous pricing</span>
-          <span class="chip chip--hypothesis">hypothesis</span>
-          <span class="cap__surface">will not regenerate — not committed</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <p class="muted" style="max-width: 720px; margin: var(--s3) auto 0; font-size:13.5px;">If the build regenerates from the record, then commitment state stops being documentation and starts being a control. What isn't committed doesn't get built — not as policy, as mechanism.</p>
-</section>
-
-
-<!-- BEAT 11 — Seed 3 -->
-<section class="screen seed" id="beat-11"
-  data-tick="11" data-label="Seed 3 — confidence as the priced unit" data-seed="true"
-  data-tool="—" data-status="HORIZON / BET"
-  data-honesty="Tagged HORIZON / BET."
-  data-why="The commercial frontier — pricing the one thing that stays scarce when building is free.">
-
-  <div class="beat-head">
-    <span class="beat-head__no">11</span>
-    <h2 class="beat-head__title edit">Seed 3<span class="beat-head__sub"> — confidence becomes the priced unit</span></h2>
-  </div>
-
-  <div class="seed__banner">
-    <span class="chip chip--horizon">Horizon / bet</span>
-    <p class="seed__banner-text"><b>The commercial frontier.</b> Not a pricing model we offer. Not built.</p>
-  </div>
-
-  <div class="seed__stage">
-    <div class="priced">
-      <div class="priced__row priced__row--was">
-        <div class="priced__what">
-          <b>3.0 — AR measurement capture</b>
-          <span>Extend tolerance to sloped and irregular yards. 6 engineers × 4 weeks.</span>
-        </div>
-        <span class="priced__price">$96,000</span>
-      </div>
-
-      <div class="priced__row">
-        <div class="priced__what">
-          <b>3.0 — Measurement accuracy, open → proven</b>
-          <span>You're paying to move measurement accuracy from <strong>open</strong> to <strong>proven</strong>. Not for the hours it takes to get there.</span>
-          <div class="delta">
-            <span class="chip chip--open">open</span>
-            <span aria-hidden="true">→</span>
-            <span class="chip chip--proven">proven</span>
-            <b>confidence delta priced at $96,000</b>
-          </div>
-        </div>
-        <span class="priced__price">$96,000</span>
-      </div>
-    </div>
-  </div>
-
-  <p class="muted" style="max-width: 620px; margin: var(--s3) auto 0; font-size:13.5px;">Same number. Completely different contract. One sells effort and gets argued about in timesheets; the other sells a risk moving state, and is either delivered or it isn't. When building is free, hours stop being scarce — and confidence is what's left to sell.</p>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     CLOSING FRAME
-     ═══════════════════════════════════════════════════════════ -->
-<section class="screen" id="beat-close"
-  data-tick="C" data-label="Closing"
-  data-tool="all five, named" data-status="FAKED"
-  data-honesty="The tool row names the machinery so the room sees it's buildable, not a mood board."
-  data-why="Returns to the two-slide image language and lands the thesis.">
-
-  <div class="plain">
-    <div class="glyphs">
-      <!-- The rock. Change landing on a person. -->
-      <div class="glyph">
-        <svg width="140" height="106" viewBox="0 0 140 106" aria-hidden="true">
-          <path class="glyph__stroke" d="M62 80 C52 76 47 62 54 51 C62 39 80 35 93 42 C106 49 110 65 103 76 C96 87 73 86 62 80 Z"/>
-          <circle class="glyph__stroke" cx="30" cy="50" r="6.5"/>
-          <path class="glyph__stroke" d="M30 57 L27 74 M30 61 L49 59 M27 74 L18 90 M27 74 L35 90"/>
-          <path class="glyph__stroke" d="M10 92 L128 92" opacity="0.4"/>
-        </svg>
-        <span class="glyph__name">The rock</span>
-      </div>
-
-      <!-- The person. -->
-      <div class="glyph">
-        <svg width="86" height="106" viewBox="0 0 86 106" aria-hidden="true">
-          <circle class="glyph__stroke" cx="43" cy="30" r="7"/>
-          <path class="glyph__stroke" d="M43 37 L43 66 M43 46 L29 57 M43 46 L57 57 M43 66 L33 90 M43 66 L53 90"/>
-          <path class="glyph__stroke" d="M12 92 L74 92" opacity="0.4"/>
-        </svg>
-        <span class="glyph__name">The person</span>
-      </div>
-
-      <!-- The hammock. -->
-      <div class="glyph">
-        <svg width="170" height="106" viewBox="0 0 170 106" aria-hidden="true">
-          <path class="glyph__stroke" d="M28 92 L28 34 M142 92 L142 34"/>
-          <path class="glyph__stroke glyph__stroke--accent" d="M28 40 Q85 84 142 40"/>
-          <circle class="glyph__stroke" cx="60" cy="56" r="5.5"/>
-          <path class="glyph__stroke" d="M66 61 Q86 72 108 58"/>
-          <path class="glyph__stroke" d="M8 92 L162 92" opacity="0.4"/>
-        </svg>
-        <span class="glyph__name">The hammock</span>
-      </div>
-    </div>
-
-    <p class="plain__line">Change used to land on a person.<br>Now it lands on <em>a system.</em></p>
-
-    <!-- The machinery, named. Not a mood board. -->
-    <div class="toolrow">
-      <span class="toolrow__item">context-lake</span>
-      <span class="toolrow__sep">·</span>
-      <span class="toolrow__item">artifact agent</span>
-      <span class="toolrow__sep">·</span>
-      <span class="toolrow__item">confidence-lineage</span>
-      <span class="toolrow__sep">·</span>
-      <span class="toolrow__item">change runner</span>
-      <span class="toolrow__sep">·</span>
-      <span class="toolrow__item">channel</span>
-    </div>
-  </div>
-</section>
-
 </main>
 
-<!-- ═══════════════════════════════════════════════════════════
-     RAIL
-     ═══════════════════════════════════════════════════════════ -->
-<nav class="rail" aria-label="Walkthrough beats">
-  <button class="rail__arrow" id="prev" type="button" aria-label="Previous beat">
-    <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true">
-      <path d="M13 5 H2 M5.5 1.5 L1.5 5 L5.5 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </button>
-  <button class="rail__arrow" id="next" type="button" aria-label="Next beat">
-    <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true">
-      <path d="M1 5 H12 M8.5 1.5 L12.5 5 L8.5 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </button>
-
-  <div class="rail__ticks" id="ticks"></div>
-
-  <div class="rail__now">
-    <span class="rail__label" id="railLabel">Frame</span>
+<aside class="radiation" aria-label="Reach">
+  <div class="radiation__head">
+    <canvas class="orb" data-orb="breathing" data-orb-when="reach" data-orb-size="40" width="40" height="40" aria-hidden="true"></canvas>
   </div>
 
-  <span class="rail__hint"><kbd>←</kbd> <kbd>→</kbd> beats · <kbd>P</kbd> presenter</span>
-</nav>
+  <div class="doorbell">
+    <span class="doorbell__ch">Slack</span>
+    <p class="doorbell__empty">Quiet</p>
+    <p class="doorbell__msg" hidden><span class="doorbell__who">Rae Oyelaran</span> The Friday ask is in. Revised range waiting on your review.</p>
+  </div>
+  <div class="doorbell">
+    <span class="doorbell__ch">Email</span>
+    <p class="doorbell__empty">Quiet</p>
+    <p class="doorbell__msg" hidden><span class="doorbell__who">Dana Kellner</span> Summary of requested change + revised range.</p>
+  </div>
+  <div class="doorbell">
+    <span class="doorbell__ch">Monday sync</span>
+    <p class="doorbell__empty">Quiet</p>
+    <p class="doorbell__msg" hidden><span class="doorbell__who">19 May</span> Flagged. The Friday change is on the table before anyone opens mail.</p>
+  </div>
+</aside>
+
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════
-     PRESENTER OVERLAY — build status, team only. Never rendered
-     in the client-facing view. Off by default.
-     ═══════════════════════════════════════════════════════════ -->
-<aside class="presenter" id="presenter" aria-live="polite">
+<aside class="presenter" id="presenter" hidden aria-label="Presenter notes">
   <div class="presenter__head">
     <span>Presenter · team only</span>
-    <span><kbd style="all:unset">P</kbd> to hide</span>
+    <span>P to hide</span>
   </div>
   <div class="presenter__row">
     <span class="presenter__k">Build</span>
@@ -1106,9 +235,10 @@
     <span class="presenter__k">Why here</span>
     <span class="presenter__v" id="pWhy">—</span>
   </div>
-  <p class="presenter__foot">Figures, dates and names are illustrative placeholders until pulled from the real engagement record.</p>
+  <p class="presenter__foot">Figures, dates, names, the path back, and this specific ask are illustrative until pulled from the record. Ask is PARTWAY REAL — plumbing only, no substrate.</p>
 </aside>
 
+<script type="module" src="assets/js/orbs.js"></script>
 <script src="assets/js/walkthrough.js"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
-# CLAUDE.md — ESOA Walkthrough Spine
+# CLAUDE.md — ESOA Portal Demo
 
-This repo renders the **ESOA Walkthrough Spine**: a full-breadth, high-fidelity
-walkthrough of how a change event is *experienced* on an engagement.
+This repo renders the **ESOA Portal Demo**: one canonical surface walking one
+change loop. The portal is the stage; the change loop is the show.
 
 `SPINE.md` is the source of truth for the story. **Do not invent story here.**
 If a beat feels thin when rendered, fix it in `SPINE.md` first, then re-render.
@@ -17,82 +17,137 @@ validation. Two kinds of marker exist, and they are **not** the same thing:
 
 | Marker | Audience | Rendered? |
 | --- | --- | --- |
-| **On-screen honesty** — ranges not numbers, a populated "still a bet" column, seeds tagged as horizon | Client, CEO, the room | **Yes.** These get built. |
-| **Build status** — REAL vs. FAKED | The build team only | **No.** Never rendered in the client-facing view. |
+| **On-screen honesty** — ranges not numbers, a populated "still a bet" column, confidence as a coarse state, reviewed by name | Client, CEO, the room | **Yes.** These get built. |
+| **Build status** — REAL vs. FAKED vs. PARTWAY REAL (mechanism-only) | The build team only | **No.** Never rendered in the client-facing view. |
 
 Build status lives in `SPINE.md` and in the optional **presenter overlay**
 (press <kbd>P</kbd>, off by default). It must never leak into a screen.
 
 ---
 
+## Client-facing — the one rule for this surface
+
+**Everything rendered in this demo is read by the client.** Treat every
+on-screen word as if a client is reading it, because in the real thing, they
+are.
+
+The one exception: the **presenter overlay** (<kbd>P</kbd>). That is the *only*
+place internal vocabulary is allowed. Nothing internal leaks onto the surface.
+
+The internal model — how the work is derived — **never appears on this
+surface.** The client experiences its *effects*, not its *machinery*.
+
+**Never on-screen (internal / presenter only):**
+- Levels, L1–L4, "caliber of judgment"
+- Capability names (AI systems engineering, …)
+- Count, surface area, concurrency, seats, staffing
+- Intensity states (Dormant / Low / Active / Peak)
+- The derivation, the change runner, pricing-logic internals
+- Seams, hand-offs
+- Any phrasing of "the cost of being wrong went up → higher caliber required"
+
+**On-screen (plain language):**
+- **Confidence** — coarse state (steady / reassessing / shaken / rebuilding). Never a score.
+- **Risk** — "leans on measurement accuracy, untested on slopes"
+- **Range / price** — a range, with confidence attached
+- **Status** of the client's asks (received, scoping, timeline noted)
+- **The plan to rebuild confidence** — the validation path, in plain terms
+- **What’s true / still a bet**
+- **Who reviewed it** ("reviewed by [name]")
+
+**The test, before any line goes on the surface:**
+1. Would the client understand this sentence? If not → rewrite or cut.
+2. Does it name anything from the model — a level, a capability, a count, a caliber? If yes → translate to an effect (confidence / risk / range) or cut.
+3. Is it a number pretending to be measured (a confidence %, a precise derivation)? If yes → coarse state or a range.
+
+When in doubt: the client sees the effect, never the machinery.
+
+---
+
 ## Brand
+
+Boundless dark surface. Not a document. Not a dashboard.
 
 ### Type
 | Role | Family | Fallback stack |
 | --- | --- | --- |
-| Editorial headings | **Newsreader** | Iowan Old Style, Georgia, Times New Roman, serif |
 | UI + body | **IBM Plex Sans** | system-ui, Segoe UI, Helvetica, Arial, sans-serif |
 | Labels, tiers, tags, metadata, numbers | **IBM Plex Mono** | ui-monospace, SFMono-Regular, Menlo, monospace |
 
-Mono is the *metadata voice* — states, tiers, timestamps, capability levels,
-dollar ranges. Serif is the *editorial voice* — beat titles and the framing
-lines. Sans carries everything a person reads as prose.
+No serif. Mono is the *metadata voice* — states, tiers, timestamps,
+dollar ranges, `reviewed by [name]`. Sans carries prose.
 
 ### Colour
 Single accent. Resist adding a second.
 
 | Token | Value | Use |
 | --- | --- | --- |
-| `--ground` | `#F2EFE9` | page ground (off-white) |
-| `--ground-raised` | `#FBF9F5` | cards, the record page |
+| `--ground` | `#1A1A1A` | near-black (never pure `#000`) |
+| `--ink` | `#EDEAE4` | primary text (off-white) |
 | `--accent` | `#E75437` | the **only** accent — change, the open risk, the one thing to look at |
-| `--ink` | `#1D1A16` | primary text (warm near-black, never pure `#000`) |
-| `--rule` | `#DCD5C9` | hairlines |
+| `--rule` | `rgba(237, 234, 228, 0.12)` | hairlines only |
 
 ### Spacing
 **8px scale.** `--s1: 8px` … `--s10: 80px`. Nothing off-grid.
 
 ### Register
-Hand-drawn and calm. **This is not a SaaS dashboard aesthetic.**
+Open space. Hairlines. No cards.
 
-- No hard card borders with drop shadows. Warm hairlines and generous whitespace.
-- A faint paper grain on the ground. Slightly irregular rules.
+- No lifts, grain, raised panels, or dashed “quiet” boxes.
+- A 1px hairline only where a group needs a seam (Was/Now, Reach when it lights).
 - No icon sets, no gradient chrome, no "enterprise blue".
-- Match the existing deck's register: quiet, editorial, confident.
+- Title is one line: **Imaginova**.
 
 ---
 
 ## Chrome rules
 
-**Push-first.** The experience mostly lives in a channel, not an app.
+**One canonical surface.** Three columns: actions | portal | reach. The portal
+is the destination; the channels are the doorbells. Do not build N channel UIs.
 
 | Chrome | When | Looks like |
 | --- | --- | --- |
-| `.channel` | Beats 2, 3, 5, 8, 9 | A message thread. Neutral — never Slack/Teams branding. |
-| `.record` | Beats 1, 4, 6, 7, 10 | A **living document**, not a BI dashboard. Wide margins, serif headings. |
-| `.plain` | Beat 0, closing | Framing. Almost nothing on screen. |
+| `.nav` | Always | Floating left column. Five plain actions, no numbers. Active = left hairline accent, not a filled chip. |
+| `.portal` | Always | Boundless living record. Pull. Pointable. Always current. Not a document page. Confidence sits with the envelope. |
+| `.radiation` | Always; lights in states 4–5 | Hairline rows. Named Slack / email / Monday sync as *reach* — never Slack/Teams branding or chrome. Breathing orb at the header, no “Reach” label. |
+| Presenter | <kbd>P</kbd> | Team-only overlay, restyled for dark. Illustrative disclaimer and PARTWAY REAL live here. |
 
-The living record is the one "page" you tap into. Everything else is pushed
-to you. If you are building a screen that requires the client to go *looking*
-for value, it is the wrong screen.
+Anti-Auctor: no sharing, approvals, comment threads, branded landing pages.
+If a minute isn't serving change → reprice → confidence, or the radiation, cut it.
+
+---
+
+## The two axes — never conflate (internal / presenter only)
+
+These axes are load-bearing for the *team*. They do **not** appear on the
+client surface. Narrate them from <kbd>P</kbd>.
+
+- **Client ask** = feature / AI autonomy (“autonomous pricing”). What they requested. **Not a level label.**
+- **Level move** = judgment caliber (AI systems engineering **L2 → L3**), driven by collapse risk.
+
+Never render “in-the-loop → autonomous” as the re-level. Never render L2 → L3,
+capability names, or “caliber of judgment” on the surface. The client sees the
+effect: the ask leans on an untested risk, so the range widens.
 
 ---
 
 ## Non-negotiables on every screen
 
 1. **Confidence is always visible.** Every number is a range with a tier —
-   never a bare figure. `$260–340K · directional` not `$300K`.
-2. **The "still a bet" column is never empty.** An empty bet column is a
-   simulation of certainty. If you cannot fill it, the screen is wrong.
-3. **No answer without a source.** Anything the system asserts carries a
+   never a bare figure. `$260–340K · directional` not `$300K`. Confidence
+   itself is a **coarse moving state** (steady / reassessing / shaken /
+   rebuilding), never a score.
+2. **The range must widen when confidence falls.** `$180–220k` ($40k spread) →
+   `$260–340k` ($80k spread). Lower confidence is extra width, not only a
+   higher number. Do not tidy this into a same-width shift.
+3. **The "still a bet" column is never empty.** Measurement accuracy sits in
+   it from resting state as a bounded/managed risk. The change escalates it.
+4. **No answer without a source.** Anything the system asserts carries a
    citation with a date.
-4. **Judgment is labelled as judgment.** The go / redirect / stop call and the
-   commercial re-estimate are shown as decisions a person made, not as
-   automated verdicts. Today they carry *reviewed by a person*.
-5. **Seeds are visibly dimmed and tagged** `HORIZON / BET`. The line between
-   shipped-story and horizon-bet must be legible at a glance, from the back
-   of the room.
-6. **One chart only.** The confidence-over-time line. No charts for charts' sake.
+5. **Judgment is labelled as judgment.** The commercial re-estimate and any
+   pending decision carry *reviewed by [name]*.
+6. **Do not pretend rest is fully confident.** A headline risk is open;
+   the range is directional.
 
 ---
 
@@ -102,30 +157,32 @@ Generic names. **No internal branding on screen.**
 
 | Tool | Does |
 | --- | --- |
-| `context-lake` | retrieval / recall over the engagement's evidence |
-| `artifact agent` | generates deliverables and cards at the confidence the evidence supports |
+| `context-lake` | retrieval / recall over the engagement's evidence. Mechanism partly exists; **no substrate yet.** Presenter: `PARTWAY REAL` means plumbing only, not “nearly working.” |
+| `artifact agent` | generates deliverables at the confidence the evidence supports. |
 | `confidence-lineage` | the evidence substrate: risk → assumption → signal → decision → confidence. **Stores; does not generate.** |
-| `change runner` | the capability model in motion — reads a change, re-fires risk, re-levels, re-counts surface area |
-| `channel` | Slack / Teams / email. Push-first. Where the experience mostly lives. |
+| `change runner` | the capability model in motion — reads a change, re-fires risk, re-levels. |
+| `channel` | Slack / email / meeting notes. Push. The doorbells, not the destination. |
 
 ---
 
 ## Tech
 
-Plain static HTML/CSS/JS. **No build step, no framework, no bundler.**
-Open `index.html` and it runs. This is an alignment artifact shown in a room —
-it must never fail to render because a dependency drifted.
+Plain static HTML/CSS/JS. **No build step, no framework, no bundler.** Serve
+`index.html` over http (ES modules for the orbs). This is an alignment artifact
+shown in a room — it must never fail to render because a dependency drifted.
 
-- `index.html` — every beat, hand-written as markup (not data-driven; each beat
-  earns its own layout)
+- `index.html` — one persistent surface; states are `data-run` / `data-loop`
 - `assets/css/` — `tokens.css`, `base.css`, `chrome.css`, `beats.css`
-- `assets/js/walkthrough.js` — navigation, tap-wiring, presenter overlay
+- `assets/js/walkthrough.js` — state machine, left-column actions, loop staging, ask, presenter overlay
+- `assets/js/orbs.js` — vanilla mount of vendored `thinking-orbs` engine (solving / listening)
 
 Fonts load from Google Fonts with full local fallback stacks, so the walkthrough
 still reads correctly offline.
 
 ## Data
 
-All dollar figures, dates, names, and specific risk states are **illustrative
-placeholders** until pulled from the real engagement record. The *shape* is
-real; the cells are not. Say this out loud when showing it.
+All dollar figures, dates, names, the L-move, and the specific scope addition
+(autonomous pricing) are **illustrative** until pulled from the real engagement
+record. The Friday-email pattern and measurement accuracy as standing risk are
+the grounded pieces. The *shape* is real; the cells are not. Say this out loud
+when showing it.

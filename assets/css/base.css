@@ -1,6 +1,5 @@
 /* ─────────────────────────────────────────────────────────────
-   base.css — reset, ground, typography, the shared vocabulary
-   of chips (tiers, states, levels) used across every beat.
+   base.css — reset, type, quiet honesty marks. No grain, no cards.
    ───────────────────────────────────────────────────────────── */
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -16,175 +15,33 @@ body {
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow: hidden; /* screens manage their own scroll */
+  overflow: hidden;
 }
-
-/* Faint paper grain on the ground — the hand-drawn register.
-   Inline SVG turbulence so there is no asset to fetch. */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.4;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)' opacity='0.28'/%3E%3C/svg%3E");
-}
-
-/* ── Type ──────────────────────────────────────────────────── */
 
 h1, h2, h3, h4 {
   margin: 0;
   font-weight: 400;
-  letter-spacing: -0.012em;
+  letter-spacing: -0.015em;
 }
-
-.edit    { font-family: var(--font-edit); font-weight: 400; }
-.mono    { font-family: var(--font-mono); }
 
 p { margin: 0 0 var(--s2); max-width: var(--measure); }
 p:last-child { margin-bottom: 0; }
 
-a { color: inherit; }
+blockquote { margin: 0; }
 
 strong { font-weight: 600; }
 
-/* Small mono label — the metadata voice. Used everywhere. */
+.mono { font-family: var(--font-mono); }
+.muted { color: var(--ink-muted); }
+
 .label {
   font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 500;
   letter-spacing: var(--track-label);
   text-transform: uppercase;
   color: var(--ink-muted);
 }
-
-.label--accent { color: var(--accent-deep); }
-
-/* Hairline rule with a faint hand-drawn irregularity. */
-.rule {
-  height: 1px;
-  border: 0;
-  margin: var(--s3) 0;
-  background: linear-gradient(
-    90deg,
-    var(--rule) 0%, var(--rule-soft) 22%, var(--rule) 48%,
-    var(--rule-soft) 71%, var(--rule) 100%
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════
-   CHIPS — the shared honesty vocabulary.
-   Confidence is always visible; these are how it shows.
-   ═══════════════════════════════════════════════════════════ */
-
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 3px 9px;
-  border-radius: 3px;
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  vertical-align: 2px;
-}
-
-.chip::before {
-  content: "";
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: currentColor;
-  flex: none;
-}
-
-.chip--bare::before { display: none; }
-
-/* ── Confidence tiers: definitive / directional / hypothesis ── */
-
-.chip--definitive {
-  background: var(--ground-deep);
-  color: var(--ink);
-  border: 1px solid var(--rule-strong);
-}
-
-.chip--directional {
-  background: var(--accent-wash);
-  color: var(--accent-deep);
-  border: 1px solid var(--accent-soft);
-}
-
-.chip--hypothesis {
-  background: transparent;
-  color: var(--ink-muted);
-  border: 1px dashed var(--rule-strong);
-}
-
-/* ── Risk states: open / validating / proven ─────────────────── */
-
-.chip--open {
-  background: var(--accent);
-  color: #fff;
-  border: 1px solid var(--accent);
-}
-
-.chip--validating {
-  background: var(--ground-deep);
-  color: var(--ink-soft);
-  border: 1px solid var(--rule-strong);
-}
-
-.chip--proven {
-  background: transparent;
-  color: var(--ink-muted);
-  border: 1px solid var(--rule);
-}
-
-/* ── Provenance: judgment a person made, not an automated verdict ── */
-
-.chip--human {
-  background: transparent;
-  color: var(--ink-muted);
-  border: 1px solid var(--rule);
-  text-transform: none;
-  letter-spacing: 0.01em;
-  font-weight: 500;
-}
-.chip--human::before {
-  border-radius: 0;
-  width: 6px; height: 6px;
-  transform: rotate(45deg);
-  background: var(--ink-faint);
-}
-
-/* ── New / unscoped ──────────────────────────────────────────── */
-
-.chip--new {
-  background: transparent;
-  color: var(--accent-deep);
-  border: 1px dashed var(--accent);
-}
-
-/* ── HORIZON / BET — seeds only. Legible from the back of the room. ── */
-
-.chip--horizon {
-  background: transparent;
-  color: var(--ink-muted);
-  border: 1px dashed var(--ink-faint);
-  letter-spacing: 0.12em;
-}
-.chip--horizon::before {
-  background: none;
-  border: 1px solid var(--ink-faint);
-  border-radius: 50%;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   MONEY — never a bare figure. Always a range with a tier.
-   ═══════════════════════════════════════════════════════════ */
 
 .money {
   font-family: var(--font-mono);
@@ -192,35 +49,44 @@ strong { font-weight: 600; }
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.01em;
 }
+.money--was {
+  color: var(--ink-muted);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
 
-.money--now  { color: var(--ink); font-size: 1.05em; }
-.money--was  { color: var(--ink-faint); text-decoration: line-through;
-               text-decoration-thickness: 1px; }
-
-/* Capability level notation */
 .level {
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.03em;
   color: var(--ink-soft);
 }
+.level--step { color: var(--accent); }
 
-.level--step {
+.tier {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--accent-deep);
-  background: var(--accent-wash);
-  padding: 2px 7px;
-  border-radius: 3px;
-  border: 1px solid var(--accent-soft);
 }
 
-/* Utility */
-.stack > * + * { margin-top: var(--s1); }
-.row { display: flex; align-items: center; gap: var(--s1); flex-wrap: wrap; }
-.spread { display: flex; align-items: baseline; justify-content: space-between;
-          gap: var(--s2); flex-wrap: wrap; }
-.muted { color: var(--ink-muted); }
+.human {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--ink-muted);
+}
+
 .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+[hidden] { display: none !important; }
