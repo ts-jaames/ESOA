@@ -99,8 +99,14 @@
       }
     );
 
+    // Deep-linking is a convenience, not a requirement — a sandboxed frame
+    // may refuse history writes, and the walkthrough must still navigate.
     if (!skipHash && screen.id) {
-      history.replaceState(null, "", "#" + screen.id);
+      try {
+        history.replaceState(null, "", "#" + screen.id);
+      } catch (err) {
+        /* no addressable URL here; navigation is unaffected */
+      }
     }
   }
 
@@ -137,6 +143,8 @@
    * Beat 5's citation opens the decision it cites.             */
 
   document.addEventListener("click", function (e) {
+    if (!e.target || typeof e.target.closest !== "function") return;
+
     var jump = e.target.closest("[data-goto]");
     if (jump) {
       var id = jump.getAttribute("data-goto");
