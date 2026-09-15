@@ -9,9 +9,6 @@
 body[data-run="2"] .inbound { display: block; }
 
 .inbound__when {
-  display: flex;
-  align-items: center;
-  gap: var(--s1);
   font-family: var(--font-mono);
   font-size: 12px;
   letter-spacing: 0.04em;
@@ -66,7 +63,7 @@ body[data-run="2"] .triage { display: block; }
   grid-template-columns: minmax(0, 1fr) auto;
   gap: var(--s2) var(--s3);
   align-items: baseline;
-  padding: var(--s2) 0;
+  padding: var(--s1) 0;
   border-top: 1px solid var(--rule);
 }
 .asks__item:last-child { border-bottom: 1px solid var(--rule); }

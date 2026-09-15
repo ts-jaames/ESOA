@@ -44,16 +44,66 @@
         <span class="tier">directional</span>
         <span class="envelope__spread">$80k spread · was $40k</span>
         <span class="money money--was">was $180–220K</span>
-        <p class="envelope__note">Until we test that, the estimate widens.</p>
       </div>
-      <div class="confidence" aria-live="polite">
-        <div class="confidence__row">
-          <span class="confidence__k">Confidence</span>
-          <span class="confidence__state" id="confState">Steady</span>
-        </div>
+      <div class="confidence" aria-label="Confidence" aria-live="polite">
+        <span class="conf-tag" data-conf-tag="steady">
+          <canvas class="orb" data-orb="working" data-orb-when="conf-steady" data-orb-size="20" width="20" height="20" aria-hidden="true"></canvas>
+          Steady
+        </span>
+        <span class="conf-tag" data-conf-tag="reassessing">
+          <canvas class="orb" data-orb="listening" data-orb-when="conf-reassessing" data-orb-size="20" width="20" height="20" aria-hidden="true"></canvas>
+          Reassessing
+        </span>
+        <span class="conf-tag" data-conf-tag="provisional">
+          <canvas class="orb" data-orb="searching" data-orb-when="conf-provisional" data-orb-size="20" width="20" height="20" aria-hidden="true"></canvas>
+          Provisional
+        </span>
+        <span class="conf-tag" data-conf-tag="rebuilding">
+          <canvas class="orb" data-orb="composing" data-orb-when="conf-rebuilding" data-orb-size="20" width="20" height="20" aria-hidden="true"></canvas>
+          Rebuilding
+        </span>
         <p class="confidence__note" id="confNote" hidden></p>
       </div>
     </section>
+
+    <article class="change" hidden>
+      <p class="change__eyebrow">Change · from the client · captured from Monday review</p>
+      <h2 class="change__title">Pricing runs off the scan — no rep in the loop.</h2>
+      <p class="change__prov">transcript on file</p>
+
+      <section class="change__block">
+        <h3 class="change__k">What it leans on</h3>
+        <p>Measurement accuracy — validated on flat yards, not on slopes, curves, or obstructions. A wrong measurement used to be caught by a person. Take the person out and a wrong price ships.</p>
+      </section>
+
+      <section class="change__block">
+        <h3 class="change__k">Effect</h3>
+        <p class="change__conf">Confidence <span class="mono">Steady → Provisional</span></p>
+        <div class="reprice">
+          <div class="reprice__col reprice__col--was">
+            <span class="reprice__label">Was</span>
+            <span class="reprice__figure">$180–220K</span>
+            <span class="reprice__spread">$40k spread</span>
+            <span class="tier">directional</span>
+          </div>
+          <div class="reprice__arrow" aria-hidden="true">→</div>
+          <div class="reprice__col reprice__col--now">
+            <span class="reprice__label">Now</span>
+            <span class="reprice__figure">$260–340K</span>
+            <span class="reprice__spread">$80k spread · widened</span>
+            <span class="tier">directional</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="change__block">
+        <h3 class="change__k">What it opened</h3>
+        <ul class="opened">
+          <li data-bet="accuracy">Measurement accuracy on slope / curve / obstruction <span class="bet-tag">new</span></li>
+          <li data-bet="pricing">Pricing in unseen regions <span class="bet-tag">escalated</span></li>
+        </ul>
+      </section>
+    </article>
 
     <section class="portal__section">
       <div class="tri">
@@ -69,9 +119,9 @@
         <div class="tri__col tri__col--bet">
           <h2 class="tri__head">Still a bet</h2>
           <ul class="tri__list">
-            <li class="bet--bounded"><b>Measurement accuracy</b> — holds on flat yards. Untested on slopes, curves, or obstructions.</li>
-            <li class="bet--escalated" hidden><b>Measurement accuracy</b> — a wrong measurement becomes a wrong shipped price.</li>
-            <li><b>Pricing</b> in regions we haven’t seen yet.</li>
+            <li class="bet--bounded" data-bet="accuracy"><b>Measurement accuracy</b> — holds on flat yards. Untested on slopes, curves, or obstructions.</li>
+            <li class="bet--new" hidden data-bet="accuracy"><span><b>Measurement accuracy</b> on slope / curve / obstruction</span> <span class="bet-tag">new</span></li>
+            <li data-bet="pricing"><span><b>Pricing</b> in unseen regions.</span> <span class="bet-tag" hidden>escalated</span></li>
             <li><b>Rep adoption</b> — whether reps will quote from a scan.</li>
           </ul>
         </div>
@@ -80,7 +130,6 @@
 
     <div class="inbound" hidden>
       <div class="inbound__when">
-        <canvas class="orb" data-orb="listening" data-orb-when="email" data-orb-size="20" width="20" height="20" aria-hidden="true"></canvas>
         <time>Fri 16 May · 4:47pm</time>
       </div>
       <p class="inbound__from"><b>Dana Kellner</b> <span class="inbound__role">client</span></p>
@@ -91,12 +140,10 @@
 
     <div class="triage" hidden>
       <section class="triage__block">
-        <h2 class="portal__h">Received — under review</h2>
-        <p>Received. Here’s what we’re looking at.</p>
+        <p>Here’s what we’re looking at.</p>
       </section>
 
       <section class="triage__block">
-        <h2 class="portal__h">Asks</h2>
         <ul class="asks">
           <li class="asks__item asks__item--scope">
             <span class="asks__ask">Price off the scan, no rep in the loop</span>
@@ -119,56 +166,16 @@
       </section>
 
       <section class="gate">
-        <h2 class="portal__h">Pending review</h2>
-        <p>The new range waits on a person.</p>
+        <h2 class="portal__h">Awaiting Monday review</h2>
+        <p>The new range waits on the conversation.</p>
       </section>
-    </div>
-
-    <div class="change" hidden>
-      <div class="change__head">
-        <canvas class="orb" data-orb="solving" data-orb-when="change" data-orb-size="20" width="20" height="20" aria-hidden="true"></canvas>
-        <p class="change__lede">You asked for pricing to run off the scan, no rep in the loop.</p>
-      </div>
-      <div class="change__body">
-        <div class="loop-step step-fire">
-          <h3 class="loop-step__k">What it leans on</h3>
-          <p>That leans on <em>measurement accuracy</em> — which we've validated on flat yards, but not on slopes, curves, or obstructions.</p>
-          <p>A wrong measurement used to be caught by a person. Take the person out and a wrong price ships.</p>
-        </div>
-
-        <div class="loop-step step-level">
-          <h3 class="loop-step__k">Until we test that</h3>
-          <p>We can’t treat the estimate as tight. Confidence is shaken because the measurement hasn’t been proven on the yards this ask would run on.</p>
-        </div>
-
-        <div class="loop-step step-price">
-          <h3 class="loop-step__k">The estimate</h3>
-          <div class="reprice">
-            <div class="reprice__col reprice__col--was">
-              <span class="reprice__label">Was</span>
-              <span class="reprice__figure">$180–220K</span>
-              <span class="reprice__spread">$40k spread</span>
-              <span class="tier">directional</span>
-            </div>
-            <div class="reprice__arrow" aria-hidden="true">→</div>
-            <div class="reprice__col reprice__col--now">
-              <span class="reprice__label">Now</span>
-              <span class="reprice__figure">$260–340K</span>
-              <span class="reprice__spread">$80k spread · widened</span>
-              <span class="tier">directional</span>
-            </div>
-          </div>
-          <p class="why-range">Until we test that, the estimate widens. Lower confidence is extra width — not only a higher number.</p>
-          <p class="provenance">Reviewed by Rae Oyelaran</p>
-        </div>
-      </div>
     </div>
 
     <section class="portal__section pending-block" hidden>
       <h2 class="portal__h">Pending</h2>
       <p class="pending__lede">Don’t run pricing off the scan until measurement accuracy is proven.</p>
       <p class="pending__why">Proving accuracy is cheaper than unwinding a wrong price in front of a buyer.</p>
-      <p class="provenance">Reviewed by Rae Oyelaran</p>
+      <p class="provenance">Captured from Monday review · transcript on file</p>
     </section>
 
     <section class="ask" id="ask" hidden>
@@ -177,13 +184,12 @@
         <button class="tap ask__go" type="button" data-ask aria-describedby="ask-prompt">Ask</button>
       </div>
       <div class="ask__answer">
-        <p>You asked for pricing to run off the scan, no rep in the loop. That leans on measurement accuracy — which we've validated on flat yards, but not on slopes, curves, or obstructions. Until we test that, the estimate widens. Here's the plan to close it: validate accuracy on slopes, curves, and obstructions (~2 weeks). If it holds, the range tightens toward $180–220K.</p>
-        <button class="cite" type="button" data-source="src-accuracy" aria-controls="src-accuracy" aria-expanded="false">DEC-0114 · 12 Mar</button>
-        <aside class="source" id="src-accuracy" hidden>
-          <span class="source__id">DEC-0114</span>
-          Accuracy before pricing off the scan.
-          <span class="source__date">12 Mar</span>
-          <p>A rep stays in the loop until measurement accuracy is proven on irregular yards.</p>
+        <p>The estimate moved because pricing was asked to run off the scan with no rep in the loop. It’s wider because measurement accuracy is unvalidated on slopes, curves, and obstructions.</p>
+        <button class="cite" type="button" data-source="src-monday" aria-controls="src-monday" aria-expanded="false">Monday review · measurement-accuracy bet</button>
+        <aside class="source" id="src-monday" hidden>
+          <span class="source__id">Monday review</span>
+          <span class="source__date">transcript on file</span>
+          <p>From the Monday review. Measurement accuracy remains unvalidated on slopes, curves, and obstructions.</p>
         </aside>
       </div>
     </section>
@@ -191,10 +197,6 @@
 </main>
 
 <aside class="radiation" aria-label="Reach">
-  <div class="radiation__head">
-    <canvas class="orb" data-orb="breathing" data-orb-when="reach" data-orb-size="40" width="40" height="40" aria-hidden="true"></canvas>
-  </div>
-
   <div class="doorbell">
     <span class="doorbell__ch">Slack</span>
     <p class="doorbell__empty">Quiet</p>

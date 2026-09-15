@@ -46,7 +46,7 @@ Everything rendered in the demo is read by the client. The presenter overlay (`P
 
 **Never on-screen:** levels (L1–L4), capability names, caliber of judgment, counts/seats/intensity, the change runner, derivation, “the cost of being wrong went up.”
 
-**On-screen:** confidence as a coarse state; risk in plain words; range with confidence attached; status of asks; the plan to rebuild; what’s true / still a bet; reviewed by [name].
+**On-screen:** confidence as a coarse state; risk in plain words; range with confidence attached; status of asks; the plan to rebuild; what’s true / still a bet; captured from [review] (not “the system repriced this alone”).
 
 Canonical translation — internal stays behind the glass:
 
@@ -108,9 +108,9 @@ The system then **receives and works** the email, visibly:
    - *A number by early next week* → **Estimate in progress**
 3. **What it touches — in risk terms.** Plain language, no levels, no capabilities: *This leans on measurement accuracy — which we've validated on flat yards, but not on slopes, curves, or obstructions.* Connects the new ask to an already-open bet.
 4. **Confidence — Reassessing.** *New information. Reassessing confidence.* Range unchanged, pending.
-5. **Pending review.** The new range is **not shown yet.** A visible placeholder holds the space. A person has not reviewed.
+5. **Awaiting the conversation.** The new range is **not shown yet.** Held for Monday review. The review *is* the meeting — not an async reprice.
 
-**Disclosure on this surface:** risks yes, levels never. The client sees what it leans on. They do not see L-moves, capability names, or the price derivation — not before review, and not after.
+**Disclosure on this surface:** risks yes, levels never. The client sees what it leans on. They do not see L-moves, capability names, or the price derivation — not before the conversation, and not after.
 
 The visual shift from rest: at rest nothing moves; here the system acknowledges, triages, and flags confidence reassessing — but the *answer* isn't there. Tension held, not resolved.
 
@@ -121,19 +121,26 @@ The visual shift from rest: at rest nothing moves; here the system acknowledges,
 
 ### 3 · The loop (the show — the beat only we can run)
 
-The change processes, visibly, after a person has reviewed. Three staged reveals — **effects only**:
+The change is not processed async. There is a conversation — a meeting — its transcript plugs into the system, and **this surface is the durable record of what the conversation produced.** The value is not “no meeting needed”; it’s that the meeting’s output doesn’t evaporate.
 
-1. **What it leans on** — measurement accuracy, which we've validated on flat yards, but not on slopes, curves, or obstructions. A wrong measurement used to be caught by a person. Take the person out and a wrong price ships.
-2. **Until we test that** — we can’t treat the estimate as tight. Confidence is shaken because the measurement hasn’t been proven on the yards this ask would run on.
-3. **The estimate** — **$180–220k → $260–340k**, **directional**. The range **widens** ($40k spread → $80k spread). Until we test that, the estimate widens. Lower confidence is extra width, not only a higher number.
+State 3 is the **post-conversation** state. One **change item** — not a scattered lede plus a separate lean-on block. Fixed shape:
 
-Stamp: *Reviewed by Rae Oyelaran.* That is the gate from state 2 made visible. Confidence **Shaken**, reason attached to the range move.
+- **Eyebrow:** `Change · from the client · captured from Monday review`
+- **Title:** *Pricing runs off the scan — no rep in the loop.*
+- **What it leans on:** *Measurement accuracy — validated on flat yards, not on slopes, curves, or obstructions. A wrong measurement used to be caught by a person. Take the person out and a wrong price ships.* The confidence reason lives **here once** — not also under the envelope’s Confidence label.
+- **Effect:** Confidence **Steady → Provisional**. Estimate **$180–220K → $260–340K**, wider ($40k spread → $80k). **This must visibly move**; it is the payload. Directional, illustrative.
+- **What it opened:** the bets this change added or escalated, the same items tagged in still-a-bet:
+  - *Measurement accuracy on slope / curve / obstruction* — `[new]`
+  - *Pricing in unseen regions* — `[escalated]`
+- **Provenance:** *captured from Monday review · transcript on file.* Coarse, client-safe. Not “the AI repriced this alone.” Honesty: system remembers, people decide. The people decided in the room; the system holds what they decided.
 
-The L-move (AI systems engineering L2 → L3, collapse risk) is real and load-bearing. It stays in the presenter. The client sees its shadow: the risk, the wider range, the plan.
+The top estimate **moves on this screen** (`$180–220K` at rest / state 2 → `$260–340K` as soon as state 3 lands). If the number doesn’t move here, the loop has no punch.
+
+The L-move (AI systems engineering L2 → L3, collapse risk) is real and load-bearing. It stays in the presenter. The client sees its shadow: the risk, the wider range, the opened bets.
 
 - **Tool:** change runner (re-fires, re-levels) → artifact agent (writes the card) — presenter only
-- **On-screen honesty:** range widens; reason is measurement accuracy; reviewed by name. No levels on screen.
-- **Build status:** `FAKED`
+- **On-screen honesty:** range widens on entry; reason is measurement accuracy, once; captured from the meeting. No levels on screen.
+- **Build status:** `FAKED` — change item, reprice, and provenance included.
 - **Why it's here:** the one thing nobody else can run. Everything in the demo serves this beat.
 
 ### 4 · The radiation (breadth of push — sidebar lights up)
@@ -153,28 +160,30 @@ Nobody had to catch the Friday email. The work checked in with them. One event, 
 
 ### 5 · New resting state
 
-Portal current: updated (widened) envelope, change card in the record, "still a bet" now carries measurement accuracy as the *escalated* open risk (now carrying the estimate), a decision sits pending. Confidence **Rebuilding — plan attached.** Anyone who opens it sees truth. Everyone who needed to know was already pushed to.
+Portal current: updated (widened) envelope, change item in the record, "still a bet" carries the tagged opened items (`[new]` / `[escalated]`), a decision sits pending. Confidence **Rebuilding — plan attached.** Anyone who opens it sees truth. Everyone who needed to know was already pushed to. Provenance stays *captured from Monday review*, not a person's name as if they rubber-stamped an async reprice.
 
 The path back (client-facing): *To earn this back: validate measurement accuracy on slopes, curves, or obstructions (~2 weeks). If it holds, confidence recovers and the range tightens toward $180–220K.* The client's request widened the unknown; they get the path to close it and what closing it does to the number. Path-back figures are illustrative. Do not name “Evidence Work” on the surface.
 
 - **Tool:** confidence-lineage + artifact agent
-- **On-screen honesty:** bet column still populated; pending decision labelled as a person's call; envelope still a range with a tier; confidence is a coarse state with a named path, never a score.
+- **On-screen honesty:** bet column still populated and tagged; pending decision captured from the meeting; envelope still a range with a tier; confidence is a coarse state with a named path, never a score.
 - **Build status:** `FAKED`
 - **Why it's here:** the new rest. The surface stayed; the truth moved. The path back is the differentiator.
 
 ## The confidence thread
 
-Confidence is a first-class element that **moves** — the spine of the emotional story. Show it as a **coarse state, never a score** (steady / reassessing / shaken / rebuilding). A precise number would be polished fiction: the measurement method is the Phase 0 keystone and does not exist yet.
+Confidence is a first-class element that **moves** — the spine of the emotional story. Show it as a **coarse state, never a score** (steady / reassessing / provisional / rebuilding). Never “shaken” — that reads as crisis. **Provisional** is the honest word for a wider range: we are not claiming tightness. A precise number would be polished fiction: the measurement method is the Phase 0 keystone and does not exist yet.
+
+Each state is a **tag** (orb + word), not a labelled row. Orbs only appear on confidence — never in the record or reach. Designed sizes only (20px): steady `working`, reassessing `listening`, provisional `searching`, rebuilding `composing`.
 
 | State | Confidence | Range | What the client feels |
 | --- | --- | --- | --- |
 | 1 · Rest | **Steady** | $180–220K | Calm. One bounded risk open. |
 | 2 · Email | **Reassessing** | unchanged (pending) | They caught it. They're already re-checking. |
-| 3 · Loop | **Shaken — reason attached** | $180–220K → $260–340K (widens) | The number moved *because* confidence fell — and I can see why. |
-| 4 · Radiation | **Shaken** | wide | Same truth, now at the doorbells. |
+| 3 · Loop | **Provisional** (reason lives in the change item, once) | $180–220K → $260–340K (widens on this screen) | The number moved *because* tightness came off — and I can see why. |
+| 4 · Radiation | **Provisional** | wide | Same truth, now at the doorbells. |
 | 5 · New rest | **Rebuilding — plan attached** | wide, with a named path to narrow | There's a plan to close this. |
 
-The review gate sits between 2 and 3: received / triaged / what-it-touches / confidence reassessing are immediate; the new range is **reviewed by [name]** before it renders.
+The review gate sits between 2 and 3: received / triaged / what-it-touches / confidence reassessing are immediate; the new range is **captured from Monday review** (the meeting) before it renders. The review *is* the conversation.
 
 ## Before / After (the value, made legible)
 
@@ -185,10 +194,14 @@ Same illustration as the closing deck slides, now concrete inside the product. T
 
 ## Light “ask the portal”
 
-After the loop (states 3–5), one scripted question returns a cited answer with a date. No answer without a source. Disabled before the loop. The answer is the canonical client-facing paragraph, and it states the plan — it does not only promise one.
+After the loop (states 3–5), one scripted question returns a cited answer. No answer without a source. Disabled before the loop. The answer ties the ask, the wider range, and the opened bet to the meeting:
+
+> The estimate moved because pricing was asked to run off the scan with no rep in the loop. It's wider because measurement accuracy is unvalidated on slopes, curves, and obstructions. Source: Monday review · measurement-accuracy bet.
+
+Keep it light and cited. On-screen it stays illustrative, not claimed live. This is the beat where provenance pays off: the answer traces to the conversation, not a black box.
 
 - **Tool:** context-lake
-- **On-screen honesty:** the answer cites a source with a date.
+- **On-screen honesty:** the answer cites the meeting; not claimed live.
 - **Build status:** `PARTWAY REAL` — **mechanism-only.** Plumbing exists, nothing real behind it. Retrieval mechanism partly exists; there is no real substrate to retrieve from yet. Do not let the tag read as “nearly working.”
 
 ## Anti-Auctor discipline (what NOT to build)

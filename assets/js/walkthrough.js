@@ -19,16 +19,16 @@
       label: "The Friday email",
       tool: "channel (ingest) → portal",
       status: "FAKED",
-      honesty: "Client words first. Triage, what-it-touches, confidence, and the review gate are FAKED. Risks yes, levels no. Autonomous pricing is illustrative structure on a real Friday-email pattern.",
-      why: "The change entering the system — received, triaged, held at the gate."
+      honesty: "Client words first. Triage, what-it-touches, confidence, and awaiting the conversation are FAKED. Risks yes, levels no. Autonomous pricing is illustrative structure on a real Friday-email pattern.",
+      why: "The change entering the system — received, triaged, waiting on the meeting."
     },
     {
       id: "loop",
       label: "The change",
       tool: "change runner → artifact agent",
       status: "FAKED",
-      honesty: "INTERNAL: L2 → L3 AI systems engineering from collapse risk. On-screen: risk + range only. Range widens $40k → $80k.",
-      why: "The beat only we can run. Narrate the L-move from here — never from the surface."
+      honesty: "INTERNAL: L2 → L3 AI systems engineering from collapse risk. On-screen: one change item, captured from Monday review, range widens on entry. Change item, reprice, provenance are FAKED.",
+      why: "The meeting’s record. Narrate the L-move from here — never from the surface."
     },
     {
       id: "radiation",
@@ -43,7 +43,7 @@
       label: "After",
       tool: "confidence-lineage → artifact agent",
       status: "FAKED",
-      honesty: "Bet column still populated. Pending decision reviewed by name. Confidence Rebuilding with a named path back. Envelope still wider. Path-back figures are illustrative.",
+      honesty: "Bet column still populated and tagged. Pending captured from Monday review. Confidence Rebuilding with a named path back. Envelope still wider. Path-back figures are illustrative.",
       why: "Anyone who opens it sees truth — and the path to earn confidence back."
     }
   ];
@@ -51,7 +51,7 @@
   var ASK_META = {
     status: "PARTWAY REAL",
     tool: "context-lake",
-    honesty: "Plumbing exists, nothing real behind it. Not “nearly working.”",
+    honesty: "Plumbing exists, nothing real behind it. Not “nearly working.” Answer traces to Monday review, not a black box.",
     why: "Light ask, after the loop. No answer without a source."
   };
 
@@ -64,9 +64,9 @@
       word: "Reassessing",
       note: "New information. Reassessing confidence."
     },
-    shaken: {
-      word: "Shaken",
-      note: "That leans on measurement accuracy — which we've validated on flat yards, but not on slopes, curves, or obstructions."
+    provisional: {
+      word: "Provisional",
+      note: ""
     },
     rebuilding: {
       word: "Rebuilding",
@@ -82,7 +82,6 @@
   var pHonesty = document.getElementById("pHonesty");
   var pWhy = document.getElementById("pWhy");
   var askEl = document.getElementById("ask");
-  var confState = document.getElementById("confState");
   var confNote = document.getElementById("confNote");
   var actionBtns = Array.prototype.slice.call(
     document.querySelectorAll(".nav__act[data-go]")
@@ -116,7 +115,6 @@
   function paintConfidence(key) {
     var conf = CONF[key] || CONF.steady;
     body.setAttribute("data-conf", key);
-    if (confState) confState.textContent = conf.word;
     if (confNote) {
       if (conf.note) {
         confNote.textContent = conf.note;
@@ -144,8 +142,7 @@
 
   function paintVisibility() {
     var run = current + 1;
-    var priced = (run === 3 && loop >= 3) || run >= 4;
-    var leveled = (run === 3 && loop >= 1) || run >= 4;
+    var priced = run >= 3;
     var reachOn = run >= 4;
 
     setHidden(document.querySelector(".envelope--before"), priced);
@@ -157,10 +154,13 @@
     setHidden(askEl, run < 3);
 
     document.querySelectorAll(".bet--bounded").forEach(function (el) {
-      setHidden(el, leveled);
+      setHidden(el, priced);
     });
-    document.querySelectorAll(".bet--escalated").forEach(function (el) {
-      setHidden(el, !leveled);
+    document.querySelectorAll(".bet--new").forEach(function (el) {
+      setHidden(el, !priced);
+    });
+    document.querySelectorAll("[data-bet=\"pricing\"] .bet-tag").forEach(function (el) {
+      setHidden(el, !priced);
     });
 
     document.querySelectorAll(".doorbell").forEach(function (d) {
@@ -176,7 +176,7 @@
     var run = RUNS[current];
 
     if (current === 2) {
-      if (loop < 1) setLoop(1);
+      setLoop(3);
     } else if (current > 2) {
       setLoop(3);
     } else {
@@ -190,13 +190,13 @@
       current === 0 ? "steady" :
       current === 1 ? "reassessing" :
       current === 4 ? "rebuilding" :
-      "shaken"
+      "provisional"
     );
 
     if (current < 2 && askEl) {
       askEl.classList.remove("is-answered");
       askOpen = false;
-      var src = document.getElementById("src-accuracy");
+      var src = document.getElementById("src-monday");
       if (src) {
         src.classList.remove("is-open");
         setHidden(src, true);
@@ -213,33 +213,16 @@
   }
 
   function next() {
-    if (current === 2 && loop < 3) {
-      setLoop(loop + 1);
-      paintVisibility();
-      paintConfidence("shaken");
-      paintPresenter(askOpen ? ASK_META : RUNS[current]);
-      return;
-    }
     go(current + 1);
   }
 
   function prev() {
-    if (current === 2 && loop > 1) {
-      setLoop(loop - 1);
-      paintVisibility();
-      paintConfidence("shaken");
-      paintPresenter(askOpen ? ASK_META : RUNS[current]);
-      return;
-    }
-    if (current === 2) setLoop(0);
     go(current - 1);
   }
 
   actionBtns.forEach(function (b) {
     b.addEventListener("click", function () {
-      var i = Number(b.getAttribute("data-go"));
-      if (i === current && current === 2 && loop < 3) next();
-      else go(i);
+      go(Number(b.getAttribute("data-go")));
     });
   });
 

@@ -17,7 +17,7 @@ validation. Two kinds of marker exist, and they are **not** the same thing:
 
 | Marker | Audience | Rendered? |
 | --- | --- | --- |
-| **On-screen honesty** — ranges not numbers, a populated "still a bet" column, confidence as a coarse state, reviewed by name | Client, CEO, the room | **Yes.** These get built. |
+| **On-screen honesty** — ranges not numbers, a populated "still a bet" column, confidence as a coarse state, captured from the meeting | Client, CEO, the room | **Yes.** These get built. |
 | **Build status** — REAL vs. FAKED vs. PARTWAY REAL (mechanism-only) | The build team only | **No.** Never rendered in the client-facing view. |
 
 Build status lives in `SPINE.md` and in the optional **presenter overlay**
@@ -47,13 +47,13 @@ surface.** The client experiences its *effects*, not its *machinery*.
 - Any phrasing of "the cost of being wrong went up → higher caliber required"
 
 **On-screen (plain language):**
-- **Confidence** — coarse state (steady / reassessing / shaken / rebuilding). Never a score.
+- **Confidence** — coarse state (steady / reassessing / provisional / rebuilding). Never a score. Never “shaken.”
 - **Risk** — "leans on measurement accuracy, untested on slopes"
 - **Range / price** — a range, with confidence attached
 - **Status** of the client's asks (received, scoping, timeline noted)
 - **The plan to rebuild confidence** — the validation path, in plain terms
 - **What’s true / still a bet**
-- **Who reviewed it** ("reviewed by [name]")
+- **Who reviewed it** — captured from [review] (the meeting). Not “the AI repriced this.”
 
 **The test, before any line goes on the surface:**
 1. Would the client understand this sentence? If not → rewrite or cut.
@@ -75,7 +75,7 @@ Boundless dark surface. Not a document. Not a dashboard.
 | Labels, tiers, tags, metadata, numbers | **IBM Plex Mono** | ui-monospace, SFMono-Regular, Menlo, monospace |
 
 No serif. Mono is the *metadata voice* — states, tiers, timestamps,
-dollar ranges, `reviewed by [name]`. Sans carries prose.
+dollar ranges, `captured from [review]`. Sans carries prose.
 
 ### Colour
 Single accent. Resist adding a second.
@@ -109,7 +109,7 @@ is the destination; the channels are the doorbells. Do not build N channel UIs.
 | --- | --- | --- |
 | `.nav` | Always | Floating left column. Five plain actions, no numbers. Active = left hairline accent, not a filled chip. |
 | `.portal` | Always | Boundless living record. Pull. Pointable. Always current. Not a document page. Confidence sits with the envelope. |
-| `.radiation` | Always; lights in states 4–5 | Hairline rows. Named Slack / email / Monday sync as *reach* — never Slack/Teams branding or chrome. Breathing orb at the header, no “Reach” label. |
+| `.radiation` | Always; lights in states 4–5 | Hairline rows. Named Slack / email / Monday sync as *reach* — never Slack/Teams branding or chrome. No “Reach” label. |
 | Presenter | <kbd>P</kbd> | Team-only overlay, restyled for dark. Illustrative disclaimer and PARTWAY REAL live here. |
 
 Anti-Auctor: no sharing, approvals, comment threads, branded landing pages.
@@ -135,8 +135,8 @@ effect: the ask leans on an untested risk, so the range widens.
 
 1. **Confidence is always visible.** Every number is a range with a tier —
    never a bare figure. `$260–340K · directional` not `$300K`. Confidence
-   itself is a **coarse moving state** (steady / reassessing / shaken /
-   rebuilding), never a score.
+   itself is a **coarse moving state** (steady / reassessing / provisional /
+   rebuilding), never a score. Never “shaken.”
 2. **The range must widen when confidence falls.** `$180–220k` ($40k spread) →
    `$260–340k` ($80k spread). Lower confidence is extra width, not only a
    higher number. Do not tidy this into a same-width shift.
@@ -145,7 +145,8 @@ effect: the ask leans on an untested risk, so the range widens.
 4. **No answer without a source.** Anything the system asserts carries a
    citation with a date.
 5. **Judgment is labelled as judgment.** The commercial re-estimate and any
-   pending decision carry *reviewed by [name]*.
+   pending decision carry *captured from [review]* — the meeting, not an
+   async reprice.
 6. **Do not pretend rest is fully confident.** A headline risk is open;
    the range is directional.
 
@@ -171,10 +172,10 @@ Plain static HTML/CSS/JS. **No build step, no framework, no bundler.** Serve
 `index.html` over http (ES modules for the orbs). This is an alignment artifact
 shown in a room — it must never fail to render because a dependency drifted.
 
-- `index.html` — one persistent surface; states are `data-run` / `data-loop`
+- `index.html` — one persistent surface; states are `data-run`
 - `assets/css/` — `tokens.css`, `base.css`, `chrome.css`, `beats.css`
-- `assets/js/walkthrough.js` — state machine, left-column actions, loop staging, ask, presenter overlay
-- `assets/js/orbs.js` — vanilla mount of vendored `thinking-orbs` engine (solving / listening)
+- `assets/js/walkthrough.js` — state machine, left-column actions, ask, presenter overlay
+- `assets/js/orbs.js` — vanilla mount of vendored `thinking-orbs` engine (confidence tags only; 20px designed size)
 
 Fonts load from Google Fonts with full local fallback stacks, so the walkthrough
 still reads correctly offline.

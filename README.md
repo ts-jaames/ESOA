@@ -27,8 +27,7 @@ reads correctly with no network — useful in a client meeting room.
 | Key | Does |
 | --- | --- |
 | Left column | five actions — Resting, The Friday email, The change, Everyone hears, After |
-| <kbd>←</kbd> <kbd>→</kbd> | previous / next state (in the loop, steps the three reveals first) |
-| Click **The change** while there | advances one loop step |
+| <kbd>←</kbd> <kbd>→</kbd> | previous / next state |
 | <kbd>Home</kbd> <kbd>End</kbd> | first / last state |
 | <kbd>P</kbd> | presenter overlay — **team only** |
 
@@ -43,11 +42,11 @@ One tap after the loop: **Ask** returns a cited answer.
 
 | # | State | What you see |
 | --- | --- | --- |
-| 1 | Resting | Portal at rest. Envelope `$180–220k` directional. Confidence **Steady**. Measurement accuracy already in still-a-bet. Reach dim. Breathing orb in the right column. |
-| 2 | The Friday email | Inbound words, then received / triaged asks / what it touches (risk terms) / confidence **Reassessing**. New range held at **Pending review**. Listening orb. |
-| 3 | **The change** ★ | Gate opens: *reviewed by Rae Oyelaran*. Stages: what it leans on → until we test that → estimate `$180–220k` → `$260–340k` (range *widens*). Confidence **Shaken**. Solving orb beside the loop. |
-| 4 | Everyone hears | Reach lights: Slack, email, Monday sync. Confidence stays **Shaken**. |
-| 5 | After | Portal current. Widened range, escalated bet, decision pending. Confidence **Rebuilding** with a named path back. Reach stays lit. |
+| 1 | Resting | Portal at rest. Envelope `$180–220k` directional. Confidence **Steady** (orb tag). Measurement accuracy already in still-a-bet. Reach dim. |
+| 2 | The Friday email | Inbound words, then received / triaged asks / what it touches (risk terms) / confidence **Reassessing**. New range held, **awaiting Monday review**. |
+| 3 | **The change** ★ | One change item, captured from Monday review. Estimate **moves** `$180–220k` → `$260–340k` (range *widens*). Confidence **Provisional** (reason once, in the item). Opened bets tagged `[new]` / `[escalated]` in still-a-bet. |
+| 4 | Everyone hears | Reach lights: Slack, email, Monday sync. Confidence stays **Provisional**. |
+| 5 | After | Portal current. Widened range, tagged bets, decision pending. Confidence **Rebuilding** with a named path back. Reach stays lit. |
 
 The L-move (AI systems engineering L2 → L3) is the internal reason the range
 widens. **Do not put it on the surface.** Narrate it from <kbd>P</kbd>. On
@@ -60,7 +59,7 @@ accuracy, so the estimate widens, with a plan to close it.
 
 **On-screen honesty** is built and rendered: ranges instead of numbers, a
 populated "still a bet" column from state 1, confidence as a coarse state,
-reviewed by name, no answer without a source.
+captured from the meeting, no answer without a source.
 
 **Build status** — REAL vs. FAKED vs. PARTWAY REAL — is for the team and is
 **never rendered**. It lives in `SPINE.md` and in the presenter overlay

@@ -10,14 +10,10 @@ function reducedMotion() {
     matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-function presetSize(size) {
-  if (size === 20 || size === 64) return size;
-  return Math.abs(size - 20) <= Math.abs(size - 64) ? 20 : 64;
-}
-
 function mount(canvas) {
-  var state = canvas.getAttribute("data-orb") || "solving";
-  var size = Number(canvas.getAttribute("data-orb-size")) || 20;
+  var state = canvas.getAttribute("data-orb") || "working";
+  var requested = Number(canvas.getAttribute("data-orb-size")) || 20;
+  var size = requested === 64 ? 64 : 20;
   var when = canvas.getAttribute("data-orb-when") || "";
   var dark = true;
   var ctx = canvas.getContext("2d");
@@ -29,7 +25,7 @@ function mount(canvas) {
   canvas.style.width = size + "px";
   canvas.style.height = size + "px";
 
-  var preset = resolvePreset(state, presetSize(size));
+  var preset = resolvePreset(state, size);
   var draw = MODE_DRAWS[preset.mode];
   var speed = preset.speed || 1;
   if (typeof draw !== "function") return;
@@ -65,10 +61,9 @@ function mount(canvas) {
   }
 
   function shouldRun() {
-    var run = Number(document.body.getAttribute("data-run") || "1");
-    if (when === "reach") return true;
-    if (when === "email") return run === 2;
-    if (when === "change") return run === 3;
+    if (when.indexOf("conf-") === 0) {
+      return (document.body.getAttribute("data-conf") || "") === when.slice(5);
+    }
     return true;
   }
 
@@ -96,7 +91,7 @@ function mount(canvas) {
   });
 
   var mo = new MutationObserver(sync);
-  mo.observe(document.body, { attributes: true, attributeFilter: ["data-run"] });
+  mo.observe(document.body, { attributes: true, attributeFilter: ["data-run", "data-conf"] });
 
   frame(0.6);
   sync();
