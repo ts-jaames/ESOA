@@ -1,21 +1,23 @@
-# ESOA Walkthrough Spine
+# ESOA Portal Demo
 
-A full-breadth, high-fidelity walkthrough of how a change event is **experienced**
-on an engagement — the Imaginova scope change, beat by beat.
+One canonical surface. One change loop. The channels as reach.
 
 > **Fidelity moves up. Finality does not.**
 > This is an alignment artifact, not a validation artifact. Every screen is
 > high-fidelity; nothing in it is a commitment or a claim of validation.
+
+The portal is the **stage**. The change loop is the **show**. Not a portal tour.
 
 ---
 
 ## Run it
 
 ```
-open index.html
+python3 -m http.server 8080 --bind 127.0.0.1
 ```
 
-That's it. No build step, no install, no server. Plain HTML, CSS and JS.
+Then open `http://127.0.0.1:8080/`. A local server is required for the orbs
+(ES modules). No build step, no install, no framework.
 
 Fonts come from Google Fonts with complete local fallback stacks, so it still
 reads correctly with no network — useful in a client meeting room.
@@ -24,68 +26,59 @@ reads correctly with no network — useful in a client meeting room.
 
 | Key | Does |
 | --- | --- |
-| <kbd>←</kbd> <kbd>→</kbd> | previous / next beat |
-| <kbd>Home</kbd> <kbd>End</kbd> | first / last beat |
+| Left column | five actions — Resting, The Friday email, The change, Everyone hears, After |
+| <kbd>←</kbd> <kbd>→</kbd> | previous / next state |
+| <kbd>Home</kbd> <kbd>End</kbd> | first / last state |
 | <kbd>P</kbd> | presenter overlay — **team only** |
 
-Also: click the numbered ticks in the rail, scroll past the end of a beat to
-page to the next one, or deep-link straight to a beat with `#beat-4`.
+Also: deep-link with `#rest`, `#trigger`, `#loop`, `#radiation`,
+`#rest-now`. Scroll inside a view does not change the view.
 
-Two taps are wired between screens:
-
-- Beat 3 → **"see the reasoning"** opens Beat 4.
-- Beat 5 → the **cited decision** expands in place to show DEC-0114 and its
-  evidence chain.
+One tap after the loop: **Ask** returns a cited answer.
 
 ---
 
-## The beats
+## The run
 
-| # | Beat | Chrome |
+| # | State | What you see |
 | --- | --- | --- |
-| 0 | Frame | plain |
-| 1 | Resting state — the living record before anything changes | record |
-| 2 | The trigger — the Friday email lands | channel |
-| 3 | **The Change Card** ★ the hero | channel |
-| 4 | Tap in — the change expanded in the living record | record |
-| 5 | Ask the engagement | channel |
-| 6 | The deliverable regenerates, confidence-tiered | record |
-| 7 | Decision ledger | record |
-| 8 | Early risk surfacing — the outbound push | channel |
-| 9 | *Seed 1* — evidence governs the agent fleet | channel, dimmed |
-| 10 | *Seed 2* — the record becomes the source the build regenerates from | dimmed |
-| 11 | *Seed 3* — confidence becomes the priced unit | dimmed |
-| C | Closing — the rock, the person, the hammock | plain |
+| 1 | Resting | Portal at rest. Envelope `$180–220k` directional. Confidence **Steady** (orb tag). Measurement accuracy already in still-a-bet. Reach dim. |
+| 2 | The Friday email | Inbound words, then received / triaged asks / what it touches (risk terms) / confidence **Reassessing**. New range held, **awaiting Monday review**. |
+| 3 | **The change** ★ | One change item, captured from Monday review. Estimate **moves** `$180–220k` → `$260–340k` (range *widens*). Confidence **Provisional** (reason once, in the item). Opened bets tagged `[new]` / `[escalated]` in still-a-bet. |
+| 4 | Everyone hears | Reach lights: Slack, email, Monday sync. Confidence stays **Provisional**. |
+| 5 | After | Portal current. Widened range, tagged bets, decision pending. Confidence **Rebuilding** with a named path back. Reach stays lit. |
 
-Beats 9–11 are **horizon frames**. They render visibly desaturated and tagged
-`HORIZON / BET` so they can never be mistaken for shipped features.
+The L-move (AI systems engineering L2 → L3) is the internal reason the range
+widens. **Do not put it on the surface.** Narrate it from <kbd>P</kbd>. On
+screen the client sees the effect: the ask leans on untested measurement
+accuracy, so the estimate widens, with a plan to close it.
 
 ---
 
 ## The two kinds of marker — do not confuse them
 
 **On-screen honesty** is built and rendered: ranges instead of numbers, a
-populated "still a bet" column, judgment labelled as judgment, no answer
-without a source, seeds tagged as horizon.
+populated "still a bet" column from state 1, confidence as a coarse state,
+captured from the meeting, no answer without a source.
 
-**Build status** — REAL vs. FAKED — is for the team and is **never rendered**.
-It lives in `SPINE.md` and in the presenter overlay behind <kbd>P</kbd>.
+**Build status** — REAL vs. FAKED vs. PARTWAY REAL — is for the team and is
+**never rendered**. It lives in `SPINE.md` and in the presenter overlay
+behind <kbd>P</kbd>, along with levels, capabilities, and the L-move.
 
 ### Say this out loud when showing it
 
-- **context-lake** (retrieval — "Ask the engagement", Beat 5): **partway real.**
-  This is the honest anchor of the demo.
-- **Everything else: faked** for alignment. High fidelity, zero finality. It
-  shows what *is to be built*, not what *is built*.
+- **The Friday-email pattern and measurement accuracy as standing risk are real.**
+- **Autonomous pricing as the one ask, and all figures, are illustrative** until
+  pulled from the record. Do not call this Change Order #2.
+- **context-lake** (Ask): **partway real, mechanism-only.** Plumbing
+  exists, nothing real behind it. Not “nearly working.”
+- **The L-move is team-only.** Speak it from <kbd>P</kbd>. The surface never
+  names levels, capabilities, or caliber.
 
-That distinction is the discipline, and stating it is what separates this from
-polished fiction.
+### The range must widen
 
-### The data is placeholder
-
-All dollar figures, dates, names and specific risk states are **illustrative**
-until pulled from the real engagement record. The shape is real; the cells are
-not.
+`$180–220k` is a $40k spread. `$260–340k` is an $80k spread. Lower confidence
+shows up as a wider range, not only a higher one. Do not tidy this away.
 
 ---
 
@@ -94,12 +87,14 @@ not.
 ```
 SPINE.md                    the story — source of truth. Change it here first.
 CLAUDE.md                   the brand and the build rules.
-index.html                  every beat, hand-written as markup.
+index.html                  one persistent surface.
 assets/css/tokens.css       brand as variables — colour, 8px scale, type.
 assets/css/base.css         reset, ground, the chip vocabulary (tiers, states).
-assets/css/chrome.css       the three frames: channel, record, plain + shell.
-assets/css/beats.css        per-beat components: the chart, ledger, SOW, seeds.
-assets/js/walkthrough.js    navigation, tap-wiring, presenter overlay.
+assets/css/chrome.css       three columns: left actions, portal, reach; presenter.
+assets/css/beats.css        inbound, ask.
+assets/js/walkthrough.js    data-run / data-loop state machine.
+assets/js/orbs.js           vanilla mount of vendored thinking-orbs engine.
+assets/vendor/thinking-orbs/  MIT canvas engine (no React at runtime).
 ```
 
 ## Changing it
@@ -107,5 +102,4 @@ assets/js/walkthrough.js    navigation, tap-wiring, presenter overlay.
 **Do not invent story in the markup.** `SPINE.md` is the source of truth. If a
 beat feels thin when rendered, fix it in the spine first, then re-render.
 
-Brand rules, chrome rules and the non-negotiables for every screen are in
-`CLAUDE.md`.
+Brand rules, chrome rules and the non-negotiables are in `CLAUDE.md`.

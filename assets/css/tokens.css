@@ -1,71 +1,44 @@
 /* ─────────────────────────────────────────────────────────────
-   tokens.css — the brand, as variables.
-   Single accent. 8px scale. Warm ground. See CLAUDE.md.
+   tokens.css — dark, boundless, hairlines. Single accent.
    ───────────────────────────────────────────────────────────── */
 
 :root {
-  /* ── Ground ───────────────────────────────────────────────── */
-  --ground:          #F2EFE9;
-  --ground-raised:   #FBF9F5;
-  --ground-sunken:   #EAE6DE;
-  --ground-deep:     #E3DED4;
+  --ground:        #1A1A1A;
+  --ink:           #EDEAE4;
+  --ink-soft:      #C4BEB4;
+  --ink-muted:     #A8A39A;
+  --ink-faint:     #949089;
 
-  /* ── Ink ──────────────────────────────────────────────────── */
-  --ink:             #1D1A16;
-  --ink-soft:        #464038;
-  --ink-muted:       #7A7367;
-  --ink-faint:       #A69E90;
+  --rule:          rgba(237, 234, 228, 0.12);
+  --rule-strong:   rgba(237, 234, 228, 0.22);
 
-  /* ── Rules ────────────────────────────────────────────────── */
-  --rule:            #DCD5C9;
-  --rule-soft:       #E6E0D6;
-  --rule-strong:     #C4BBAB;
+  --accent:        #E75437;
+  --accent-deep:   #F07A62;
+  --accent-soft:   rgba(231, 84, 55, 0.18);
+  --accent-wash:   rgba(231, 84, 55, 0.10);
 
-  /* ── The one accent ───────────────────────────────────────── */
-  --accent:          #E75437;
-  --accent-deep:     #B93C23;
-  --accent-soft:     #F9DED6;
-  --accent-wash:     #FDF0EC;
-
-  /* ── Spacing: 8px scale, nothing off-grid ─────────────────── */
   --s1:   8px;
   --s2:  16px;
   --s3:  24px;
   --s4:  32px;
   --s5:  40px;
   --s6:  48px;
-  --s7:  56px;
   --s8:  64px;
-  --s9:  72px;
   --s10: 80px;
-  --s12: 96px;
 
-  /* ── Type ─────────────────────────────────────────────────── */
   --font-sans: "IBM Plex Sans", system-ui, -apple-system, BlinkMacSystemFont,
                "Segoe UI", Helvetica, Arial, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, "SF Mono",
                Menlo, Consolas, monospace;
-  --font-edit: "Newsreader", "Iowan Old Style", Georgia, "Times New Roman",
-               Times, serif;
 
-  /* Mono is the metadata voice: states, tiers, timestamps, ranges. */
-  --mono-label: 600 11px/1.3 var(--font-mono);
-  --track-label: 0.09em;
-
-  /* ── Motion — calm, never bouncy ──────────────────────────── */
+  --track-label: 0.08em;
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
-  --dur:  340ms;
+  --dur:  280ms;
 
-  /* ── Depth — warm and shallow. Not SaaS elevation. ────────── */
-  --lift-1: 0 1px 2px rgba(60, 48, 32, 0.05);
-  --lift-2: 0 2px 10px rgba(60, 48, 32, 0.07);
-  --lift-3: 0 6px 28px rgba(60, 48, 32, 0.10);
-
-  /* ── Layout ───────────────────────────────────────────────── */
-  --measure:   66ch;   /* prose */
-  --record-w: 1080px;  /* the living record page */
-  --channel-w: 720px;  /* the message thread */
-  --rail-h:    64px;   /* bottom navigation rail */
+  --nav-w:     176px;
+  --reach-w:   240px;
+  --deck-max:  1600px;
+  --measure:   62ch;
 }
 
 @media (prefers-reduced-motion: reduce) {

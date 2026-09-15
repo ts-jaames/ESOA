@@ -1,281 +1,232 @@
-# ESOA Walkthrough Spine
+# ESOA Portal Demo — Spine
 
-**Full-breadth alignment artifact — Imaginova change event · v0.1 · WIP**
+**One canonical surface · the change loop as the show · the channels as reach · v0.1 · WIP**
 
----
+Supersedes the 13-beat walkthrough. Single scenario, single surface.
 
-## How to read this
-
-This is the spine for the fake full-breadth build — the connected story we show
-to answer *"how is this experienced?"* It is an **alignment artifact, not a
-validation artifact**. Its job is to make the whole ESOA legible in one
-narrative so the CEO, a client, and the build team point at the same picture.
-
-The discipline that keeps this honest: **fidelity moves up, finality does not.**
-Every screen is high-fidelity; nothing here is a commitment or a claim of
-validation. Two kinds of markers appear below:
-
-- **On-screen honesty** — what the rendered screen shows so it never simulates
-  certainty (ranges not numbers, a populated "still a bet" column, seeds
-  labeled as horizon). *These get built.*
-- **Build status** — REAL vs. FAKED, for the team only. *Not rendered.* Today
-  only the retrieval piece is partway real; everything else is faked for the
-  story.
+`SPINE.md` is the source of truth. **Do not invent story in the markup.** If a beat feels thin when rendered, fix it here first, then re-render.
 
 ---
 
-## Tool legend
+## The one idea
 
-Generic names — no internal branding on screen.
+> There is **one place** that always holds the truth, and it **comes to you** wherever you already are.
 
-| Tool | Does |
-| --- | --- |
-| **context-lake** | retrieval / recall over the engagement's evidence (and, later, the corpus). The only piece that is partway built today. |
-| **artifact agent** | generates deliverables and cards from evidence, at the confidence the evidence supports. |
-| **confidence-lineage** | the evidence substrate. Stores the chain: risk → assumption → signal → decision → confidence. Stores; does not generate. |
-| **change runner** | the capability model in motion. Reads a change, re-fires risk, re-levels, re-counts surface area. |
-| **channel** | Slack / Teams / email. Push-first. Where the experience mostly lives. |
+- **The place** = the portal (the canonical ESOA surface). Pull. Pointable. Always current.
+- **The reach** = the channels (Slack, email, meeting notes…). Push. Diffuse. Meets people where they are.
+- **The channel model is now settled:** one canonical surface the channels *notify into.* Not channel-plural. The portal is the destination; the channels are the doorbells.
 
----
+## What this demo is (and is not)
 
-## The scenario
+- It **is** a scripted walkthrough of one real scenario, lived through one surface. Call it a walkthrough.
+- It is **not** a portal tour. No sharing/approvals/commenting/branded-landing beats — that's Auctor's demo and they win it. The portal is the **stage**; the change loop is the **show**.
+- The single differentiated thing it exists to show: **a change hits work with unknown feasibility → the system re-levels and re-prices → the client sees the envelope move with confidence attached.** Nobody else can run this loop. Every second of the demo serves it.
 
-Imaginova — the iPad AR pool-sales app — is mid-build. On a Friday, the client
-emails asking to expand scope: autonomous AI pricing, more AR realism, a data
-migration, and photorealistic renderings. The system re-runs the change:
-Framing re-fires first to make the go / redirect / stop call; the riskiest open
-question relocates (measurement accuracy becomes the risk carrying the
-estimate); surface area grows on existing capabilities at their existing
-levels; there is one candidate level step (AI systems engineering: in-the-loop
-→ autonomous); and the commercial envelope is re-estimated — which today is
-manual work no layer does automatically.
+## Fidelity
 
-> All dollar figures, dates, and specific risk states below are **illustrative
-> until pulled from the real engagement record**. The shape is real; the cells
-> are placeholders.
+- **Real pattern:** Imaginova. The AR pool-sales app. Friday-email change. Measurement accuracy as the standing top risk.
+- **Illustrative structure until the record is pulled:** autonomous pricing as the one scope addition. Do **not** say or imply this is Change Order #2. The shape (change hits an unvalidated assumption → re-level → reprice) is the demo; this specific ask is a placeholder.
+- **Illustrative, flag on-screen:** all figures ($180–220k → $260–340k), the L-move, dates, names.
+- If the real CO#2 is pulled later, swap the client-ask copy. Keep the L-move / widen-range mechanics.
 
----
+## The two axes — do not conflate
 
-## The beats
+This is the differentiator. The load-bearing beat must keep them apart.
 
-### Beat 0 — Frame *(before the scenario)*
+- **Client ask (feature / AI autonomy):** pricing should run with no human on the final price — “autonomous pricing.” This is what they requested. It is **not** a level label.
+- **Level move (judgment caliber):** autonomous pricing removes the human catch. If measurement accuracy is off, a wrong price ships automatically. Consequence of being wrong went up → collapse risk up → caliber of judgment required goes up → **AI systems engineering L2 → L3.**
 
-**On screen:** One quiet title screen. Two boxes: *Delivery engine* (helps us
-build — invisible to you) and *this* (what you're about to see — the
-experience). One line under it: **"You don't check on the work. The work checks
-in with you."**
+Never render “in-the-loop → autonomous” as the re-level. That reads as an AI-autonomy product. Keep “autonomous pricing” only as the client’s ask — and even then, **not on the client surface.** On-screen, say what they asked in their words: pricing off the scan, no rep in the loop.
 
-- **Tool:** —
-- **On-screen honesty:** none needed; it's the framing.
-- **Build status:** `FAKED` (static)
-- **Why it's here:** kills the "platform = dashboard" confusion in ten seconds
-  and sets the push-first expectation before any screen.
+**This model is presenter-only.** The client surface shows the *effect* (risk, range, confidence, plan), never the machinery (levels, capabilities, caliber).
 
----
+## Client-facing — the one rule for this surface
 
-### Beat 1 — Resting state *(the Living Record, before anything changes)*
+Everything rendered in the demo is read by the client. The presenter overlay (`P`) is the only place internal vocabulary is allowed.
 
-**On screen:** The engagement's living page. Three columns only — *what's true
-now / what changed / what's still a bet*. A confidence-over-time line trending
-up. Current risks listed with state: measurement accuracy — open, high; AR
-under load — validating. Current commercial envelope shown as a range
-($180–220K, high confidence). Capabilities at their levels (Core Systems Eng.
-L3, Production Hardening L3, AI systems eng. in-the-loop).
+**Never on-screen:** levels (L1–L4), capability names, caliber of judgment, counts/seats/intensity, the change runner, derivation, “the cost of being wrong went up.”
+
+**On-screen:** confidence as a coarse state; risk in plain words; range with confidence attached; status of asks; the plan to rebuild; what’s true / still a bet; captured from [review] (not “the system repriced this alone”).
+
+Canonical translation — internal stays behind the glass:
+
+> Autonomous pricing removes the human catch. Collapse risk rose → AI systems engineering L2 → L3.
+
+Client-facing:
+
+> You asked for pricing to run off the scan, no rep in the loop. That leans on measurement accuracy — which we've validated on flat yards, but not on slopes, curves, or obstructions. Until we test that, the estimate widens. Here's the plan to close it.
+
+## Layout — one screen, three zones
+
+```
+┌──────────────────────────────────────────────┬───────────────────┐
+│  THE PORTAL  (canonical surface · pull)        │  CHANNEL RADIATION │
+│                                                │  (push · sidebar)  │
+│  ┌────────────────────────────────────────┐   │                    │
+│  │  CHANGE CARD  (hero)                    │   │  → Slack           │
+│  │  what changed · risk re-fired ·         │   │  → Email (sponsor) │
+│  │  envelope moved · confidence attached   │   │  → Monday sync     │
+│  └────────────────────────────────────────┘   │                    │
+│                                                │  each: what was    │
+│  LIVING RECORD                                 │  pushed, to whom,  │
+│  · What's true now (validated + evidence)      │  in which channel  │
+│  · Still a bet (open risks + status)           │                    │
+│  · Commercial envelope (range + confidence)    │                    │
+│                                                │                    │
+├──────────────────────────────────────────────┴───────────────────┤
+│  BEFORE / AFTER toggle:  "Friday without this"  ↔  "Friday with it" │
+└──────────────────────────────────────────────────────────────────┘
+```
+
+The portal is the persistent thing anyone can open. Confidence is a first-class
+element on it — a coarse moving state, never a score. The sidebar shows the
+same event reaching people where they already are.
+
+## The run (sequence)
+
+### 1 · Resting state (the pull surface at rest)
+
+Portal open, engagement current — not serene. Envelope **$180–220k**, **directional**. Confidence **Steady**. Living record shows what's true and what's still a bet. **Measurement accuracy already sits in still-a-bet** as a bounded/managed risk (holds on flat rectangular yards; untested on slope, curve, obstruction). Activity feed quiet. Sidebar dim. This is "the thing you can always check."
+
+The Friday change *re-fires / escalates* that bet. The portal does not pretend everything was validated until Friday.
 
 - **Tool:** confidence-lineage (stores it) → artifact agent (renders it)
-- **On-screen honesty:** the "still a bet" column is populated, not empty.
-  Envelope is a range with a confidence tier, not a number.
+- **On-screen honesty:** still-a-bet is populated; envelope is a range with a tier, not “high confidence.” Figures and the specific ask are illustrative.
 - **Build status:** `FAKED`
-- **Why it's here:** establishes that the record exists and is alive before any
-  change — the client isn't only contacted on events. Sets the baseline the
-  change will move.
+- **Why it's here:** establishes the canonical surface and the baseline the change will move.
 
----
+### 2 · The trigger (triage many, drill one)
 
-### Beat 2 — The trigger *(the Friday email lands)*
+Friday 4:47pm. Client email lands: they want the app to set the price off the scan, no rep in the loop — and they want it before the fall selling season, with a number by early next week. Enters the portal as an inbound **change event**. Client words first, unprocessed. That is the trigger, not the whole state.
 
-**On screen:** The raw client email in-channel: expand scope — autonomous
-pricing, more AR realism, data migration, photoreal renders. Unprocessed. A
-subtle "scoping…" state begins.
+The system then **receives and works** the email, visibly:
 
-- **Tool:** channel (ingest)
-- **On-screen honesty:** shows the input in the client's own words before the
-  system touches it — no premature confidence.
+1. **Received — under review.** Immediate client-safe acknowledgment: *Received. Here's what we're looking at.*
+2. **Asks, triaged.** The email broken into discrete items, each with a coarse status. Only the one ask that re-fires a risk carries into the loop:
+   - *Price off the scan, no rep in the loop* → **Scoping — affects estimate** (the drill)
+   - *Before fall selling season* → **Timeline noted**
+   - *A number by early next week* → **Estimate in progress**
+3. **What it touches — in risk terms.** Plain language, no levels, no capabilities: *This leans on measurement accuracy — which we've validated on flat yards, but not on slopes, curves, or obstructions.* Connects the new ask to an already-open bet.
+4. **Confidence — Reassessing.** *New information. Reassessing confidence.* Range unchanged, pending.
+5. **Awaiting the conversation.** The new range is **not shown yet.** Held for Monday review. The review *is* the meeting — not an async reprice.
+
+**Disclosure on this surface:** risks yes, levels never. The client sees what it leans on. They do not see L-moves, capability names, or the price derivation — not before the conversation, and not after.
+
+The visual shift from rest: at rest nothing moves; here the system acknowledges, triages, and flags confidence reassessing — but the *answer* isn't there. Tension held, not resolved.
+
+- **Tool:** channel (ingest) → portal
+- **On-screen honesty:** client words first; triage is coarse status not a verdict; what-it-touches is risk language; range not yet moved. Figures and this specific ask are illustrative.
+- **Build status:** `FAKED` — triage, what-it-touches, confidence, and the review gate included.
+- **Why it's here:** the change entering the system *and being worked*, not only displayed. Real Friday-email pattern; this wording is a placeholder until the record is pulled.
+
+### 3 · The loop (the show — the beat only we can run)
+
+The change is not processed async. There is a conversation — a meeting — its transcript plugs into the system, and **this surface is the durable record of what the conversation produced.** The value is not “no meeting needed”; it’s that the meeting’s output doesn’t evaporate.
+
+State 3 is the **post-conversation** state. One **change item** — not a scattered lede plus a separate lean-on block. Fixed shape:
+
+- **Eyebrow:** `Change · from the client · captured from Monday review`
+- **Title:** *Pricing runs off the scan — no rep in the loop.*
+- **What it leans on:** *Measurement accuracy — validated on flat yards, not on slopes, curves, or obstructions. A wrong measurement used to be caught by a person. Take the person out and a wrong price ships.* The confidence reason lives **here once** — not also under the envelope’s Confidence label.
+- **Effect:** Confidence **Steady → Provisional**. Estimate **$180–220K → $260–340K**, wider ($40k spread → $80k). **This must visibly move**; it is the payload. Directional, illustrative.
+- **What it opened:** the bets this change added or escalated, the same items tagged in still-a-bet:
+  - *Measurement accuracy on slope / curve / obstruction* — `[new]`
+  - *Pricing in unseen regions* — `[escalated]`
+- **Provenance:** *captured from Monday review · transcript on file.* Coarse, client-safe. Not “the AI repriced this alone.” Honesty: system remembers, people decide. The people decided in the room; the system holds what they decided.
+
+The top estimate **moves on this screen** (`$180–220K` at rest / state 2 → `$260–340K` as soon as state 3 lands). If the number doesn’t move here, the loop has no punch.
+
+The L-move (AI systems engineering L2 → L3, collapse risk) is real and load-bearing. It stays in the presenter. The client sees its shadow: the risk, the wider range, the opened bets.
+
+- **Tool:** change runner (re-fires, re-levels) → artifact agent (writes the card) — presenter only
+- **On-screen honesty:** range widens on entry; reason is measurement accuracy, once; captured from the meeting. No levels on screen.
+- **Build status:** `FAKED` — change item, reprice, and provenance included.
+- **Why it's here:** the one thing nobody else can run. Everything in the demo serves this beat.
+
+### 4 · The radiation (breadth of push — sidebar lights up)
+
+The same event reaches everyone where they are:
+
+- **→ Slack:** delivery lead — "The Friday ask is in. Revised range waiting on your review."
+- **→ Email:** client sponsor — "summary of requested change + revised range."
+- **→ Monday sync:** flagged in the agenda automatically.
+
+Nobody had to catch the Friday email. The work checked in with them. One event, many doorbells, one canonical record.
+
+- **Tool:** notification adapters (represented, not integrated)
+- **On-screen honesty:** channels are named as reach, rendered as annotation cards — never Slack/Teams chrome. Pushes are represented, not claimed live.
 - **Build status:** `FAKED`
-- **Why it's here:** this is the change event entering the system. It's the
-  exact real moment from Change Order #2 — the email that resequenced the build.
+- **Why it's here:** the reach. The portal is the destination; the channels are the doorbells.
 
----
+### 5 · New resting state
 
-### Beat 3 — The Change Card *(pushed back, ~20 min later)* — **THE HERO**
+Portal current: updated (widened) envelope, change item in the record, "still a bet" carries the tagged opened items (`[new]` / `[escalated]`), a decision sits pending. Confidence **Rebuilding — plan attached.** Anyone who opens it sees truth. Everyone who needed to know was already pushed to. Provenance stays *captured from Monday review*, not a person's name as if they rubber-stamped an async reprice.
 
-**On screen:** A single pushed card in-channel:
+The path back (client-facing): *To earn this back: validate measurement accuracy on slopes, curves, or obstructions (~2 weeks). If it holds, confidence recovers and the range tightens toward $180–220K.* The client's request widened the unknown; they get the path to close it and what closing it does to the number. Path-back figures are illustrative. Do not name “Evidence Work” on the surface.
 
-> Your change is scoped. Autonomous pricing moves AI systems engineering from
-> in-the-loop to autonomous — a deeper level of judgment on that capability.
-> That re-opens measurement accuracy as the risk now carrying your estimate.
-> **Was:** $180–220K · high confidence · **Now:** $260–340K · directional until
-> accuracy is proven. Why a range: one open risk gates it. → see the reasoning
-
-- **Tool:** change runner (re-fires risk, re-levels, re-counts) → artifact agent
-  (writes the card) → channel (pushes it)
-- **On-screen honesty:** revised number is a range, tagged directional. The card
-  names the one open risk driving the range. A small note: *commercial
-  re-estimate reviewed by a person* (see Beat 4 / Bet 2).
+- **Tool:** confidence-lineage + artifact agent
+- **On-screen honesty:** bet column still populated and tagged; pending decision captured from the meeting; envelope still a range with a tier; confidence is a coarse state with a named path, never a score.
 - **Build status:** `FAKED`
-- **Why it's here:** the one artifact nothing else in the market sends. It
-  proves the model by doing — repricing against retired-and-open risk — not
-  describing.
+- **Why it's here:** the new rest. The surface stayed; the truth moved. The path back is the differentiator.
 
----
+## The confidence thread
 
-### Beat 4 — Tap in *(the change, expanded in the Living Record)*
+Confidence is a first-class element that **moves** — the spine of the emotional story. Show it as a **coarse state, never a score** (steady / reassessing / provisional / rebuilding). Never “shaken” — that reads as crisis. **Provisional** is the honest word for a wider range: we are not claiming tightness. A precise number would be polished fiction: the measurement method is the Phase 0 keystone and does not exist yet.
 
-**On screen:** The card opens the living record, now updated. The go / redirect
-/ stop call from Framing shown plainly: **Redirect** — don't commit autonomous
-pricing until measurement accuracy is proven; autonomous pricing depends on it.
-The level step highlighted (in-the-loop → autonomous). Surface area growth shown
-on existing capabilities → a count implication (more seats, same levels). Data
-migration and photoreal renders shown as new, unscoped, low confidence.
+Each state is a **tag** (orb + word), not a labelled row. Orbs only appear on confidence — never in the record or reach. Designed sizes only (20px): steady `working`, reassessing `listening`, provisional `searching`, rebuilding `composing`.
 
-- **Tool:** change runner + confidence-lineage
-- **On-screen honesty:** the go/redirect/stop is shown as a judgment call, not
-  an automated verdict. The count/staffing derivation is flagged *reviewed by a
-  person today* — the honest status of the automation.
-- **Build status:** `FAKED`
-- **Why it's here:** shows the model doing the thing the whole deck was about —
-  a change landing on a system, re-firing cleanly, traceably.
+| State | Confidence | Range | What the client feels |
+| --- | --- | --- | --- |
+| 1 · Rest | **Steady** | $180–220K | Calm. One bounded risk open. |
+| 2 · Email | **Reassessing** | unchanged (pending) | They caught it. They're already re-checking. |
+| 3 · Loop | **Provisional** (reason lives in the change item, once) | $180–220K → $260–340K (widens on this screen) | The number moved *because* tightness came off — and I can see why. |
+| 4 · Radiation | **Provisional** | wide | Same truth, now at the doorbells. |
+| 5 · New rest | **Rebuilding — plan attached** | wide, with a named path to narrow | There's a plan to close this. |
 
----
+The review gate sits between 2 and 3: received / triaged / what-it-touches / confidence reassessing are immediate; the new range is **captured from Monday review** (the meeting) before it renders. The review *is* the conversation.
 
-### Beat 5 — Ask the engagement
+## Before / After (the value, made legible)
 
-**On screen:** Client types in-channel: *"Why did measurement accuracy
-re-open?"* → a cited answer: *"Autonomous pricing sets price from the measured
-yard; if the measurement is off, the price is off. Decision logged 12 Mar —
-accuracy gates pricing autonomy."* The cited decision is tappable.
+- **Without:** Friday email lands on a person. Monday, someone realizes. Scope gets absorbed silently or fought later — the fixed-price collapse. *The rock lands on whoever's holding the thread.*
+- **With:** event enters the system, radiates to every channel, reprices with confidence, canonical record stays current. *The rock lands on a system.*
+
+Same illustration as the closing deck slides, now concrete inside the product. The toggle is always available; it does not replace the five-step run.
+
+## Light “ask the portal”
+
+After the loop (states 3–5), one scripted question returns a cited answer. No answer without a source. Disabled before the loop. The answer ties the ask, the wider range, and the opened bet to the meeting:
+
+> The estimate moved because pricing was asked to run off the scan with no rep in the loop. It's wider because measurement accuracy is unvalidated on slopes, curves, and obstructions. Source: Monday review · measurement-accuracy bet.
+
+Keep it light and cited. On-screen it stays illustrative, not claimed live. This is the beat where provenance pays off: the answer traces to the conversation, not a black box.
 
 - **Tool:** context-lake
-- **On-screen honesty:** the answer cites the real decision with a date — trust,
-  not vibes. No answer without a source.
-- **Build status:** `PARTWAY REAL` — retrieval is the one piece that exists.
-  Mark it as the real anchor of the demo.
-- **Why it's here:** the "magic" beat, and the one we can most honestly stand
-  behind. Anchors the story in something built.
+- **On-screen honesty:** the answer cites the meeting; not claimed live.
+- **Build status:** `PARTWAY REAL` — **mechanism-only.** Plumbing exists, nothing real behind it. Retrieval mechanism partly exists; there is no real substrate to retrieve from yet. Do not let the tag read as “nearly working.”
 
----
+## Anti-Auctor discipline (what NOT to build)
 
-### Beat 6 — The deliverable regenerates *(confidence-tiered)*
+- No portal-feature beats (sharing, approvals, comment threads, branded landing pages). They ship it better; it isn't the point.
+- Don't out-polish the shell. Out-substance the loop. If a minute isn't serving change→reprice→confidence or the radiation, cut it.
+- Their traceability shows *where a decision came from* (provenance, past). Ours shows *how confident we are and whether the language reflects it* (confidence, commitment). Keep the demo on confidence — that's the axis they structurally can't run on novel work.
+- Never conflate the client's feature-autonomy ask with a judgment-level move.
 
-**On screen:** The SOW / scope updates itself. Autonomous pricing appears as an
-explicit hypothesis (thin). Measurement accuracy marked as the gating risk.
-Known work (auth, navigation) stays definitive. Language visibly tiered:
-*definitive / directional / hypothesis*.
+## Honesty markers (on-screen honesty is rendered; build status is team-only)
 
-- **Tool:** artifact agent
-- **On-screen honesty:** the deliverable refuses to simulate certainty — thin
-  work reads as hypothesis, not as a confident line item.
-- **Build status:** `FAKED`
-- **Why it's here:** this is how we sell honesty as a product — the deliverable
-  that tells the truth about what's known.
+- **Real:** the scenario pattern (Imaginova Friday email; measurement accuracy as standing risk).
+- **Illustrative, flag on-screen:** all figures ($180–220k → $260–340k), the L-move, the ±tolerance, dates, and this specific scope addition.
+- **Faked mechanism, not claimed as live:** the re-level/reprice, the channel pushes (represented, not integrated). The portal shell is faked-real.
+- **The one partly-real piece:** retrieval (context-lake), gated as mechanism-only. No substrate yet.
 
----
+## Build note
 
-### Beat 7 — Decision Ledger *(confidence-stamped)*
+Single HTML artifact, same stack as the existing repo (no build step). Channels are **represented** (sidebar cards), not integrated — one surface plus an annotation layer, honest and cheap. This is one surface to build, which is exactly why the settled channel model matters: you're building the portal + notification adapters later, not N channels now.
 
-**On screen:** The change logged as an entry: what was decided (redirect), the
-confidence it was made under, who, when, evidence attached.
+## What each zone maps to on the roadmap (so the demo is the scorecard)
 
-- **Tool:** confidence-lineage
-- **On-screen honesty:** every decision carries the confidence it was made
-  under, so future re-litigation starts from "here's what we knew then."
-- **Build status:** `FAKED`
-- **Why it's here:** shows continuity — the reasoning survives the moment, the
-  person, the handoff.
+- **Change card + living record + envelope** ← confidence-lineage substrate (Phase 1) + artifact agent (Phase 2).
+- **The loop (re-level/reprice)** ← change runner (Phase 3, the hard one).
+- **Confidence tier / "still a bet" language** ← confidence measurement (Phase 0 keystone).
+- **Channel radiation** ← notification adapters (post-decision, cheap once the surface exists).
 
----
-
-### Beat 8 — Early risk surfacing *(the outbound push)*
-
-**On screen:** Days later in the narrative, a push goes out with no one asking:
-*"Heads up — measurement accuracy is trending toward your estimate. Cheaper to
-address now than after the steering meeting."*
-
-- **Tool:** change runner (watches the risk) → channel
-- **On-screen honesty:** framed as a heads-up with a *why now*, not an alarm;
-  still a range, still directional.
-- **Build status:** `FAKED` — and mark it internally as **highest emotional
-  value, least built**.
-- **Why it's here:** the payoff of "no surprises," and the proof that value
-  arrives without opening anything.
-
----
-
-## Seeds — horizon frames
-
-*Clearly labeled: where this goes, not built.* Render these visibly set apart —
-dimmed, tagged `HORIZON / BET` — so they read as future thinking, never as
-shipped features.
-
-### Beat 9 — Seed 1: Evidence governs the agent fleet
-
-**On screen:** The change card grows one new line: *"Agent fleet built the
-pricing module — 2 checks passed, 1 awaiting human trust."* A trust gate the
-human sets.
-
-- **On-screen honesty:** tagged `HORIZON / BET`. The line is greyed as
-  not-yet-real.
-- **Why it's here:** shows the thesis extended to machines — when building is
-  free, the model is the throttle.
-
-### Beat 10 — Seed 2: The living record becomes the source the build regenerates from
-
-**On screen:** An arrow inverts — the record no longer reports on the build; the
-build regenerates from the record. Commitment states shown as a throttle on what
-is allowed to regenerate.
-
-- **On-screen honesty:** tagged `HORIZON / BET`.
-- **Why it's here:** the most aggressive bet — the ESOA as the origin of the
-  work, not a view onto it.
-
-### Beat 11 — Seed 3: Confidence becomes the priced unit
-
-**On screen:** The SOW line flips from hours to risk retired: *"You're paying to
-move measurement accuracy from open to proven,"* with a price on the confidence
-delta.
-
-- **On-screen honesty:** tagged `HORIZON / BET`.
-- **Why it's here:** the commercial frontier — pricing the one thing that stays
-  scarce when building is free.
-
----
-
-## Closing frame
-
-**On screen:** Return to the two-slide image language — the rock, the person,
-the hammock. One line: **"Change used to land on a person. Now it lands on a
-system."** Then: the tool row (context-lake · artifact agent ·
-confidence-lineage · change runner · channel) so the room sees the machinery is
-named and buildable, not a mood board.
-
----
-
-## What's real vs. faked
-
-*Say this out loud when showing it.*
-
-- **context-lake** (retrieval / Ask the engagement): **partway real.** This is
-  the honest anchor.
-- **Everything else:** faked for alignment — high fidelity, zero finality. It
-  shows what *is to be built*, not what *is built*. That distinction is the
-  discipline, and stating it is what separates this from polished fiction.
-
----
-
-## Sequence note
-
-Spine first (this doc) → render in Claude Code, beat by beat, in a separate repo
-with the brand `CLAUDE.md`. Build the spine's story order first as static
-screens; wire the taps between them last. **Do not let the tool invent the
-story — it's here.** If a beat feels thin when rendered, fix it here in the
-spine before adding screens.
+The demo shows the target; the roadmap is the order these zones turn real.
