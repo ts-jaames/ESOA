@@ -217,8 +217,35 @@
   color: var(--ink-muted);
 }
 
+/* a short screen compacts the band rather than hiding the last hold */
+@media (max-height: 900px) {
+  .system {
+    padding-top: var(--s3);
+    gap: var(--s2);
+  }
+  .row { padding-top: 5px; padding-bottom: 5px; }
+  .row__text { font-size: 12px; line-height: 1.35; }
+  .zone__h { padding-bottom: 5px; }
+  .zone__flow { padding-top: 0; padding-bottom: 0; }
+  .system__net { padding-top: var(--s1); }
+}
+
+@media (max-height: 780px) {
+  .system { padding-top: var(--s2); gap: var(--s1); }
+  .zones { gap: 4px; }
+  .system__net { font-size: 12px; }
+}
+
+/* the record keeps the room when the window tightens */
 @media (max-width: 1180px) {
+  :root { --reach-w: 296px; }
   .row { grid-template-columns: 64px minmax(0, 1fr); }
+}
+
+@media (max-width: 980px) {
+  :root { --reach-w: 268px; }
+  .system { padding-right: var(--s2); }
+  .row__text { font-size: 12px; }
 }
 
 @media (max-width: 720px) {

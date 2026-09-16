@@ -1,6 +1,6 @@
 # ESOA Portal Demo
 
-One canonical surface. One change loop. The channels as reach.
+One canonical surface. One change loop. The system working beside it.
 
 > **Fidelity moves up. Finality does not.**
 > This is an alignment artifact, not a validation artifact. Every screen is
@@ -26,12 +26,12 @@ reads correctly with no network — useful in a client meeting room.
 
 | Key | Does |
 | --- | --- |
-| Left column | five actions — Resting, The Friday email, The change, Everyone hears, After |
+| Left column | six actions — Resting, Absorbs, The Friday email, The change, Everyone hears, After |
 | <kbd>←</kbd> <kbd>→</kbd> | previous / next state |
 | <kbd>Home</kbd> <kbd>End</kbd> | first / last state |
 | <kbd>P</kbd> | presenter overlay — **team only** |
 
-Also: deep-link with `#rest`, `#trigger`, `#loop`, `#radiation`,
+Also: deep-link with `#rest`, `#absorbs`, `#trigger`, `#loop`, `#radiation`,
 `#rest-now`. Scroll inside a view does not change the view.
 
 One tap after the loop: **Ask** returns a cited answer.
@@ -39,11 +39,18 @@ One tap after the loop: **Ask** returns a cited answer.
 Inside the estimate figure: hover or focus it and <kbd>←</kbd> <kbd>→</kbd>
 scrub the review points instead of changing state; click a point to pin it.
 An open bet with `see it on the estimate` points at the moment it moved the
-number.
+number. In the right column, a `wrote` row with `↳ in the record` scrolls the
+middle column to the thing that moved.
 
 ---
 
 ## The run
+
+The right column is **the system working**: a two-word loop state, then
+ingestion → reasoning → dispatch. Four dispatch verbs and no others — `sent`,
+`held`, `wrote`, `scheduled`/`armed`. Every state holds something back with its
+reason attached; at rest that hold is the whole output. See `CLAUDE.md` →
+*The right column*.
 
 The middle column is **one prioritized scroll** of what the system holds as
 truth — envelope, the range over time with confidence on the same axis, the
@@ -53,11 +60,12 @@ order never changes; the emphasis does. See `CLAUDE.md` → *The middle column*.
 
 | # | State | What you see |
 | --- | --- | --- |
-| 1 | Resting | Portal at rest. Envelope `$180–220k` directional. Confidence **Steady** (orb tag). Measurement accuracy already in still-a-bet. Reach dim. |
+| 1 | Resting | Portal at rest. Envelope `$180–220k` directional. Confidence **Steady** (orb tag). Measurement accuracy already in still-a-bet. The band reads continuously and sends nothing. |
+| 1a | **Absorbs** | A real change — metres alongside yards — closes itself. The band states the rule that absorbed it; the range holds and confidence does not move. In the record, only the asks ledger and the stamp move. |
 | 2 | The Friday email | Inbound words, then received / triaged asks / what it touches (risk terms) / confidence **Reassessing**. New range held, **awaiting Monday review**. |
 | 3 | **The change** ★ | One change item, captured from Monday review. Estimate **moves** `$180–220k` → `$260–340k` (range *widens*). Confidence **Provisional** (reason once, in the item). Opened bets tagged `[new]` / `[escalated]` in still-a-bet. |
-| 4 | Everyone hears | Reach lights: Slack, email, Monday sync. Confidence stays **Provisional**. |
-| 5 | After | Portal current. Widened range, tagged bets, decision pending. Confidence **Rebuilding** with a named path back. Reach stays lit. |
+| 4 | Everyone hears | Dispatch carries it: Slack, email, the Monday sync — and a hold on the pilot crews. Confidence stays **Provisional**. |
+| 5 | After | Portal current. Widened range, tagged bets, decision pending. Confidence **Rebuilding** with a named path back. The band arms the re-price for when the accuracy results land. |
 
 The L-move (AI systems engineering L2 → L3) is the internal reason the range
 widens. **Do not put it on the surface.** Narrate it from <kbd>P</kbd>. On
@@ -85,6 +93,11 @@ behind <kbd>P</kbd>, along with levels, capabilities, and the L-move.
   exists, nothing real behind it. Not “nearly working.”
 - **The L-move is team-only.** Speak it from <kbd>P</kbd>. The surface never
   names levels, capabilities, or caliber.
+- **Absorbs and the Friday email are the same machinery.** One ask touches no
+  open bet, so it closes itself; one lands on an open bet, so it goes to the
+  room. Narrate the threshold, not two behaviours.
+- **The right column is represented, not integrated.** Nothing in it is claimed
+  live. The stamps are illustrative; the shape of what it reads is real.
 
 ### The range must widen
 
@@ -101,11 +114,13 @@ CLAUDE.md                   the brand and the build rules.
 index.html                  one persistent surface.
 assets/css/tokens.css       brand as variables — colour, 8px scale, type.
 assets/css/base.css         reset, ground, the chip vocabulary (tiers, states).
-assets/css/chrome.css       three columns: left actions, portal, reach; presenter.
+assets/css/chrome.css       three columns: left actions, portal; presenter.
 assets/css/beats.css        inbound, ask.
 assets/css/record.css       the middle column: figures, ledgers, the log.
-assets/js/walkthrough.js    data-run / data-loop state machine.
+assets/css/system.css       the right column: loop state and the three zones.
+assets/js/walkthrough.js    data-run / data-beat / data-loop state machine.
 assets/js/record.js         the record: its data model and its SVG figures.
+assets/js/system.js         the band: what it read, reasoned, and did.
 assets/js/orbs.js           vanilla mount of vendored thinking-orbs engine.
 assets/vendor/thinking-orbs/  MIT canvas engine (no React at runtime).
 ```
