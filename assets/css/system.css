@@ -26,18 +26,17 @@
 .system__loop {
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  padding-bottom: var(--s2);
+  gap: 3px;
+  padding-bottom: var(--s1);
   border-bottom: 1px solid var(--rule);
 }
 
 .system__k {
   font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 11.5px;
   font-weight: 500;
   letter-spacing: var(--track-label);
   text-transform: uppercase;
-  color: var(--ink-faint);
 }
 
 .system__state {
@@ -82,7 +81,7 @@
 .zones {
   display: flex;
   flex-direction: column;
-  gap: var(--s3);
+  gap: var(--s4);
   flex: 0 0 auto;
   /* the last hold clears the net line when the column has to scroll */
   padding-bottom: var(--s4);
@@ -95,11 +94,10 @@
 
 .zone__h {
   font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 11.5px;
   font-weight: 500;
   letter-spacing: var(--track-label);
   text-transform: uppercase;
-  color: var(--ink-muted);
   margin: 0 0 var(--s1);
 }
 
@@ -109,23 +107,21 @@
   display: block;
   width: 100%;
   margin: 0;
-  padding: 0 0 0 9px;
   border: 0;
-  border-left: 1px solid transparent;
   background: none;
   text-align: left;
   font-family: var(--font-sans);
   color: inherit;
 }
-.row + .row { margin-top: 7px; }
+.row + .row { margin-top: 10px; }
 
 .row.is-accent { border-left-color: var(--accent); }
 
 .row__line {
   margin: 0;
   max-width: none;
-  font-size: 12.5px;
-  line-height: 1.45;
+  font-size: 12px;
+  line-height: 1.3;
   color: var(--ink-soft);
 }
 .row--why .row__line { color: var(--ink-soft); }
@@ -233,7 +229,7 @@
   margin: 1px 0 0;
   max-width: none;
   font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 11.5px;
   letter-spacing: 0.02em;
   line-height: 1.4;
   color: var(--ink-faint);
@@ -284,39 +280,9 @@
   padding: var(--s2) 0 var(--s3);
   background: var(--ground);
   border-top: 1px solid var(--rule);
-  font-size: 12.5px;
+  font-size: 13.5px;
   line-height: 1.45;
   color: var(--ink-muted);
-}
-
-/* a short screen compacts the band rather than hiding the last hold */
-@media (max-height: 1000px) {
-  .system {
-    padding-top: var(--s4);
-    gap: var(--s2);
-  }
-  .zones { gap: var(--s2); }
-  .zone + .zone { padding-top: var(--s2); }
-  .row + .row { margin-top: 6px; }
-  .row__line { font-size: 12px; line-height: 1.4; }
-  .system__net { padding-top: var(--s1); padding-bottom: var(--s2); }
-}
-
-/* shorter still: the metadata voice drops a half step */
-@media (max-height: 940px) {
-  .system { padding: var(--s3); gap: var(--s2); }
-  .row + .row { margin-top: 5px; }
-  .row__line { font-size: 12px; line-height: 1.35; }
-  .row__when,
-  .row__meta,
-  .row__go,
-  .row__gauge,
-  .call__k,
-  .call__cite { font-size: 10px; }
-  .call { margin-top: var(--s1); }
-  .call__track { margin: 3px 0 3px; font-size: 11px; }
-  .call__why { font-size: 12px; line-height: 1.35; }
-  .system__net { font-size: 12px; }
 }
 
 /* the record keeps the room when the window tightens */

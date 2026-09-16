@@ -506,7 +506,7 @@
 
       var head = tag("div", "fig__head");
       head.appendChild(tag("span", "fig__k", "Estimate over time"));
-      head.appendChild(tag("span", "fig__src", "confidence record · illustrative"));
+      head.appendChild(tag("span", "fig__src"));
       host.appendChild(head);
 
       var note = tag("div", "fig__note");

@@ -99,10 +99,6 @@
    FIGURES
    ═══════════════════════════════════════════════════════════ */
 
-.fig {
-  margin-top: var(--s2);
-}
-
 .fig__head {
   display: flex;
   align-items: baseline;
@@ -110,7 +106,6 @@
   gap: var(--s2);
   flex-wrap: wrap;
   padding-bottom: var(--s1);
-  border-bottom: 1px solid var(--rule);
 }
 
 .fig__k {
@@ -181,10 +176,6 @@
   font-size: 11px;
   color: var(--ink-faint);
 }
-
-.fig.is-pinned .fig__when { color: var(--accent-deep); }
-
-.fig__plot { margin-top: var(--s1); }
 
 .fig__svg {
   display: block;
@@ -304,7 +295,6 @@
   text-transform: uppercase;
   fill: var(--ink-faint);
 }
-.fig__rowhead { fill: var(--ink-muted); }
 .fig__rowlabel { fill: rgba(237, 234, 228, 0.34); }
 .fig__rowlabel.is-active { fill: var(--ink); }
 .fig__rowlabel.is-open { fill: var(--accent-deep); }
@@ -364,10 +354,18 @@
 }
 
 /* ═══════════════════════════════════════════════════════════
-   LEDGERS — hairline rows, never boxes
+   LEDGERS — each item enclosed by a hairline, not a card
    ═══════════════════════════════════════════════════════════ */
 
 .portal__h--bet { color: var(--accent-deep); }
+
+.ledger,
+.asks-ledger,
+.log {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+}
 
 .truth {
   list-style: none;
@@ -386,10 +384,9 @@
 .truth b { color: var(--ink); font-weight: 600; }
 
 .ledger__row {
-  padding: var(--s2) 0;
-  border-top: 1px solid var(--rule);
+  padding: var(--s2);
+  border: 1px solid var(--rule);
 }
-.ledger__row:last-child { border-bottom: 1px solid var(--rule); }
 
 .ledger__line {
   display: flex;
@@ -517,10 +514,9 @@
    ═══════════════════════════════════════════════════════════ */
 
 .asks__row {
-  padding: 10px 0;
-  border-top: 1px solid var(--rule);
+  padding: var(--s2);
+  border: 1px solid var(--rule);
 }
-.asks__row:last-child { border-bottom: 1px solid var(--rule); }
 
 .asks__line {
   display: grid;
@@ -557,10 +553,9 @@
    ═══════════════════════════════════════════════════════════ */
 
 .log__row {
-  padding: var(--s2) 0;
-  border-top: 1px solid var(--rule);
+  padding: var(--s2);
+  border: 1px solid var(--rule);
 }
-.log__row:last-child { border-bottom: 1px solid var(--rule); }
 
 .log__line {
   display: flex;
@@ -608,9 +603,10 @@
   grid-template-columns: minmax(0, 1fr) auto;
   gap: var(--s2) var(--s3);
   align-items: baseline;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--rule);
+  padding: var(--s2);
+  border: 1px solid var(--rule);
 }
+.path__row + .path__row { margin-top: var(--s2); }
 .path__step {
   font-size: 13.5px;
   color: var(--ink-soft);
