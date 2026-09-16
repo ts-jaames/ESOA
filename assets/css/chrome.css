@@ -71,7 +71,7 @@
   padding: var(--s5) var(--s6) var(--s8);
 }
 
-.portal { max-width: 720px; }
+.portal { max-width: 880px; }
 
 .portal__title {
   font-family: var(--font-mono);
@@ -85,8 +85,7 @@
 
 .portal__section { margin-bottom: var(--s6); }
 
-.portal__h,
-.tri__head {
+.portal__h {
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 500;
@@ -246,13 +245,6 @@ body[data-run="5"] .change { display: block; }
 }
 .why-range b { color: var(--ink); font-weight: 600; }
 
-.provenance {
-  margin-top: var(--s2);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--ink-muted);
-}
-
 /* Envelope — numbers in the open */
 .envelope {
   display: flex;
@@ -340,48 +332,6 @@ body[data-conf="rebuilding"] .conf-tag {
   max-width: 58ch;
 }
 
-/* Living record */
-.tri {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--s5);
-}
-.tri__col--bet .tri__head { color: var(--accent-deep); }
-.tri__list { list-style: none; margin: 0; padding: 0; }
-.tri__list li {
-  font-size: 13.5px;
-  line-height: 1.35;
-  color: var(--ink-soft);
-  margin-bottom: var(--s1);
-}
-.tri__list li:last-child { margin-bottom: 0; }
-.tri__list b { color: var(--ink); font-weight: 600; }
-.tri__list .bet--new,
-.tri__list [data-bet="pricing"] {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--s2);
-}
-
-body[data-run="1"] .bet--new,
-body[data-run="2"] .bet--new { display: none; }
-body[data-run="4"] .bet--bounded,
-body[data-run="5"] .bet--bounded { display: none; }
-body[data-run="1"] .bet--bounded,
-body[data-run="2"] .bet--bounded { display: list-item; }
-body[data-run="3"] .bet--new,
-body[data-run="4"] .bet--new,
-body[data-run="5"] .bet--new { display: list-item; }
-body[data-run="3"] .bet--bounded,
-body[data-run="4"] .bet--bounded,
-body[data-run="5"] .bet--bounded { display: none; }
-body[data-run="1"] [data-bet="pricing"] .bet-tag,
-body[data-run="2"] [data-bet="pricing"] .bet-tag { display: none; }
-body[data-run="3"] [data-bet="pricing"] .bet-tag,
-body[data-run="4"] [data-bet="pricing"] .bet-tag,
-body[data-run="5"] [data-bet="pricing"] .bet-tag { display: inline; }
-
 .cap {
   display: flex;
   align-items: center;
@@ -406,19 +356,6 @@ body[data-run="3"][data-loop="2"] .cap--before,
 body[data-run="3"][data-loop="3"] .cap--before { display: none; }
 body[data-run="3"][data-loop="2"] .cap--after,
 body[data-run="3"][data-loop="3"] .cap--after { display: flex; }
-
-body[data-run="1"] .pending-block,
-body[data-run="2"] .pending-block,
-body[data-run="3"] .pending-block,
-body[data-run="4"] .pending-block { display: none; }
-
-.pending__lede {
-  font-size: 17px;
-  line-height: 1.4;
-  color: var(--ink);
-  margin-bottom: 8px;
-}
-.pending__why { font-size: 13.5px; color: var(--ink-soft); max-width: 58ch; }
 
 .tap {
   appearance: none;
@@ -599,9 +536,6 @@ body[data-run="5"] .doorbell__empty { display: none; }
     grid-template-columns: var(--nav-w) minmax(0, 1fr) var(--reach-w);
   }
   .stage { padding: var(--s3); }
-  .tri { grid-template-columns: 1fr; gap: var(--s4); }
-  .asks__item { grid-template-columns: 1fr; gap: 4px; }
-  .asks__status { text-align: left; }
 }
 
 @media (max-width: 720px) {

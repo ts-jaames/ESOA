@@ -204,6 +204,147 @@ Keep it light and cited. On-screen it stays illustrative, not claimed live. This
 - **On-screen honesty:** the answer cites the meeting; not claimed live.
 - **Build status:** `PARTWAY REAL` — **mechanism-only.** Plumbing exists, nothing real behind it. Retrieval mechanism partly exists; there is no real substrate to retrieve from yet. Do not let the tag read as “nearly working.”
 
+## What the record holds (the middle column)
+
+The middle column is **one prioritized scroll** — not tabs, not a grid, not a
+set of cards. Order is priority and never changes. What changes per state is
+emphasis and density.
+
+Reading top to bottom answers, in order:
+
+1. **Where do we stand** — the envelope, confidence, and the as-of stamp
+2. **How it moved** — the range over time, with the confidence track on the same axis
+3. **Why it moved** — the change item
+4. **What's open** — the open bets, each with what would close it and what it waits on
+5. **What's being done** — the path to close, and the range it returns to
+6. **What it hits** — delivery, against the client's fall selling season target
+7. **What's on record** — the client's asks, and the decisions captured from reviews
+8. **Ask** — one cited question
+
+The "still a bet" column becomes a full-width **ledger** in position 4. Same
+non-negotiable: it is never empty, and measurement accuracy sits in it from
+rest. "What's true" keeps its own list in position 3.5, alongside the change.
+
+### The system, made visible without internals
+
+The surface should feel like something that takes information in and keeps
+process moving. That is carried by four plain devices — no levels, no
+capabilities, no counts, no scores:
+
+- **An as-of stamp.** The record states when it was last current.
+- **Ingestion is stamped.** `received automatically · Fri 16 May 4:47pm`.
+- **Every open item says what it waits on.** Nothing open is unexplained.
+- **Statuses advance by themselves** across the run. The client never files anything.
+
+### Figures — honesty rules
+
+- The range band has **no midline.** A midline is a point estimate we do not
+  have. Band plus endpoint labels only.
+- Confidence is a **categorical step track** across four rows, in the order
+  the states occur. Not a ranked scale, never a curve, never a number.
+- Anything after today renders as a **hairline outline**, labelled
+  `if accuracy holds`. Visibly a projection, not a forecast.
+- Every figure carries a source with a date.
+
+### The range over time
+
+Illustrative figures, as everywhere else. The shape — wide at the start,
+tightening as things get proved, held on the change, widening after the review
+— is the real pattern.
+
+| When | Range | Spread | Tier | Confidence | What moved it | Source | Enters at |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 14 Feb | $150–210K | $60k | order-of-magnitude | provisional | Shaped before anyone had walked a yard | kickoff note · 14 Feb | 1 |
+| 10 Mar | $170–210K | $40k | directional | steady | Scope agreed | scope agreement · 10 Mar | 1 |
+| 4 Apr | $180–220K | $40k | directional | steady | AR capture held on flat, rectangular yards | capture test · 4 Apr | 1 |
+| 16 May | $180–220K · held | $40k | directional · pending | reassessing | Change received. Range held for the review. | client email · Fri 16 May 4:47pm | 2 |
+| 19 May | $260–340K | $80k | directional | provisional | Pricing off the scan leans on measurement accuracy, untested on slopes | Monday review · 19 May | 3 |
+| 19 May · later | $260–340K | $80k | directional | rebuilding | Plan attached to close measurement accuracy | Monday review · 19 May | 5 |
+| ~2 Jun | $180–220K | $40k | projection | — | If accuracy holds on slope, curve and obstruction | plan · 19 May | 5, outline only |
+
+The widening segment — 16 May to 19 May — is the only accented part of the
+figure. It is the one thing to look at.
+
+### Open bets
+
+| Bet | At rest | After the change | What would close it | Waiting on |
+| --- | --- | --- | --- | --- |
+| **Measurement accuracy** — holds on flat yards, untested on slopes, curves, obstructions | bounded | escalated · `new` on slope / curve / obstruction | Measure slope, curve and obstruction yards against tape | Yard access in the pilot region |
+| **Pricing in unseen regions** | open | escalated | Check the price book against two more regions | Regional price data from the client |
+| **Rep adoption** — whether reps will quote from a scan | open | open | Pilot reps quoting from a scan without reverting | Pilot usage, week 3 |
+
+### The path to close
+
+At rest this is one queued step against a bounded risk. The change makes it
+the committed work, and the client gets to see what closing it does to the
+number.
+
+| Step | At rest | After the review |
+| --- | --- | --- |
+| Measure slope, curve and obstruction yards against tape | queued behind the pilot | starts 20 May |
+| Compare against the flat-yard baseline | not scheduled | follows |
+| Hold or revise the capture method | not scheduled | ~2 Jun |
+
+Each step carries its own status, and the two outcomes are stated plainly —
+what closing it buys, and what happens if it doesn't hold. Both are
+illustrative.
+
+| | At rest | After the review |
+| --- | --- | --- |
+| **If it holds** | The flat-yard limit comes off capture. | Confidence recovers and the range tightens toward `$180–220K · directional`. |
+| **If it doesn't** | Capture stays limited to flat, rectangular yards. | The capture method changes before pricing moves off the rep. |
+
+### Delivery, against the client's target
+
+| Phase | When | At rest | After the change |
+| --- | --- | --- | --- |
+| Catalogue and design sync | shipped 12 Mar | shipped | shipped |
+| Sign-in, pilot-limited | shipped 2 Apr | shipped | shipped |
+| AR capture · flat yards | in market since 4 Apr | in market | in market |
+| Accuracy on slope, curve, obstruction | 20 May – ~2 Jun | queued behind the pilot | in the plan |
+| Pricing off the scan | after accuracy holds | not scoped | waits on accuracy |
+| **Fall selling season** | 1 Sep | client target | target held · tight |
+
+### The client's asks
+
+The asks ledger is permanent, not a state-2 panel. Statuses advance across
+the run on their own.
+
+| Ask | Came in | 1 | 2 | 3–4 | 5 |
+| --- | --- | --- | --- | --- | --- |
+| Designs sync across devices | review · 6 Mar | delivered 12 Mar | — | — | — |
+| Limit sign-in to pilot users | email · 20 Mar | delivered 2 Apr | — | — | — |
+| Price off the scan, no rep in the loop | email · Fri 16 May 4:47pm | — | scoping — affects estimate | repriced · captured from Monday review | answered · decision pending |
+| Before fall selling season | email · Fri 16 May 4:47pm | — | timeline noted | checked against the plan | target held · tight |
+| A number by early next week | email · Fri 16 May 4:47pm | — | estimate in progress | sent 19 May | delivered |
+
+### Decisions on record
+
+| When | Decision | Source | From state |
+| --- | --- | --- | --- |
+| 10 Mar | Ship the catalogue before capture | scope agreement · 10 Mar | 1 |
+| 4 Apr | Hold AR capture to flat, rectangular yards until accuracy is tested | capture test review · 4 Apr | 1 |
+| 19 May | Don't run pricing off the scan until measurement accuracy is proven — **pending** | Monday review · 19 May | 5 |
+
+### As-of stamps
+
+| State | Stamp |
+| --- | --- |
+| 1 | current as of Thu 15 May · 6:02pm |
+| 2 | current as of Fri 16 May · 4:47pm · new signal received |
+| 3 | current as of Mon 19 May · 11:30am |
+| 4 | current as of Mon 19 May · 11:34am |
+| 5 | current as of Mon 19 May · 5:40pm |
+
+- **Tool:** confidence-lineage (holds it) → artifact agent (renders it)
+- **On-screen honesty:** every figure is a range with a tier; confidence stays a
+  coarse state; projections are outlines; every module carries a source and a
+  date; open items say what they wait on.
+- **Build status:** `FAKED` — the whole record. The figures are rendered from a
+  static model, not from a substrate.
+- **Why it's here:** the middle column is what the system holds as truth. If it
+  only held a headline number, there would be nothing for the change to move.
+
 ## Anti-Auctor discipline (what NOT to build)
 
 - No portal-feature beats (sharing, approvals, comment threads, branded landing pages). They ship it better; it isn't the point.

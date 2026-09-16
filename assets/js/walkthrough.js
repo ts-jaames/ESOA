@@ -150,18 +150,7 @@
     setHidden(document.querySelector(".inbound"), run !== 2);
     setHidden(document.querySelector(".triage"), run !== 2);
     setHidden(document.querySelector(".change"), run < 3);
-    setHidden(document.querySelector(".pending-block"), run !== 5);
     setHidden(askEl, run < 3);
-
-    document.querySelectorAll(".bet--bounded").forEach(function (el) {
-      setHidden(el, priced);
-    });
-    document.querySelectorAll(".bet--new").forEach(function (el) {
-      setHidden(el, !priced);
-    });
-    document.querySelectorAll("[data-bet=\"pricing\"] .bet-tag").forEach(function (el) {
-      setHidden(el, !priced);
-    });
 
     document.querySelectorAll(".doorbell").forEach(function (d) {
       setHidden(d.querySelector(".doorbell__empty"), reachOn);
@@ -205,6 +194,13 @@
 
     paintPresenter(askOpen && current >= 2 ? ASK_META : run);
     if (stage) stage.scrollTop = 0;
+
+    /* the record listens; the state machine stays the only source of state */
+    document.dispatchEvent(
+      new CustomEvent("portal:state", {
+        detail: { run: current + 1, conf: body.getAttribute("data-conf") }
+      })
+    );
 
     if (!skipHash && run.id) {
       try { history.replaceState(null, "", "#" + run.id); }

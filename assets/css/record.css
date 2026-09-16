@@ -1,0 +1,672 @@
+/* ─────────────────────────────────────────────────────────────
+   record.css — the middle column's figures and ledgers.
+   Hairlines and open space. No cards, no panels, one accent.
+   ───────────────────────────────────────────────────────────── */
+
+/* ═══════════════════════════════════════════════════════════
+   THE AS-OF STAMP — the record says when it was last current
+   ═══════════════════════════════════════════════════════════ */
+
+.portal__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s3);
+  flex-wrap: wrap;
+  margin-bottom: var(--s2);
+}
+.portal__head .portal__title { margin-bottom: 0; }
+
+.stamp {
+  position: relative;
+  margin: 0;
+  padding-bottom: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+}
+.stamp__fresh {
+  color: var(--accent-deep);
+}
+.stamp.has-fresh .stamp__fresh::before {
+  content: " · ";
+  color: var(--ink-faint);
+}
+
+/* an arrival is a hairline that fades, not a flash */
+.stamp::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  opacity: 0;
+}
+.stamp.is-arriving::after {
+  animation: stamp-arrive 1400ms var(--ease) forwards;
+}
+@keyframes stamp-arrive {
+  0%   { transform: scaleX(0); opacity: 0; }
+  18%  { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stamp.is-arriving::after { animation: none; }
+}
+
+/* an arrival: the same hairline, wherever the record moved */
+.portal__h,
+.fig__head,
+.change__eyebrow,
+.inbound__when {
+  position: relative;
+}
+.portal__h::after,
+.fig__head::after,
+.change__eyebrow::after,
+.inbound__when::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  opacity: 0;
+  pointer-events: none;
+}
+.portal__h.is-arriving::after,
+.fig__head.is-arriving::after,
+.change__eyebrow.is-arriving::after,
+.inbound__when.is-arriving::after {
+  animation: stamp-arrive 1500ms var(--ease) forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .portal__h.is-arriving::after,
+  .fig__head.is-arriving::after,
+  .change__eyebrow.is-arriving::after,
+  .inbound__when.is-arriving::after { animation: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FIGURES
+   ═══════════════════════════════════════════════════════════ */
+
+.fig {
+  margin-top: var(--s2);
+}
+
+.fig__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s2);
+  flex-wrap: wrap;
+  padding-bottom: var(--s1);
+  border-bottom: 1px solid var(--rule);
+}
+
+.fig__k {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.fig__src {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+}
+
+/* the annotation strip — what the cursor is sitting on */
+.fig__note {
+  margin-top: var(--s2);
+  min-height: 62px;
+}
+
+.fig__noteline {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s2);
+  flex-wrap: wrap;
+}
+
+.fig__when {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.fig__figure {
+  font-family: var(--font-mono);
+  font-size: 17px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.fig__spread {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.fig__moved {
+  margin: 6px 0 0;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  max-width: 58ch;
+}
+
+.fig__prov {
+  margin: 4px 0 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+}
+
+.fig.is-pinned .fig__when { color: var(--accent-deep); }
+
+.fig__plot { margin-top: var(--s1); }
+
+.fig__svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
+  outline: none;
+}
+.fig__svg:focus-visible {
+  outline: 1px solid var(--rule-strong);
+  outline-offset: 4px;
+}
+
+/* ── the band ── */
+
+.fig__band {
+  fill: rgba(237, 234, 228, 0.07);
+  stroke: none;
+}
+.fig__band--now { fill: rgba(237, 234, 228, 0.04); }
+.fig__band--accent { fill: var(--accent-wash); }
+
+.fig__edge {
+  fill: none;
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.fig__edge--now { stroke-dasharray: 3 3; }
+.fig__edge--accent { stroke: var(--accent); }
+
+.fig__jump {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.fig__held {
+  stroke: var(--accent);
+  stroke-width: 1;
+  stroke-dasharray: 1 4;
+  vector-effect: non-scaling-stroke;
+}
+.fig__heldlabel {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  fill: var(--accent-deep);
+}
+
+.fig__proj {
+  fill: none;
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+  vector-effect: non-scaling-stroke;
+}
+.fig__projlabel {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  fill: var(--ink-faint);
+}
+
+/* ── scale and axis ── */
+
+.fig__grid {
+  stroke: rgba(237, 234, 228, 0.05);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.fig__axis {
+  stroke: var(--rule);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.fig__today {
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  stroke-dasharray: 1 3;
+  vector-effect: non-scaling-stroke;
+}
+.fig__leader {
+  stroke: rgba(237, 234, 228, 0.08);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.fig__tick,
+.fig__date,
+.fig__endpoint {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  fill: var(--ink-faint);
+}
+.fig__endpoint {
+  font-size: 11px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  fill: var(--ink-muted);
+}
+.fig__date--today {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  fill: var(--ink-muted);
+}
+.fig__date--accent { fill: var(--accent-deep); }
+
+/* ── the confidence track ── */
+
+.fig__rowhead,
+.fig__rowlabel {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  fill: var(--ink-faint);
+}
+.fig__rowhead { fill: var(--ink-muted); }
+.fig__rowlabel { fill: rgba(237, 234, 228, 0.34); }
+.fig__rowlabel.is-active { fill: var(--ink); }
+.fig__rowlabel.is-open { fill: var(--accent-deep); }
+
+.fig__rowline {
+  stroke: rgba(237, 234, 228, 0.05);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.fig__step {
+  fill: none;
+  stroke: var(--ink-muted);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.fig__step--now { stroke-dasharray: 3 3; }
+.fig__step--open { stroke: var(--accent); }
+
+.fig__stepdot {
+  fill: var(--ground);
+  stroke: var(--ink-muted);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.fig__stepdot.is-open { fill: var(--accent); stroke: var(--accent); }
+
+.fig__confword {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.fig__confword.is-open { color: var(--accent-deep); }
+
+/* ── markers ── */
+
+.fig__dot {
+  fill: var(--ground);
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  transition: r var(--dur) var(--ease), stroke var(--dur) var(--ease);
+}
+.fig__dot--held { stroke: var(--ink-muted); }
+.fig__dot--accent { fill: var(--accent); stroke: var(--accent); }
+.fig__dot.is-active { stroke: var(--ink); r: 4.5; }
+.fig__dot--accent.is-active { stroke: var(--accent-deep); }
+
+.fig__hit {
+  fill: transparent;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fig__dot { transition: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LEDGERS — hairline rows, never boxes
+   ═══════════════════════════════════════════════════════════ */
+
+.portal__h--bet { color: var(--accent-deep); }
+
+.truth {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  columns: 2;
+  column-gap: var(--s5);
+}
+.truth li {
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+  margin-bottom: var(--s1);
+  break-inside: avoid;
+}
+.truth b { color: var(--ink); font-weight: 600; }
+
+.ledger__row {
+  padding: var(--s2) 0;
+  border-top: 1px solid var(--rule);
+}
+.ledger__row:last-child { border-bottom: 1px solid var(--rule); }
+
+.ledger__line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s2);
+}
+.ledger__name {
+  font-size: 14.5px;
+  color: var(--ink);
+  font-weight: 500;
+}
+.ledger__row.is-open .ledger__name { color: var(--ink); }
+
+.bet-tag--quiet { color: var(--ink-muted); }
+
+.ledger__detail {
+  margin: 4px 0 0;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  max-width: 58ch;
+}
+
+.ledger__meta {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 2px var(--s2);
+  margin-top: var(--s1);
+}
+.ledger__k {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.ledger__v {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--ink-muted);
+}
+
+.ledger__foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s2);
+  margin-top: var(--s1);
+}
+.ledger__src {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+}
+
+.trace {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: var(--accent-deep);
+  cursor: pointer;
+}
+.trace:hover { color: var(--accent); }
+
+/* ═══════════════════════════════════════════════════════════
+   DELIVERY
+   ═══════════════════════════════════════════════════════════ */
+
+.fig__plot--delivery { margin-top: var(--s3); }
+
+.fig__phase {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  fill: var(--ink-soft);
+}
+.fig__phasestatus {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  fill: var(--ink-faint);
+}
+.fig__phasestatus.is-open { fill: var(--accent-deep); }
+
+.fig__bar {
+  fill: rgba(237, 234, 228, 0.10);
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.fig__bar--queued,
+.fig__bar--waiting {
+  fill: none;
+  stroke-dasharray: 3 3;
+}
+.fig__bar--planned { fill: rgba(237, 234, 228, 0.06); }
+.fig__carry {
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  stroke-dasharray: 2 3;
+  vector-effect: non-scaling-stroke;
+}
+
+.fig__marker {
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.fig__marker--hot { stroke: var(--accent); }
+.fig__markerlabel {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  fill: var(--ink-muted);
+}
+.fig__markerlabel.is-hot { fill: var(--accent-deep); }
+
+/* ═══════════════════════════════════════════════════════════
+   THE CLIENT'S ASKS
+   ═══════════════════════════════════════════════════════════ */
+
+.asks__row {
+  padding: 10px 0;
+  border-top: 1px solid var(--rule);
+}
+.asks__row:last-child { border-bottom: 1px solid var(--rule); }
+
+.asks__line {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--s2) var(--s3);
+  align-items: baseline;
+}
+.asks__text {
+  font-size: 14px;
+  color: var(--ink);
+}
+.asks__row--scope .asks__text { font-weight: 500; }
+.asks__row.is-done .asks__text { color: var(--ink-muted); }
+
+.asks__state {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--ink-muted);
+  text-align: right;
+}
+.asks__row--scope .asks__state { color: var(--accent-deep); }
+.asks__row.is-done .asks__state { color: var(--ink-faint); }
+
+.asks__came {
+  margin: 2px 0 0;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DECISIONS ON RECORD
+   ═══════════════════════════════════════════════════════════ */
+
+.log__row {
+  padding: var(--s2) 0;
+  border-top: 1px solid var(--rule);
+}
+.log__row:last-child { border-bottom: 1px solid var(--rule); }
+
+.log__line {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s2);
+  flex-wrap: wrap;
+}
+.log__when {
+  flex: none;
+  width: 72px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.log__what {
+  flex: 1 1 24ch;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+.log__row--pending .log__what {
+  font-size: 15px;
+  color: var(--ink);
+}
+.log__why {
+  margin: 6px 0 0 72px;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  max-width: 54ch;
+}
+.log__src {
+  margin: 4px 0 0 72px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   THE PATH TO CLOSE
+   ═══════════════════════════════════════════════════════════ */
+
+.path__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--s2) var(--s3);
+  align-items: baseline;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.path__step {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+.path__row.is-live .path__step { color: var(--ink); }
+.path__status {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  color: var(--ink-faint);
+  text-align: right;
+}
+.path__row.is-live .path__status { color: var(--ink-muted); }
+.path__row.is-live:first-of-type .path__status { color: var(--accent-deep); }
+
+.path__out {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 4px var(--s2);
+  margin-top: var(--s2);
+}
+.path__k {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.path.is-committed .path__k { color: var(--accent-deep); }
+.path__v {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  max-width: 58ch;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   NARROW — the record still reads; nothing is cut
+   ═══════════════════════════════════════════════════════════ */
+
+@media (max-width: 860px) {
+  .ledger__meta,
+  .path__out { grid-template-columns: 84px minmax(0, 1fr); }
+}
+
+@media (max-width: 720px) {
+  .truth { columns: 1; }
+  .ledger__meta,
+  .path__out { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .ledger__k,
+  .path__k { margin-top: 6px; }
+  .asks__line,
+  .path__row { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .asks__state,
+  .path__status { text-align: left; }
+  .log__when { width: auto; }
+  .log__why,
+  .log__src { margin-left: 0; }
+  .fig__note { min-height: 0; }
+}

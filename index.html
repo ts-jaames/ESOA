@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/chrome.css">
 <link rel="stylesheet" href="assets/css/beats.css">
+<link rel="stylesheet" href="assets/css/record.css">
 </head>
 <body data-run="1" data-loop="0" data-conf="steady">
 
@@ -32,9 +33,12 @@
 
 <main class="stage" id="stage">
   <article class="portal">
-    <h1 class="portal__title">Imaginova</h1>
+    <div class="portal__head">
+      <h1 class="portal__title">Imaginova</h1>
+      <p class="stamp" id="stamp"></p>
+    </div>
 
-    <section class="portal__section" aria-label="Estimate">
+    <section class="portal__section" aria-label="Estimate" data-record="estimate">
       <div class="envelope envelope--before">
         <span class="envelope__figure">$180–220K</span>
         <span class="tier">directional</span>
@@ -66,7 +70,37 @@
       </div>
     </section>
 
-    <article class="change" hidden>
+    <section class="portal__section" aria-label="Estimate over time" data-record="figure">
+      <div class="fig" id="figRange" data-fig="range"></div>
+    </section>
+
+    <div class="inbound" data-record="inbound" hidden>
+      <div class="inbound__when">
+        <time>Fri 16 May · 4:47pm</time>
+      </div>
+      <p class="inbound__from"><b>Dana Kellner</b> <span class="inbound__role">client</span></p>
+      <blockquote class="inbound__text">
+        <p>Hey — leadership sat with the prototype Wednesday. Can the app set the price off the scan, no rep in the loop? We want pricing to run itself before the fall selling season. Can you get us a number by early next week?</p>
+      </blockquote>
+    </div>
+
+    <div class="triage" hidden>
+      <section class="triage__block">
+        <p>Here’s what we’re looking at.</p>
+      </section>
+
+      <section class="triage__block">
+        <h2 class="portal__h">What it touches</h2>
+        <p>This leans on measurement accuracy — which we've validated on flat yards, but not on slopes, curves, or obstructions.</p>
+      </section>
+
+      <section class="gate">
+        <h2 class="portal__h">Awaiting Monday review</h2>
+        <p>The new range waits on the conversation.</p>
+      </section>
+    </div>
+
+    <article class="change" data-record="change" hidden>
       <p class="change__eyebrow">Change · from the client · captured from Monday review</p>
       <h2 class="change__title">Pricing runs off the scan — no rep in the loop.</h2>
       <p class="change__prov">transcript on file</p>
@@ -106,76 +140,36 @@
     </article>
 
     <section class="portal__section">
-      <div class="tri">
-        <div class="tri__col">
-          <h2 class="tri__head">What’s true</h2>
-          <ul class="tri__list">
-            <li><b>Auth</b> — in production, limited to the pilot.</li>
-            <li><b>Catalogue</b> — shipped. Designs sync across devices.</li>
-            <li><b>AR capture</b> — holds on flat, rectangular yards.</li>
-            <li><b>Pricing</b> — a rep confirms every number.</li>
-          </ul>
-        </div>
-        <div class="tri__col tri__col--bet">
-          <h2 class="tri__head">Still a bet</h2>
-          <ul class="tri__list">
-            <li class="bet--bounded" data-bet="accuracy"><b>Measurement accuracy</b> — holds on flat yards. Untested on slopes, curves, or obstructions.</li>
-            <li class="bet--new" hidden data-bet="accuracy"><span><b>Measurement accuracy</b> on slope / curve / obstruction</span> <span class="bet-tag">new</span></li>
-            <li data-bet="pricing"><span><b>Pricing</b> in unseen regions.</span> <span class="bet-tag" hidden>escalated</span></li>
-            <li><b>Rep adoption</b> — whether reps will quote from a scan.</li>
-          </ul>
-        </div>
-      </div>
+      <h2 class="portal__h">What’s true</h2>
+      <ul class="truth">
+        <li><b>Auth</b> — in production, limited to the pilot.</li>
+        <li><b>Catalogue</b> — shipped. Designs sync across devices.</li>
+        <li><b>AR capture</b> — holds on flat, rectangular yards.</li>
+        <li><b>Pricing</b> — a rep confirms every number.</li>
+      </ul>
     </section>
 
-    <div class="inbound" hidden>
-      <div class="inbound__when">
-        <time>Fri 16 May · 4:47pm</time>
-      </div>
-      <p class="inbound__from"><b>Dana Kellner</b> <span class="inbound__role">client</span></p>
-      <blockquote class="inbound__text">
-        <p>Hey — leadership sat with the prototype Wednesday. Can the app set the price off the scan, no rep in the loop? We want pricing to run itself before the fall selling season. Can you get us a number by early next week?</p>
-      </blockquote>
-    </div>
+    <section class="portal__section" aria-label="Still a bet" data-record="bets">
+      <h2 class="portal__h portal__h--bet">Still a bet</h2>
+      <div class="ledger" id="ledgerBets"></div>
+    </section>
 
-    <div class="triage" hidden>
-      <section class="triage__block">
-        <p>Here’s what we’re looking at.</p>
-      </section>
+    <section class="portal__section" aria-label="Path to close" data-record="path">
+      <div class="path" id="pathClose"></div>
+    </section>
 
-      <section class="triage__block">
-        <ul class="asks">
-          <li class="asks__item asks__item--scope">
-            <span class="asks__ask">Price off the scan, no rep in the loop</span>
-            <span class="asks__status">Scoping — affects estimate</span>
-          </li>
-          <li class="asks__item">
-            <span class="asks__ask">Before fall selling season</span>
-            <span class="asks__status">Timeline noted</span>
-          </li>
-          <li class="asks__item">
-            <span class="asks__ask">A number by early next week</span>
-            <span class="asks__status">Estimate in progress</span>
-          </li>
-        </ul>
-      </section>
+    <section class="portal__section" aria-label="Delivery" data-record="delivery">
+      <div class="fig" id="figDelivery"></div>
+    </section>
 
-      <section class="triage__block">
-        <h2 class="portal__h">What it touches</h2>
-        <p>This leans on measurement accuracy — which we've validated on flat yards, but not on slopes, curves, or obstructions.</p>
-      </section>
+    <section class="portal__section" aria-label="The client’s asks" data-record="asks">
+      <h2 class="portal__h">The client’s asks</h2>
+      <div class="asks-ledger" id="ledgerAsks"></div>
+    </section>
 
-      <section class="gate">
-        <h2 class="portal__h">Awaiting Monday review</h2>
-        <p>The new range waits on the conversation.</p>
-      </section>
-    </div>
-
-    <section class="portal__section pending-block" hidden>
-      <h2 class="portal__h">Pending</h2>
-      <p class="pending__lede">Don’t run pricing off the scan until measurement accuracy is proven.</p>
-      <p class="pending__why">Proving accuracy is cheaper than unwinding a wrong price in front of a buyer.</p>
-      <p class="provenance">Captured from Monday review · transcript on file</p>
+    <section class="portal__section" aria-label="Decisions on record" data-record="decisions">
+      <h2 class="portal__h">Decisions on record</h2>
+      <div class="log" id="logDecisions"></div>
     </section>
 
     <section class="ask" id="ask" hidden>
@@ -237,10 +231,11 @@
     <span class="presenter__k">Why here</span>
     <span class="presenter__v" id="pWhy">—</span>
   </div>
-  <p class="presenter__foot">Figures, dates, names, the path back, and this specific ask are illustrative until pulled from the record. Ask is PARTWAY REAL — plumbing only, no substrate.</p>
+  <p class="presenter__foot">Figures, dates, names, the path back, and this specific ask are illustrative until pulled from the record. The record’s figures — estimate over time, confidence track, delivery — render from a static model, not a substrate. Ask is PARTWAY REAL — plumbing only, no substrate.</p>
 </aside>
 
 <script type="module" src="assets/js/orbs.js"></script>
+<script src="assets/js/record.js"></script>
 <script src="assets/js/walkthrough.js"></script>
 </body>
 </html>
