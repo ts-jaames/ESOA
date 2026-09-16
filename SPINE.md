@@ -59,28 +59,26 @@ Client-facing:
 ## Layout — one screen, three zones
 
 ```
-┌──────────────────────────────────────────────┬───────────────────┐
-│  THE PORTAL  (canonical surface · pull)        │  CHANNEL RADIATION │
-│                                                │  (push · sidebar)  │
-│  ┌────────────────────────────────────────┐   │                    │
-│  │  CHANGE CARD  (hero)                    │   │  → Slack           │
-│  │  what changed · risk re-fired ·         │   │  → Email (sponsor) │
-│  │  envelope moved · confidence attached   │   │  → Monday sync     │
-│  └────────────────────────────────────────┘   │                    │
-│                                                │  each: what was    │
-│  LIVING RECORD                                 │  pushed, to whom,  │
-│  · What's true now (validated + evidence)      │  in which channel  │
-│  · Still a bet (open risks + status)           │                    │
-│  · Commercial envelope (range + confidence)    │                    │
-│                                                │                    │
-├──────────────────────────────────────────────┴───────────────────┤
-│  BEFORE / AFTER toggle:  "Friday without this"  ↔  "Friday with it" │
-└──────────────────────────────────────────────────────────────────┘
+┌──────────┬────────────────────────────────┬──────────────────────┐
+│ THE RUN  │  THE PORTAL                    │  THE SYSTEM WORKING  │
+│          │  (canonical surface · pull)     │  (in · reason · out) │
+│ Resting  │                                 │                      │
+│ Absorbs  │  Envelope · range + confidence  │  loop state          │
+│ The      │  How it moved · the figure      │  ─────────────       │
+│  Friday  │  Why it moved · the change      │  INGESTION           │
+│  email   │  What's open · the bets         │       ↓              │
+│ The      │  What's being done · the path    │  REASONING           │
+│  change  │  What it hits · delivery        │       ↓              │
+│ Everyone │  What's on record · asks,       │  DISPATCH            │
+│  hears   │   decisions                     │   sent · held ·      │
+│ After    │  Ask · one cited question       │   wrote · armed      │
+└──────────┴────────────────────────────────┴──────────────────────┘
 ```
 
-The portal is the persistent thing anyone can open. Confidence is a first-class
-element on it — a coarse moving state, never a score. The sidebar shows the
-same event reaching people where they already are.
+Left: where we are in the story. Middle: what the system holds as truth — the
+persistent thing anyone can open, with confidence as a first-class element on
+it. Right: the system working — what it read, what it reasoned, what it did,
+including what it deliberately didn't say.
 
 ## The run (sequence)
 
@@ -94,6 +92,31 @@ The Friday change *re-fires / escalates* that bet. The portal does not pretend e
 - **On-screen honesty:** still-a-bet is populated; envelope is a range with a tier, not “high confidence.” Figures and the specific ask are illustrative.
 - **Build status:** `FAKED`
 - **Why it's here:** establishes the canonical surface and the baseline the change will move.
+
+### 1a · Absorbs (the change that never reaches a person)
+
+Left-column action: **Absorbs**. It sits under Resting, because this *is* what
+rest looks like when something small arrives. Tue 13 May, 9:12am — the client
+asks for quotes to show metres alongside yards, because two Ontario crews work
+in metric. It is a real change. It is also display-only: it touches nothing the
+estimate leans on, and it moves no date.
+
+So the loop closes without a person in it. The ask is logged and answered, the
+delivery lead gets one line, the range holds at **$180–220K**, confidence stays
+**steady**, and nobody is asked to decide anything.
+
+This beat exists to set the threshold. When the Friday email lands three days
+later and the system *doesn't* absorb it, the contrast is the argument: the
+system is not escalating everything, and it is not absorbing everything. It
+knows the difference, and it can say which rule it applied.
+
+- **Middle column:** nothing moves except the asks ledger and the as-of stamp.
+  That emptiness is the point — the record shows why you never heard about it.
+- **On-screen honesty:** the rule that absorbed it is stated, not implied. The
+  range is shown holding, not quietly unchanged. Figures illustrative.
+- **Build status:** `FAKED`
+- **Why it's here:** without it, "the system handles change" reads as "the
+  system escalates change." Absorption is the other half of the claim.
 
 ### 2 · The trigger (triage many, drill one)
 
@@ -178,6 +201,7 @@ Each state is a **tag** (orb + word), not a labelled row. Orbs only appear on co
 | State | Confidence | Range | What the client feels |
 | --- | --- | --- | --- |
 | 1 · Rest | **Steady** | $180–220K | Calm. One bounded risk open. |
+| 1a · Absorbs | **Steady** (unmoved — that is the signal) | $180–220K held | A change came in and cost me nothing. |
 | 2 · Email | **Reassessing** | unchanged (pending) | They caught it. They're already re-checking. |
 | 3 · Loop | **Provisional** (reason lives in the change item, once) | $180–220K → $260–340K (widens on this screen) | The number moved *because* tightness came off — and I can see why. |
 | 4 · Radiation | **Provisional** | wide | Same truth, now at the doorbells. |
@@ -314,6 +338,7 @@ the run on their own.
 | --- | --- | --- | --- | --- | --- |
 | Designs sync across devices | review · 6 Mar | delivered 12 Mar | — | — | — |
 | Limit sign-in to pilot users | email · 20 Mar | delivered 2 Apr | — | — | — |
+| Show metres alongside yards | email · Tue 13 May 9:12am | absorbed 13 May — range held | — | — | in the build |
 | Price off the scan, no rep in the loop | email · Fri 16 May 4:47pm | — | scoping — affects estimate | repriced · captured from Monday review | answered · decision pending |
 | Before fall selling season | email · Fri 16 May 4:47pm | — | timeline noted | checked against the plan | target held · tight |
 | A number by early next week | email · Fri 16 May 4:47pm | — | estimate in progress | sent 19 May | delivered |
@@ -331,6 +356,7 @@ the run on their own.
 | State | Stamp |
 | --- | --- |
 | 1 | current as of Thu 15 May · 6:02pm |
+| 1a | current as of Tue 13 May · 9:14am · absorbed without repricing |
 | 2 | current as of Fri 16 May · 4:47pm · new signal received |
 | 3 | current as of Mon 19 May · 11:30am |
 | 4 | current as of Mon 19 May · 11:34am |
@@ -344,6 +370,134 @@ the run on their own.
   static model, not from a substrate.
 - **Why it's here:** the middle column is what the system holds as truth. If it
   only held a headline number, there would be nothing for the change to move.
+
+## What the system takes in, and what it does with it (the right column)
+
+The middle column is what the system **holds**. The right column is the system
+**working**: what it read, what it reasoned, what it did. Three zones, always
+in the same order, always all three present.
+
+```
+        INGESTION          what the system read, and when
+            ↓
+        REASONING          what it checked it against, and the rule it applied
+            ↓
+        DISPATCH           what it did — sent, held, wrote, scheduled, armed
+```
+
+Above them sits one line: the **loop state**. It is the answer to "what is the
+system doing right now," in two plain words.
+
+| State | Loop state | The claim it makes |
+| --- | --- | --- |
+| 1 · Rest | `passive monitoring` | Reading continuously. Interrupting no one. |
+| 1a · Absorbs | `auto-resolving` | A change arrived and closed itself. |
+| 2 · Email | `strategic hold` | This one needs the room. Acknowledge now, price later. |
+| 3 · Loop | `applying the decision` | The room decided; the record is being written. |
+| 4 · Radiation | `dispatching` | One event reaching the people it affects. |
+| 5 · New rest | `watching the close` | Listening for the one thing that moves the range back. |
+
+### The four verbs of dispatch
+
+Output is not only messages. The band's argument is that a system can act on a
+record and on the future, not just in a chat window.
+
+| Verb | What it means | Why it's here |
+| --- | --- | --- |
+| `sent` | a message reached a named channel | the reach — the doorbells |
+| `held` | a message that could have gone out, didn't — with the reason | **the differentiator.** Restraint is an output. |
+| `wrote` | a change to the record itself — the range, a bet, a status, a date | the record moves as a result, not as a side effect |
+| `scheduled` / `armed` | work created, or a trigger set for a future signal | the loop stays open after the screen closes |
+
+`held` is the one most systems can't show, because most systems send
+everything. Every state has at least one. At rest, it is the whole output.
+
+### What it can read (the intake surface)
+
+Named plainly, as things a client recognises — never as integrations or
+adapters.
+
+| Source | What it reads | Cadence |
+| --- | --- | --- |
+| The field app | yard scans from the pilot crews, and the tape measurements entered beside them | continuous |
+| The build | design changes and shipped work | continuous |
+| The client's systems | the price book export, so a quote prices off what the client charges | nightly |
+| Threads | the client email thread, the delivery channel | as they arrive |
+| The room | review transcripts | when a review happens |
+| Documents | the scope agreement, the capture test report | on file, retrieved when relevant |
+| The calendar | the review, the fall selling season date | standing |
+
+Retrieval over documents is the one `PARTWAY REAL` piece (context-lake,
+mechanism-only). On the surface it is never claimed as live.
+
+### The band, state by state
+
+Illustrative, like everything else. The *shape* — read continuously, escalate
+rarely, hold deliberately, write to the record, arm the next trigger — is the
+claim.
+
+**1 · Rest — `passive monitoring`**
+
+- **In:** field app scans (last read 11:40am) · build activity (5:55pm) · price book, nightly (2:10am) · threads, quiet since Tuesday.
+- **Reasoning:** everything read today sits inside the range. One bet is being watched — measurement accuracy — and flat-yard scans keep matching the tape (`capture test · 4 Apr`). Nothing read today touched an open bet.
+- **Out:** `held` all three channels, nothing worth an interruption · `wrote` nothing, the record was already current · `armed` re-check accuracy the first time a slope scan lands.
+- **Net:** nobody was interrupted.
+
+**1a · Absorbs — `auto-resolving`**
+
+- **In:** email, Tue 13 May 9:12am — metres alongside yards for the Ontario crews · ambient sources still reading.
+- **Reasoning:** read as an ask about how a quote displays. Checked against capture, pricing, the open bets and the dates — it touches none of them. **Rule: an ask that doesn't touch an open bet or a date is absorbed inside the range.** So the range holds at $180–220K and confidence stays steady.
+- **Out:** `wrote` the asks ledger — logged and answered, no reprice · `sent` the client thread, 9:14am — it's in the current build, no change to the range or the dates · `sent` the delivery channel, one line, no reply needed · `held` the Monday agenda, nothing to decide.
+- **Net:** absorbed in two minutes, without a person in the loop.
+
+**2 · The trigger — `strategic hold`**
+
+- **In:** email, Fri 16 May 4:47pm — the client's words, unprocessed · ambient sources still reading.
+- **Reasoning:** read as three asks, not one. Pricing off the scan removes the rep's catch on a bad measurement, which lands on measurement accuracy — untested on slopes, curves, obstructions (`capture test · 4 Apr`). **Rule: an ask that lands on an open bet is never absorbed — it goes to the room.** Confidence moves to reassessing; the range is held, not changed.
+- **Out:** `sent` the client thread at 4:51pm — received, here's what we're looking at, and no number, because there isn't an honest one yet · `sent` the delivery channel — the ask and what it leans on · `wrote` three asks with statuses, and confidence steady → reassessing · `scheduled` Monday review, first item, accuracy evidence attached · `held` **the new range — it needs the room, not an algorithm.**
+- **Net:** acknowledged in four minutes on a Friday evening. Nobody's weekend went into it.
+
+**3 · The loop — `applying the decision`**
+
+- **In:** the Monday review transcript, 10:00–11:25am · the capture test report and the scope agreement, retrieved into the room.
+- **Reasoning:** the room decided; the system read the transcript for what it changed. One bet added, one escalated. Tightness came off the estimate, so the range widened rather than only rising — $40K spread to $80K. **Rule: a decision enters the record only with its reason and its source attached.**
+- **Out:** `wrote` the envelope, $180–220K → $260–340K, provisional, captured from Monday review · `wrote` the open bets · `wrote` the path to close, starting 20 May · `wrote` the pending decision · `held` every channel for four minutes — the record goes out complete or not at all.
+- **Net:** the number moved once, in the room, with the reason attached.
+
+**4 · The radiation — `dispatching`**
+
+- **In:** nothing new. This is the same event, still moving.
+- **Reasoning:** who is affected by a wider range, and what does each of them act on. **Rule: a channel carries a pointer to the record, never a copy that can drift.**
+- **Out:** `sent` the delivery lead in Slack · `sent` the client sponsor by email — the change, the revised range, the plan to close it · `scheduled` the Monday sync agenda — accuracy validation as the first item · `held` the pilot crews, nothing changes for them this week · `armed` when accuracy results land, re-open the range and tell the same people.
+- **Net:** one event, three doorbells, one record. Nobody had to catch the email.
+
+**5 · New rest — `watching the close`**
+
+- **In:** from 20 May, a new stream the plan created — slope, curve and obstruction scans, each against a tape measurement · ambient sources continuing · waiting on the client for yard access in the pilot region.
+- **Reasoning:** watching one thing — how far a scan sits from the tape on ground that isn't flat — against the flat-yard baseline. **Rule: the range moves again only with evidence attached, or in the room.**
+- **Out:** `armed` re-price when the slope results land — the same loop, in reverse · `armed` flag the fall selling season target if it slips · `scheduled` the pending decision returns to review when accuracy reports · `held` everything else.
+- **Net:** the surface stayed, the truth moved, and what it's waiting for is on the record.
+
+### The band — honesty rules
+
+- **Every row is stamped or sourced.** An intake row without a time is a claim
+  without evidence.
+- **`held` is never decoration.** It names the channel it didn't ring and the
+  reason. If there's no reason, it was a send that didn't happen.
+- **The reasoning zone states the rule it applied**, in one client-readable
+  sentence. It never shows a score, a weight, a confidence percentage, or a
+  derivation.
+- **No queue counts, no throughput, no "signals processed."** The band shows
+  *what* was read, not *how much*.
+- **`wrote` rows point at the record.** Every one of them corresponds to
+  something visible in the middle column. If it isn't there, it didn't happen.
+- **Ingestion never claims integration.** Sources are named as things, not as
+  connectors, and nothing is claimed live.
+
+- **Tool:** channel (intake) → context-lake (retrieval, `PARTWAY REAL`) → change runner (reasoning) → artifact agent + notification adapters (dispatch) — presenter only
+- **On-screen honesty:** every intake row carries a stamp; every hold carries a reason; the loop state is two plain words, never a mode name from the model.
+- **Build status:** `FAKED` — rendered from a static model. Retrieval is the one mechanism-only piece.
+- **Why it's here:** the middle column could be a very good document. This column is the argument that it is a system: it read things nobody sent it, it decided what not to say, and it set a trigger for a signal that hasn't arrived yet.
 
 ## Anti-Auctor discipline (what NOT to build)
 

@@ -122,18 +122,19 @@ legends in boxes, no gridlines beyond one or two faint seams for scale.
 
 ## Chrome rules
 
-**One canonical surface.** Three columns: actions | portal | reach. The portal
-is the destination; the channels are the doorbells. Do not build N channel UIs.
+**One canonical surface.** Three columns: the run | the record | the system
+working. The portal is the destination; channels are doorbells inside the
+dispatch zone. Do not build N channel UIs.
 
 | Chrome | When | Looks like |
 | --- | --- | --- |
-| `.nav` | Always | Floating left column. Five plain actions, no numbers. Active = left hairline accent, not a filled chip. |
+| `.nav` | Always | Floating left column. Six plain actions, no numbers. Active = left hairline accent, not a filled chip. |
 | `.portal` | Always | Boundless living record. Pull. Pointable. Always current. Not a document page. Confidence sits with the envelope. **One prioritized scroll** — no tabs, no grid. |
-| `.radiation` | Always; lights in states 4–5 | Hairline rows. Named Slack / email / Monday sync as *reach* — never Slack/Teams branding or chrome. No “Reach” label. |
+| `.system` | Always | The system working: loop state, then ingestion → reasoning → dispatch. Hairline rows, mono stamps. Channels are named inside dispatch — never Slack/Teams branding or chrome. |
 | Presenter | <kbd>P</kbd> | Team-only overlay, restyled for dark. Illustrative disclaimer and PARTWAY REAL live here. |
 
 Anti-Auctor: no sharing, approvals, comment threads, branded landing pages.
-If a minute isn't serving change → reprice → confidence, or the radiation, cut it.
+If a minute isn't serving change → reprice → confidence, or the reach, cut it.
 
 ### The middle column — order is priority
 
@@ -154,6 +155,38 @@ Do not add a module that does not answer one of those questions. The record
 should feel like something that takes information in and keeps process moving:
 **ingestion is stamped, every open item says what it waits on, statuses advance
 on their own.** The client never files anything.
+
+### The right column — the system working
+
+Three zones, same order, always all three: **ingestion → reasoning →
+dispatch**, under a two-word **loop state**. `SPINE.md` → *What the system
+takes in* is the source for every row.
+
+This column may name the *behaviour* of the loop. It still may not name the
+model.
+
+| Allowed here | Still never |
+| --- | --- |
+| Loop state as two plain words — `passive monitoring`, `auto-resolving`, `strategic hold`, `dispatching`, `watching the close` | Levels, capability names, caliber, intensity states, the change runner, seams |
+| The rule it applied, in one client-readable sentence | Scores, weights, confidence percentages, any derivation |
+| What it read, and when — every intake row is stamped | Queue counts, throughput, "signals processed", volumes |
+| Named channels inside dispatch | Slack/Teams chrome, logos, message bubbles |
+
+Four dispatch verbs, no others: **`sent`** (reached a channel), **`held`** (a
+message that could have gone out and didn't — *with the reason*), **`wrote`**
+(a change to the record), **`scheduled` / `armed`** (work created, or a trigger
+set for a signal that hasn't arrived).
+
+- **`held` is load-bearing, not decoration.** Every state has at least one. At
+  rest it is the entire output. It always names the channel it didn't ring and
+  why. Restraint is the differentiator; most systems send everything.
+- **`wrote` rows must be true.** Each one points at something visible in the
+  middle column. If it isn't in the record, it didn't happen.
+- **Ingestion never claims integration.** Sources are named as things a client
+  recognises — the field app, the price book, the room — not as connectors,
+  and nothing is claimed live.
+- The band is **narrow**. One idea per row, one line of prose, one mono stamp.
+  If a row needs two sentences, it belongs in the record.
 
 ---
 
@@ -189,6 +222,12 @@ effect: the ask leans on an untested risk, so the range widens.
    async reprice.
 6. **Do not pretend rest is fully confident.** A headline risk is open;
    the range is directional.
+7. **The system is shown absorbing, not only escalating.** One beat closes a
+   real change without a person in it, and states the rule that let it. A
+   system that escalates everything is a tripwire, not judgment.
+8. **Every state holds something back.** Dispatch always shows a `held` with
+   its reason. What the system chose not to say is as load-bearing as what it
+   sent.
 
 ---
 
