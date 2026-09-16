@@ -121,9 +121,29 @@
   var pWhy = document.getElementById("pWhy");
   var askEl = document.getElementById("ask");
   var confNote = document.getElementById("confNote");
+  var pBuild = document.getElementById("pBuild");
   var actionBtns = Array.prototype.slice.call(
     document.querySelectorAll(".nav__act[data-go]")
   );
+
+  /* Which build is on screen. serve.sh writes build.txt while it serves;
+     started any other way there is nothing to read, and the overlay says so
+     rather than claiming a version it can't stand behind. */
+  function paintBuild() {
+    if (!pBuild || typeof fetch !== "function") return;
+    fetch("build.txt", { cache: "no-store" })
+      .then(function (res) {
+        if (!res.ok) throw new Error(String(res.status));
+        return res.text();
+      })
+      .then(function (text) {
+        var line = text.trim();
+        if (line) pBuild.textContent = line;
+      })
+      .catch(function () {
+        pBuild.textContent = "unversioned — not started by serve.sh";
+      });
+  }
 
   /* Opened straight off the disk, the orb engine can't load — modules need
      http. Collapse its space rather than leave a hole where it should be. */
@@ -314,6 +334,7 @@
     return "#" + r.id === window.location.hash;
   });
   go(fromHash > -1 ? fromHash : 0, true);
+  paintBuild();
 
   window.addEventListener("hashchange", function () {
     var i = RUNS.findIndex(function (r) {
