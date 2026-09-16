@@ -125,6 +125,14 @@
     document.querySelectorAll(".nav__act[data-go]")
   );
 
+  /* Opened straight off the disk, the orb engine can't load — modules need
+     http. Collapse its space rather than leave a hole where it should be. */
+  window.setTimeout(function () {
+    if (!document.querySelector("canvas[data-orb][data-mounted]")) {
+      body.setAttribute("data-orbs", "off");
+    }
+  }, 900);
+
   var current = 0;
   var loop = 0;
   var askOpen = false;

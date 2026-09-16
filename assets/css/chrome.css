@@ -338,6 +338,7 @@ body[data-conf="reassessing"] .orb[data-orb-when="conf-reassessing"],
 body[data-conf="provisional"] .orb[data-orb-when="conf-provisional"],
 body[data-conf="rebuilding"] .orb[data-orb-when="conf-rebuilding"] { opacity: 1; }
 .confidence__read { min-width: 0; }
+body[data-orbs="off"] .confidence__orbs { display: none; }
 .conf-tag {
   display: none;
   font-family: var(--font-mono);

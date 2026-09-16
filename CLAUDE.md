@@ -201,7 +201,10 @@ model.
 | What it read, and when — every intake row is stamped | Queue counts, throughput, "signals processed", volumes |
 | Named channels inside dispatch | Slack/Teams chrome, logos, message bubbles |
 
-Four dispatch verbs, no others: **`sent`** (reached a channel), **`held`** (a
+Dispatch reads **target → state (reason)**, one line each. The state word is
+plain — Sent, Suppressed, Queued, Staged, Standby, Held, Written, Unchanged,
+Armed — and every one of them resolves to one of five kinds, carried as
+`data-verb` and never rendered: **`sent`** (reached a channel), **`held`** (a
 message that could have gone out and didn't — *with the reason*), **`wrote`**
 (a change to the record), **`scheduled` / `armed`** (work created, or a trigger
 set for a signal that hasn't arrived).

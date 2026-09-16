@@ -95,6 +95,7 @@ function mount(canvas) {
 
   frame(0.6);
   sync();
+  canvas.setAttribute("data-mounted", "1");
 }
 
 document.querySelectorAll("canvas[data-orb]").forEach(mount);
