@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="assets/css/chrome.css">
 <link rel="stylesheet" href="assets/css/beats.css">
 <link rel="stylesheet" href="assets/css/record.css">
+<link rel="stylesheet" href="assets/css/system.css">
 </head>
 <body data-run="1" data-loop="0" data-conf="steady">
 
@@ -23,11 +24,16 @@
 
 <nav class="nav" aria-label="Actions">
   <div class="nav__actions" id="actions">
-    <button class="nav__act" type="button" data-go="0">Resting</button>
-    <button class="nav__act" type="button" data-go="1">The Friday email</button>
-    <button class="nav__act" type="button" data-go="2">The change</button>
-    <button class="nav__act" type="button" data-go="3">Everyone hears</button>
-    <button class="nav__act" type="button" data-go="4">After</button>
+    <button class="nav__act" type="button" data-go="0">When nothing’s on fire</button>
+
+    <p class="nav__group">When something changes</p>
+    <button class="nav__act nav__act--sub" type="button" data-go="1">Absorbed</button>
+    <button class="nav__act nav__act--sub" type="button" data-go="2">Confirm</button>
+    <button class="nav__act nav__act--sub" type="button" data-go="3">Reprice + human</button>
+    <button class="nav__act nav__act--sub" type="button" data-go="4">The new number</button>
+    <button class="nav__act nav__act--sub" type="button" data-go="5">Everyone hears</button>
+
+    <button class="nav__act" type="button" data-go="6">What lasts</button>
   </div>
 </nav>
 
@@ -50,23 +56,19 @@
         <span class="money money--was">was $180–220K</span>
       </div>
       <div class="confidence" aria-label="Confidence" aria-live="polite">
-        <span class="conf-tag" data-conf-tag="steady">
-          <canvas class="orb" data-orb="working" data-orb-when="conf-steady" data-orb-size="20" width="20" height="20" aria-hidden="true"></canvas>
-          Steady
-        </span>
-        <span class="conf-tag" data-conf-tag="reassessing">
-          <canvas class="orb" data-orb="listening" data-orb-when="conf-reassessing" data-orb-size="20" width="20" height="20" aria-hidden="true"></canvas>
-          Reassessing
-        </span>
-        <span class="conf-tag" data-conf-tag="provisional">
-          <canvas class="orb" data-orb="searching" data-orb-when="conf-provisional" data-orb-size="20" width="20" height="20" aria-hidden="true"></canvas>
-          Provisional
-        </span>
-        <span class="conf-tag" data-conf-tag="rebuilding">
-          <canvas class="orb" data-orb="composing" data-orb-when="conf-rebuilding" data-orb-size="20" width="20" height="20" aria-hidden="true"></canvas>
-          Rebuilding
-        </span>
-        <p class="confidence__note" id="confNote" hidden></p>
+        <div class="confidence__orbs" aria-hidden="true">
+          <canvas class="orb" data-orb="working" data-orb-when="conf-steady" data-orb-size="64" width="64" height="64"></canvas>
+          <canvas class="orb" data-orb="listening" data-orb-when="conf-reassessing" data-orb-size="64" width="64" height="64"></canvas>
+          <canvas class="orb" data-orb="searching" data-orb-when="conf-provisional" data-orb-size="64" width="64" height="64"></canvas>
+          <canvas class="orb" data-orb="composing" data-orb-when="conf-rebuilding" data-orb-size="64" width="64" height="64"></canvas>
+        </div>
+        <div class="confidence__read">
+          <span class="conf-tag" data-conf-tag="steady">Steady</span>
+          <span class="conf-tag" data-conf-tag="reassessing">Reassessing</span>
+          <span class="conf-tag" data-conf-tag="provisional">Provisional</span>
+          <span class="conf-tag" data-conf-tag="rebuilding">Rebuilding</span>
+          <p class="confidence__note" id="confNote"></p>
+        </div>
       </div>
     </section>
 
@@ -190,22 +192,13 @@
   </article>
 </main>
 
-<aside class="radiation" aria-label="Reach">
-  <div class="doorbell">
-    <span class="doorbell__ch">Slack</span>
-    <p class="doorbell__empty">Quiet</p>
-    <p class="doorbell__msg" hidden><span class="doorbell__who">Rae Oyelaran</span> The Friday ask is in. Revised range waiting on your review.</p>
+<aside class="system" aria-label="The control loop">
+  <div class="system__loop">
+    <span class="system__k">The control loop</span>
+    <span class="system__state" id="loopState">passive monitoring</span>
   </div>
-  <div class="doorbell">
-    <span class="doorbell__ch">Email</span>
-    <p class="doorbell__empty">Quiet</p>
-    <p class="doorbell__msg" hidden><span class="doorbell__who">Dana Kellner</span> Summary of requested change + revised range.</p>
-  </div>
-  <div class="doorbell">
-    <span class="doorbell__ch">Monday sync</span>
-    <p class="doorbell__empty">Quiet</p>
-    <p class="doorbell__msg" hidden><span class="doorbell__who">19 May</span> Flagged. The Friday change is on the table before anyone opens mail.</p>
-  </div>
+  <div class="zones" id="zones" aria-live="polite"></div>
+  <p class="system__net" id="systemNet"></p>
 </aside>
 
 </div>
@@ -231,11 +224,12 @@
     <span class="presenter__k">Why here</span>
     <span class="presenter__v" id="pWhy">—</span>
   </div>
-  <p class="presenter__foot">Figures, dates, names, the path back, and this specific ask are illustrative until pulled from the record. The record’s figures — estimate over time, confidence track, delivery — render from a static model, not a substrate. Ask is PARTWAY REAL — plumbing only, no substrate.</p>
+  <p class="presenter__foot">Figures, dates, names, the path back, and this specific ask are illustrative until pulled from the record. The record’s figures — estimate over time, confidence track, delivery — render from a static model, not a substrate. So does the right column: intake, reasoning and dispatch are FAKED, and retrieval is the one mechanism-only piece. Ask is PARTWAY REAL — plumbing only, no substrate.</p>
 </aside>
 
 <script type="module" src="assets/js/orbs.js"></script>
 <script src="assets/js/record.js"></script>
+<script src="assets/js/system.js"></script>
 <script src="assets/js/walkthrough.js"></script>
 </body>
 </html>

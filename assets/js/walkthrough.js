@@ -1,5 +1,11 @@
 /* ─────────────────────────────────────────────────────────────
-   walkthrough.js — one surface, five actions.
+   walkthrough.js — one surface, six actions.
+
+   An action is not the same thing as a run state. "Absorbs" is
+   what rest looks like when something small arrives, so it
+   carries run 1 with a beat of its own. Every entry names its
+   run and its confidence outright; nothing is derived from the
+   action's position in the list.
    ───────────────────────────────────────────────────────────── */
 
 (function () {
@@ -8,15 +14,41 @@
   var RUNS = [
     {
       id: "rest",
-      label: "Resting",
+      label: "When nothing’s on fire",
+      run: 1,
+      conf: "steady",
       tool: "confidence-lineage → artifact agent",
       status: "FAKED",
       honesty: "Still-a-bet is populated from the start. Envelope is a range, directional. Figures and this specific ask are illustrative.",
       why: "The surface at rest. A headline risk is already open."
     },
     {
+      id: "absorbs",
+      label: "Absorbed",
+      run: 1,
+      beat: "absorbs",
+      conf: "steady",
+      tool: "channel (ingest) → change runner (no re-level) → artifact agent",
+      status: "FAKED",
+      honesty: "The rule that absorbed it is on screen. Range shown holding, not quietly unchanged. Confidence does not move — that is the signal.",
+      why: "The other half of the claim. A system that escalates everything is a tripwire, not judgment. Narrate: no re-level, so no reprice."
+    },
+    {
+      id: "confirms",
+      label: "Confirm",
+      run: 1,
+      beat: "confirms",
+      conf: "steady",
+      tool: "channel (ingest) → change runner (routes, no re-level) → artifact agent",
+      status: "FAKED",
+      honesty: "The hold is a real hold: the reply waited on a person, and the wait is stamped. Attributed to a role, not to the system. No reprice, no re-level.",
+      why: "The middle rung. Consequence rose but clarity held, so it took one person instead of the room — and that is not a level move."
+    },
+    {
       id: "trigger",
-      label: "The Friday email",
+      label: "Reprice + human",
+      run: 2,
+      conf: "reassessing",
       tool: "channel (ingest) → portal",
       status: "FAKED",
       honesty: "Client words first. Triage, what-it-touches, confidence, and awaiting the conversation are FAKED. Risks yes, levels no. Autonomous pricing is illustrative structure on a real Friday-email pattern.",
@@ -24,7 +56,9 @@
     },
     {
       id: "loop",
-      label: "The change",
+      label: "The new number",
+      run: 3,
+      conf: "provisional",
       tool: "change runner → artifact agent",
       status: "FAKED",
       honesty: "INTERNAL: L2 → L3 AI systems engineering from collapse risk. On-screen: one change item, captured from Monday review, range widens on entry. Change item, reprice, provenance are FAKED.",
@@ -33,14 +67,18 @@
     {
       id: "radiation",
       label: "Everyone hears",
+      run: 4,
+      conf: "provisional",
       tool: "notification adapters (represented)",
       status: "FAKED",
-      honesty: "Channels named as reach, not branded chrome. Represented, not live.",
-      why: "One event, many doorbells."
+      honesty: "Channels named inside dispatch, not branded chrome. Represented, not live. The held row — the pilot crews — is as load-bearing as the sends.",
+      why: "One event, many doorbells. Narrate the hold: restraint is the part nobody else shows."
     },
     {
       id: "rest-now",
-      label: "After",
+      label: "What lasts",
+      run: 5,
+      conf: "rebuilding",
       tool: "confidence-lineage → artifact agent",
       status: "FAKED",
       honesty: "Bet column still populated and tagged. Pending captured from Monday review. Confidence Rebuilding with a named path back. Envelope still wider. Path-back figures are illustrative.",
@@ -58,7 +96,7 @@
   var CONF = {
     steady: {
       word: "Steady",
-      note: ""
+      note: "Nothing open has moved the range."
     },
     reassessing: {
       word: "Reassessing",
@@ -66,7 +104,7 @@
     },
     provisional: {
       word: "Provisional",
-      note: ""
+      note: "Wider while measurement accuracy stays untested off flat ground."
     },
     rebuilding: {
       word: "Rebuilding",
@@ -86,6 +124,14 @@
   var actionBtns = Array.prototype.slice.call(
     document.querySelectorAll(".nav__act[data-go]")
   );
+
+  /* Opened straight off the disk, the orb engine can't load — modules need
+     http. Collapse its space rather than leave a hole where it should be. */
+  window.setTimeout(function () {
+    if (!document.querySelector("canvas[data-orb][data-mounted]")) {
+      body.setAttribute("data-orbs", "off");
+    }
+  }, 900);
 
   var current = 0;
   var loop = 0;
@@ -140,10 +186,8 @@
     });
   }
 
-  function paintVisibility() {
-    var run = current + 1;
+  function paintVisibility(run) {
     var priced = run >= 3;
-    var reachOn = run >= 4;
 
     setHidden(document.querySelector(".envelope--before"), priced);
     setHidden(document.querySelector(".envelope--after"), !priced);
@@ -151,38 +195,27 @@
     setHidden(document.querySelector(".triage"), run !== 2);
     setHidden(document.querySelector(".change"), run < 3);
     setHidden(askEl, run < 3);
-
-    document.querySelectorAll(".doorbell").forEach(function (d) {
-      setHidden(d.querySelector(".doorbell__empty"), reachOn);
-      setHidden(d.querySelector(".doorbell__msg"), !reachOn);
-    });
   }
 
   function go(i, skipHash) {
     if (i < 0 || i >= RUNS.length) return;
 
     current = i;
-    var run = RUNS[current];
+    var entry = RUNS[current];
+    var run = entry.run;
+    var beat = entry.beat || "";
 
-    if (current === 2) {
-      setLoop(3);
-    } else if (current > 2) {
-      setLoop(3);
-    } else {
-      setLoop(0);
-    }
+    setLoop(run >= 3 ? 3 : 0);
 
-    body.setAttribute("data-run", String(current + 1));
+    body.setAttribute("data-run", String(run));
+    if (beat) body.setAttribute("data-beat", beat);
+    else body.removeAttribute("data-beat");
+
     paintActions();
-    paintVisibility();
-    paintConfidence(
-      current === 0 ? "steady" :
-      current === 1 ? "reassessing" :
-      current === 4 ? "rebuilding" :
-      "provisional"
-    );
+    paintVisibility(run);
+    paintConfidence(entry.conf);
 
-    if (current < 2 && askEl) {
+    if (run < 3 && askEl) {
       askEl.classList.remove("is-answered");
       askOpen = false;
       var src = document.getElementById("src-monday");
@@ -192,18 +225,23 @@
       }
     }
 
-    paintPresenter(askOpen && current >= 2 ? ASK_META : run);
+    paintPresenter(askOpen && run >= 3 ? ASK_META : entry);
     if (stage) stage.scrollTop = 0;
 
-    /* the record listens; the state machine stays the only source of state */
+    /* the record and the band listen; the state machine stays the only source of state */
     document.dispatchEvent(
       new CustomEvent("portal:state", {
-        detail: { run: current + 1, conf: body.getAttribute("data-conf") }
+        detail: {
+          run: run,
+          beat: beat,
+          id: entry.id,
+          conf: body.getAttribute("data-conf")
+        }
       })
     );
 
-    if (!skipHash && run.id) {
-      try { history.replaceState(null, "", "#" + run.id); }
+    if (!skipHash && entry.id) {
+      try { history.replaceState(null, "", "#" + entry.id); }
       catch (err) { /* sandboxed frame */ }
     }
   }

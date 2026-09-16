@@ -122,18 +122,19 @@ legends in boxes, no gridlines beyond one or two faint seams for scale.
 
 ## Chrome rules
 
-**One canonical surface.** Three columns: actions | portal | reach. The portal
-is the destination; the channels are the doorbells. Do not build N channel UIs.
+**One canonical surface.** Three columns: the run | the record | the system
+working. The portal is the destination; channels are doorbells inside the
+dispatch zone. Do not build N channel UIs.
 
 | Chrome | When | Looks like |
 | --- | --- | --- |
-| `.nav` | Always | Floating left column. Five plain actions, no numbers. Active = left hairline accent, not a filled chip. |
+| `.nav` | Always | Floating left column. Seven plain actions, no numbers: rest, the three routes a change can take, the reach, the new rest. Active = left hairline accent, not a filled chip. |
 | `.portal` | Always | Boundless living record. Pull. Pointable. Always current. Not a document page. Confidence sits with the envelope. **One prioritized scroll** — no tabs, no grid. |
-| `.radiation` | Always; lights in states 4–5 | Hairline rows. Named Slack / email / Monday sync as *reach* — never Slack/Teams branding or chrome. No “Reach” label. |
+| `.system` | Always | The system working: loop state, then ingestion → reasoning → dispatch. Hairline rows, mono stamps. Channels are named inside dispatch — never Slack/Teams branding or chrome. |
 | Presenter | <kbd>P</kbd> | Team-only overlay, restyled for dark. Illustrative disclaimer and PARTWAY REAL live here. |
 
 Anti-Auctor: no sharing, approvals, comment threads, branded landing pages.
-If a minute isn't serving change → reprice → confidence, or the radiation, cut it.
+If a minute isn't serving change → reprice → confidence, or the reach, cut it.
 
 ### The middle column — order is priority
 
@@ -154,6 +155,70 @@ Do not add a module that does not answer one of those questions. The record
 should feel like something that takes information in and keeps process moving:
 **ingestion is stamped, every open item says what it waits on, statuses advance
 on their own.** The client never files anything.
+
+### The barometer — the premise, on screen
+
+A change that arrives is read on two coarse readings, and those two readings
+decide who touches it. Three routes, never two:
+
+| Confidence — what it touches | Consequence — if we're wrong | What it needs |
+| --- | --- | --- |
+| clear | reversible | **absorbed** — nobody |
+| clear | costly, recoverable if a boundary holds | **one confirmation** — one person |
+| partly clear or unclear | anything | **the room** |
+| anything | **a commitment** (the range, a date, what the estimate leans on) | **the room** |
+
+- **Two confidences must never blur.** The envelope's confidence is a coarse
+  state of the engagement, carried with orbs. The barometer's confidence is
+  about *the ask*, labelled **what it touches**, and it never shares a device,
+  a colour ramp, or a word with the envelope's.
+- **Three options per reading, one lit.** The roads not taken stay visible —
+  showing only the route taken reads as a rule; showing the ladder reads as
+  judgment. Never a score, a percentage, or a position on a chart.
+- **Consequence is in the client's terms** — a wrong price in front of a
+  buyer, a date that slips. Never a severity label, never a number.
+- **Three avenues in, one barometer:** an email, a message in a channel, a
+  transcript from the room. The reading is the same in all three.
+- **A confirmation is attributed and leaves a trace** — the role that gave it,
+  the time it took, and a decision on the record. A confirmed boundary with no
+  trace is scope absorbed silently, which is the failure this exists to stop.
+- **No route where nothing arrived.** At rest and after, the reasoning zone
+  says what it is watching. The barometer is for an arrival.
+
+### The right column — the system working
+
+Three zones, same order, always all three: **ingestion → reasoning →
+dispatch**, under a two-word **loop state**. `SPINE.md` → *What the system
+takes in* is the source for every row.
+
+This column may name the *behaviour* of the loop. It still may not name the
+model.
+
+| Allowed here | Still never |
+| --- | --- |
+| Loop state as two plain words — `passive monitoring`, `auto-resolving`, `confirming`, `strategic hold`, `dispatching`, `watching the close` | Levels, capability names, caliber, intensity states, the change runner, seams |
+| The rule it applied, in one client-readable sentence | Scores, weights, confidence percentages, any derivation |
+| What it read, and when — every intake row is stamped | Queue counts, throughput, "signals processed", volumes |
+| Named channels inside dispatch | Slack/Teams chrome, logos, message bubbles |
+
+Dispatch reads **target → state (reason)**, one line each. The state word is
+plain — Sent, Suppressed, Queued, Staged, Standby, Held, Written, Unchanged,
+Armed — and every one of them resolves to one of five kinds, carried as
+`data-verb` and never rendered: **`sent`** (reached a channel), **`held`** (a
+message that could have gone out and didn't — *with the reason*), **`wrote`**
+(a change to the record), **`scheduled` / `armed`** (work created, or a trigger
+set for a signal that hasn't arrived).
+
+- **`held` is load-bearing, not decoration.** Every state has at least one. At
+  rest it is the entire output. It always names the channel it didn't ring and
+  why. Restraint is the differentiator; most systems send everything.
+- **`wrote` rows must be true.** Each one points at something visible in the
+  middle column. If it isn't in the record, it didn't happen.
+- **Ingestion never claims integration.** Sources are named as things a client
+  recognises — the field app, the price book, the room — not as connectors,
+  and nothing is claimed live.
+- The band is **narrow**. One idea per row, one line of prose, one mono stamp.
+  If a row needs two sentences, it belongs in the record.
 
 ---
 
@@ -189,6 +254,14 @@ effect: the ask leans on an untested risk, so the range widens.
    async reprice.
 6. **Do not pretend rest is fully confident.** A headline risk is open;
    the range is directional.
+7. **The system is shown absorbing, not only escalating.** One beat closes a
+   real change without a person in it, and states the reading that let it. A
+   system that escalates everything is a tripwire, not judgment.
+   **Three routes, never two** — absorbed, one confirmation, the room. Two
+   routes is a switch; the premise is a ladder.
+8. **Every state holds something back.** Dispatch always shows a `held` with
+   its reason. What the system chose not to say is as load-bearing as what it
+   sent.
 
 ---
 

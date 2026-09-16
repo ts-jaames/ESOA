@@ -89,6 +89,8 @@
 
   var TODAY = {
     1: "2025-05-15",
+    "1a": "2025-05-13",
+    "1b": "2025-05-14",
     2: "2025-05-16",
     3: "2025-05-19",
     4: "2025-05-19",
@@ -119,7 +121,7 @@
         rest: "Holds on flat yards. Untested on slopes, curves, or obstructions.",
         after: "On slope, curve and obstruction. A wrong measurement is no longer caught by a person."
       },
-      state: { 1: "bounded", 2: "bounded", 3: "new", 4: "new", 5: "new" },
+      state: { 1: "bounded", 2: "this request", 3: "new", 4: "new", 5: "new" },
       closes: "Measure slope, curve and obstruction yards against tape",
       waits: { rest: "Yard access in the pilot region", after: "Starts 20 May" },
       source: { rest: "capture test · 4 Apr", after: "Monday review · 19 May" },
@@ -129,7 +131,7 @@
       id: "pricing",
       name: "Pricing in unseen regions",
       detail: {
-        rest: "The price book is proved in the pilot region only.",
+        rest: "The price book is proved in the pilot region only. The Québec crews quote from it under a boundary confirmed 14 May.",
         after: "Pricing off the scan would carry the price book into regions it hasn't been checked against."
       },
       state: { 1: "open", 2: "open", 3: "escalated", 4: "escalated", 5: "escalated" },
@@ -266,6 +268,30 @@
       from: 1
     },
     {
+      id: "metric",
+      ask: "Show metres alongside yards",
+      came: "email · Tue 13 May 9:12am",
+      status: {
+        "1a": "absorbed 9:14am — the range held",
+        rest: "absorbed 13 May — the range held",
+        after: "in the build"
+      },
+      done: true,
+      from: 1
+    },
+    {
+      id: "quebec",
+      ask: "Add the Québec crews to the pilot",
+      came: "delivery channel · Wed 14 May 2:20pm",
+      status: {
+        "1b": "answered 3:04pm — confirmed by the delivery lead",
+        rest: "answered 14 May — confirmed by the delivery lead",
+        after: "in the pilot"
+      },
+      done: true,
+      from: 1
+    },
+    {
       id: "scan",
       ask: "Price off the scan, no rep in the loop",
       came: "email · Fri 16 May 4:47pm",
@@ -310,6 +336,13 @@
       from: 1
     },
     {
+      id: "quebec-boundary",
+      when: "14 May",
+      decision: "New pilot crews quote from the proved price book until regional data lands.",
+      source: "Confirmed by the delivery lead · delivery channel · 14 May",
+      from: 1
+    },
+    {
       id: "no-autoprice",
       when: "19 May",
       decision: "Don’t run pricing off the scan until measurement accuracy is proven.",
@@ -325,6 +358,8 @@
      state move nothing in the record. */
   var MOVED = {
     1: [],
+    "1a": ["asks"],
+    "1b": ["asks", "bets", "decisions"],
     2: ["figure", "inbound", "asks"],
     3: ["figure", "change", "bets"],
     4: [],
@@ -333,6 +368,8 @@
 
   var STAMP = {
     1: { when: "current as of Thu 15 May · 6:02pm" },
+    "1a": { when: "current as of Tue 13 May · 9:14am", fresh: "absorbed without repricing" },
+    "1b": { when: "current as of Wed 14 May · 3:04pm", fresh: "answered on one confirmation" },
     2: { when: "current as of Fri 16 May · 4:47pm", fresh: "new signal received" },
     3: { when: "current as of Mon 19 May · 11:30am", fresh: "estimate re-issued" },
     4: { when: "current as of Mon 19 May · 11:34am", fresh: "sent to everyone on the engagement" },
@@ -389,9 +426,26 @@
     return "$" + (e.high - e.low) + "k spread";
   }
 
+  /* A beat is a moment inside a run: the record holds the same truth, read at
+     a different minute. "Absorbs" reads run 1 on 13 May, under the key 1a. */
+  var beat = "";
+
+  var BEAT_KEY = { absorbs: "1a", confirms: "1b" };
+
+  function key(run) {
+    return BEAT_KEY[beat] || run;
+  }
+
+  function keyed(table, run) {
+    var k = key(run);
+    return table[k] !== undefined ? table[k] : table[run];
+  }
+
   /* One value, read for a run: a constant, a per-run key, or rest/after. */
   function pick(value, run) {
     if (value === null || typeof value !== "object") return value;
+    var k = key(run);
+    if (value[k] !== undefined) return value[k];
     if (value[run] !== undefined) return value[run];
     return run >= 3 ? value.after : value.rest;
   }
@@ -585,7 +639,7 @@
         return e.from <= run;
       });
       var latest = events[events.length - 1];
-      var todayX = f.X(TODAY[run] || TODAY[1]);
+      var todayX = f.X(keyed(TODAY, run) || TODAY[1]);
       var plotRight = f.w - f.padR;
       var projection = run >= PROJECTION.from ? PROJECTION : null;
       /* the range as it stands runs forward from today; a projection, if the
@@ -1154,7 +1208,7 @@
       var g = el("g");
       this.svg.appendChild(g);
 
-      var todayX = f.X(TODAY[run] || TODAY[1]);
+      var todayX = f.X(keyed(TODAY, run) || TODAY[1]);
       var markerX = f.X(DELIVERY.marker.t);
       var markerHot = run >= 3;
 
@@ -1510,7 +1564,7 @@
     },
 
     paint: function (run) {
-      var s = STAMP[run] || STAMP[1];
+      var s = keyed(STAMP, run) || STAMP[1];
       var moved = this.when.textContent && this.when.textContent !== s.when;
       this.when.textContent = s.when;
       this.fresh.textContent = s.fresh || "";
@@ -1549,7 +1603,7 @@
         this.first = false;
         return;
       }
-      (MOVED[run] || []).forEach(function (k, i) {
+      (keyed(MOVED, run) || []).forEach(function (k, i) {
         var head = heads[k];
         if (!head) return;
         void head.offsetWidth;
@@ -1557,6 +1611,14 @@
           head.classList.add("is-arriving");
         }, i * 90);
       });
+    },
+
+    flash: function (name) {
+      var head = this.heads[name];
+      if (!head) return;
+      head.classList.remove("is-arriving");
+      void head.offsetWidth;
+      head.classList.add("is-arriving");
     },
 
     first: true
@@ -1584,7 +1646,8 @@
 
   Arrivals.collect();
 
-  function paint(run) {
+  function paint(run, nextBeat) {
+    beat = nextBeat || "";
     mounted.forEach(function (m) {
       m.paint(run);
     });
@@ -1592,8 +1655,26 @@
   }
 
   document.addEventListener("portal:state", function (e) {
-    paint((e.detail && e.detail.run) || 1);
+    var d = e.detail || {};
+    paint(d.run || 1, d.beat);
   });
 
-  paint(Number(document.body.getAttribute("data-run")) || 1);
+  /* the band asks the record to show what a dispatch wrote */
+  document.addEventListener("record:point", function (e) {
+    var name = e.detail && e.detail.section;
+    var host = name && document.querySelector('[data-record="' + name + '"]');
+    if (!host) return;
+    host.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "center"
+    });
+    /* the hairline marks the section once it has arrived, not while it travels */
+    if (reduceMotion) Arrivals.flash(name);
+    else window.setTimeout(function () { Arrivals.flash(name); }, 420);
+  });
+
+  paint(
+    Number(document.body.getAttribute("data-run")) || 1,
+    document.body.getAttribute("data-beat")
+  );
 })();

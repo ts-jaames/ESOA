@@ -35,8 +35,8 @@
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --dur:  280ms;
 
-  --nav-w:     176px;
-  --reach-w:   240px;
+  --nav-w:     240px;
+  --reach-w:   312px;
   --deck-max:  1600px;
   --measure:   62ch;
 }
