@@ -176,15 +176,16 @@
 /* ── rows that point at the record ────────────────────────── */
 
 .row--tap { cursor: pointer; }
+/* the affordance stays quiet — the accent belongs to the one thing to look at */
 .row__go {
   font-family: var(--font-mono);
   font-size: 10.5px;
   letter-spacing: 0.02em;
-  color: var(--accent-deep);
-  opacity: 0.85;
+  color: var(--ink-faint);
+  transition: color var(--dur) var(--ease);
 }
 .row__go::before { content: "↳ "; }
-.row--tap:hover .row__go { opacity: 1; }
+.row--tap:hover .row__go { color: var(--accent-deep); }
 .row--tap:hover .row__text { color: var(--ink); }
 .row--tap:focus-visible {
   outline: 1px solid var(--rule-strong);
