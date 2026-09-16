@@ -405,71 +405,13 @@ body[data-run="3"][data-loop="3"] .cap--after { display: flex; }
   margin-left: var(--s1);
 }
 
-/* ═══════════════════════════════════════════════════════════
-   REACH
-   ═══════════════════════════════════════════════════════════ */
-
-.radiation {
-  position: sticky;
-  top: 0;
-  width: var(--reach-w);
-  min-width: var(--reach-w);
-  height: 100vh;
-  height: 100dvh;
-  padding: var(--s5) var(--s3);
-  overflow: auto;
-}
-
+/* the confidence orb — the only place an orb appears */
 .orb {
   display: block;
   flex: none;
   width: 20px;
   height: 20px;
 }
-
-.doorbell {
-  padding: var(--s2) 0;
-  border-top: 1px solid var(--rule);
-}
-.doorbell:last-child { border-bottom: 1px solid var(--rule); }
-
-.doorbell__ch {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-muted);
-  display: block;
-  margin-bottom: 4px;
-}
-body[data-run="4"] .doorbell__ch,
-body[data-run="5"] .doorbell__ch { color: var(--accent-deep); }
-
-.doorbell__msg {
-  margin: 0;
-  font-size: 13px;
-  color: var(--ink-soft);
-  line-height: 1.45;
-}
-.doorbell__who {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.03em;
-  color: var(--ink-muted);
-  margin-right: 6px;
-}
-.doorbell__empty {
-  font-size: 13px;
-  color: var(--ink-muted);
-  margin: 0;
-}
-
-body[data-run="1"] .doorbell__msg,
-body[data-run="2"] .doorbell__msg,
-body[data-run="3"] .doorbell__msg { display: none; }
-body[data-run="4"] .doorbell__empty,
-body[data-run="5"] .doorbell__empty { display: none; }
 
 /* ═══════════════════════════════════════════════════════════
    PRESENTER
@@ -547,7 +489,7 @@ body[data-run="5"] .doorbell__empty { display: none; }
     overflow: auto;
   }
   body { overflow: auto; }
-  .nav, .radiation {
+  .nav {
     position: static;
     height: auto;
     width: auto;

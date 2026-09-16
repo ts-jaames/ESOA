@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="assets/css/chrome.css">
 <link rel="stylesheet" href="assets/css/beats.css">
 <link rel="stylesheet" href="assets/css/record.css">
+<link rel="stylesheet" href="assets/css/system.css">
 </head>
 <body data-run="1" data-loop="0" data-conf="steady">
 
@@ -191,22 +192,13 @@
   </article>
 </main>
 
-<aside class="radiation" aria-label="Reach">
-  <div class="doorbell">
-    <span class="doorbell__ch">Slack</span>
-    <p class="doorbell__empty">Quiet</p>
-    <p class="doorbell__msg" hidden><span class="doorbell__who">Rae Oyelaran</span> The Friday ask is in. Revised range waiting on your review.</p>
+<aside class="system" aria-label="The system working">
+  <div class="system__loop">
+    <span class="system__k">Loop state</span>
+    <span class="system__state" id="loopState">passive monitoring</span>
   </div>
-  <div class="doorbell">
-    <span class="doorbell__ch">Email</span>
-    <p class="doorbell__empty">Quiet</p>
-    <p class="doorbell__msg" hidden><span class="doorbell__who">Dana Kellner</span> Summary of requested change + revised range.</p>
-  </div>
-  <div class="doorbell">
-    <span class="doorbell__ch">Monday sync</span>
-    <p class="doorbell__empty">Quiet</p>
-    <p class="doorbell__msg" hidden><span class="doorbell__who">19 May</span> Flagged. The Friday change is on the table before anyone opens mail.</p>
-  </div>
+  <div class="zones" id="zones" aria-live="polite"></div>
+  <p class="system__net" id="systemNet"></p>
 </aside>
 
 </div>
@@ -237,6 +229,7 @@
 
 <script type="module" src="assets/js/orbs.js"></script>
 <script src="assets/js/record.js"></script>
+<script src="assets/js/system.js"></script>
 <script src="assets/js/walkthrough.js"></script>
 </body>
 </html>

@@ -60,8 +60,8 @@
       conf: "provisional",
       tool: "notification adapters (represented)",
       status: "FAKED",
-      honesty: "Channels named as reach, not branded chrome. Represented, not live.",
-      why: "One event, many doorbells."
+      honesty: "Channels named inside dispatch, not branded chrome. Represented, not live. The held row — the pilot crews — is as load-bearing as the sends.",
+      why: "One event, many doorbells. Narrate the hold: restraint is the part nobody else shows."
     },
     {
       id: "rest-now",
@@ -169,7 +169,6 @@
 
   function paintVisibility(run) {
     var priced = run >= 3;
-    var reachOn = run >= 4;
 
     setHidden(document.querySelector(".envelope--before"), priced);
     setHidden(document.querySelector(".envelope--after"), !priced);
@@ -177,11 +176,6 @@
     setHidden(document.querySelector(".triage"), run !== 2);
     setHidden(document.querySelector(".change"), run < 3);
     setHidden(askEl, run < 3);
-
-    document.querySelectorAll(".doorbell").forEach(function (d) {
-      setHidden(d.querySelector(".doorbell__empty"), reachOn);
-      setHidden(d.querySelector(".doorbell__msg"), !reachOn);
-    });
   }
 
   function go(i, skipHash) {
