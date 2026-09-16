@@ -110,6 +110,82 @@
     5: "rebuilding"
   };
 
+  /* Open bets. Never empty: measurement accuracy sits here from rest. */
+  var BETS = [
+    {
+      id: "accuracy",
+      name: "Measurement accuracy",
+      detail: {
+        rest: "Holds on flat yards. Untested on slopes, curves, or obstructions.",
+        after: "On slope, curve and obstruction. A wrong measurement is no longer caught by a person."
+      },
+      state: { 1: "bounded", 2: "bounded", 3: "new", 4: "new", 5: "new" },
+      closes: "Measure slope, curve and obstruction yards against tape",
+      waits: { rest: "Yard access in the pilot region", after: "Starts 20 May" },
+      source: { rest: "capture test · 4 Apr", after: "Monday review · 19 May" },
+      trace: "repriced"
+    },
+    {
+      id: "pricing",
+      name: "Pricing in unseen regions",
+      detail: {
+        rest: "The price book is proved in the pilot region only.",
+        after: "Pricing off the scan would carry the price book into regions it hasn't been checked against."
+      },
+      state: { 1: "open", 2: "open", 3: "escalated", 4: "escalated", 5: "escalated" },
+      closes: "Check the price book against two more regions",
+      waits: {
+        rest: "Regional price data from the client",
+        after: "Regional price data from the client"
+      },
+      source: { rest: "scope agreement · 10 Mar", after: "Monday review · 19 May" },
+      trace: "repriced"
+    },
+    {
+      id: "adoption",
+      name: "Rep adoption",
+      detail: {
+        rest: "Whether reps will quote from a scan.",
+        after: "Whether reps will quote from a scan."
+      },
+      state: { 1: "open", 2: "open", 3: "open", 4: "open", 5: "open" },
+      closes: "Pilot reps quoting from a scan without reverting",
+      waits: { rest: "Pilot usage, week 3", after: "Pilot usage, week 3" },
+      source: { rest: "pilot note · 2 May", after: "pilot note · 2 May" }
+    }
+  ];
+
+  /* The committed work against the headline bet, and what closing it does. */
+  var PATH = {
+    of: "Measurement accuracy",
+    steps: [
+      {
+        step: "Measure slope, curve and obstruction yards against tape",
+        rest: "queued behind the pilot",
+        after: "starts 20 May"
+      },
+      {
+        step: "Compare against the flat-yard baseline",
+        rest: "not scheduled",
+        after: "follows"
+      },
+      {
+        step: "Hold or revise the capture method",
+        rest: "not scheduled",
+        after: "~2 Jun"
+      }
+    ],
+    holds: {
+      rest: "The flat-yard limit comes off capture.",
+      after: "Confidence recovers and the range tightens toward $180–220K · directional."
+    },
+    fails: {
+      rest: "Capture stays limited to flat, rectangular yards.",
+      after: "The capture method changes before pricing moves off the rep."
+    },
+    source: { rest: "capture test · 4 Apr", after: "Monday review · 19 May" }
+  };
+
   var STAMP = {
     1: { when: "current as of Thu 15 May · 6:02pm" },
     2: { when: "current as of Fri 16 May · 4:47pm", fresh: "new signal received" },
@@ -139,6 +215,12 @@
     }
     if (text !== undefined && text !== null) node.textContent = String(text);
     return node;
+  }
+
+  function setHidden(node, hide) {
+    if (!node) return;
+    if (hide) node.setAttribute("hidden", "");
+    else node.removeAttribute("hidden");
   }
 
   function tag(name, cls, text) {
@@ -287,6 +369,21 @@
 
       this.svg.addEventListener("mouseleave", function () {
         if (!self.pinned && self.geo) self.setActive(self.geo.latest, false);
+      });
+
+      /* a bet in the ledger points at the moment it moved the estimate */
+      document.addEventListener("record:trace", function (e) {
+        var id = e.detail && e.detail.event;
+        var match = (self.geo ? self.geo.events : []).filter(function (o) {
+          return o.id === id;
+        })[0];
+        if (!match) return;
+        self.pinned = true;
+        self.setActive(match, false);
+        self.host.scrollIntoView({
+          behavior: reduceMotion ? "auto" : "smooth",
+          block: "center"
+        });
       });
     },
 
@@ -798,6 +895,129 @@
     }
   };
 
+  /* ── open bets: what would close each, and what it waits on ─────── */
+
+  var QUIET_STATES = { bounded: true, open: true };
+
+  var BetLedger = {
+    mount: function (host) {
+      this.host = host;
+      this.rows = BETS.map(function (bet) {
+        var row = tag("div", "ledger__row");
+        row.setAttribute("data-bet", bet.id);
+
+        var line = tag("div", "ledger__line");
+        line.appendChild(tag("span", "ledger__name", bet.name));
+        var state = tag("span", "bet-tag");
+        line.appendChild(state);
+        row.appendChild(line);
+
+        var detail = tag("p", "ledger__detail");
+        row.appendChild(detail);
+
+        var meta = tag("div", "ledger__meta");
+        meta.appendChild(tag("span", "ledger__k", "closes when"));
+        var closes = tag("span", "ledger__v", bet.closes);
+        meta.appendChild(closes);
+        meta.appendChild(tag("span", "ledger__k", "waiting on"));
+        var waits = tag("span", "ledger__v");
+        meta.appendChild(waits);
+        row.appendChild(meta);
+
+        var foot = tag("div", "ledger__foot");
+        var src = tag("span", "ledger__src");
+        foot.appendChild(src);
+        var trace = null;
+        if (bet.trace) {
+          trace = tag("button", "trace", "see it on the estimate");
+          trace.type = "button";
+          trace.addEventListener("click", function () {
+            document.dispatchEvent(
+              new CustomEvent("record:trace", { detail: { event: bet.trace, bet: bet.id } })
+            );
+          });
+          foot.appendChild(trace);
+        }
+        row.appendChild(foot);
+
+        host.appendChild(row);
+        return {
+          bet: bet,
+          row: row,
+          state: state,
+          detail: detail,
+          waits: waits,
+          src: src,
+          trace: trace
+        };
+      });
+    },
+
+    paint: function (run) {
+      var phase = run >= 3 ? "after" : "rest";
+      this.rows.forEach(function (r) {
+        if (r.trace) {
+          /* only offer the trace once the moment it points at is on the record */
+          var target = ESTIMATE.filter(function (o) {
+            return o.id === r.bet.trace;
+          })[0];
+          setHidden(r.trace, !target || run < target.from);
+        }
+        var state = r.bet.state[run] || r.bet.state[1];
+        r.state.textContent = state;
+        r.state.className = "bet-tag" + (QUIET_STATES[state] ? " bet-tag--quiet" : "");
+        r.detail.textContent = r.bet.detail[phase];
+        r.waits.textContent = r.bet.waits[phase];
+        r.src.textContent = r.bet.source[phase];
+        r.row.classList.toggle("is-open", !QUIET_STATES[state]);
+      });
+    }
+  };
+
+  /* ── the path to close: the committed work, and what it buys ─────── */
+
+  var PathToClose = {
+    mount: function (host) {
+      this.host = host;
+
+      var head = tag("div", "fig__head");
+      head.appendChild(tag("span", "fig__k", "Path to close " + PATH.of.toLowerCase()));
+      this.src = tag("span", "fig__src");
+      head.appendChild(this.src);
+      host.appendChild(head);
+
+      this.steps = PATH.steps.map(function (s) {
+        var row = tag("div", "path__row");
+        row.appendChild(tag("span", "path__step", s.step));
+        var status = tag("span", "path__status");
+        row.appendChild(status);
+        host.appendChild(row);
+        return { data: s, row: row, status: status };
+      });
+
+      var out = tag("div", "path__out");
+      out.appendChild(tag("span", "path__k", "if it holds"));
+      this.holds = tag("span", "path__v");
+      out.appendChild(this.holds);
+      out.appendChild(tag("span", "path__k", "if it doesn’t"));
+      this.fails = tag("span", "path__v");
+      out.appendChild(this.fails);
+      host.appendChild(out);
+    },
+
+    paint: function (run) {
+      var phase = run >= 3 ? "after" : "rest";
+      this.steps.forEach(function (s) {
+        s.status.textContent = s.data[phase];
+        s.row.classList.toggle("is-live", phase === "after");
+      });
+      this.holds.textContent = PATH.holds[phase];
+      this.fails.textContent = PATH.fails[phase];
+      this.src.textContent = PATH.source[phase];
+      this.host.classList.toggle("is-committed", phase === "after");
+    }
+  };
+
   /* ── the as-of stamp: the record says when it was last current ──── */
 
   var Stamp = {
@@ -830,7 +1050,9 @@
 
   var MODULES = [
     { sel: "#stamp", mod: Stamp },
-    { sel: "#figRange", mod: RangeFigure }
+    { sel: "#figRange", mod: RangeFigure },
+    { sel: "#ledgerBets", mod: BetLedger },
+    { sel: "#pathClose", mod: PathToClose }
   ];
   var mounted = [];
 

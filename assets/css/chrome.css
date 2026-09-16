@@ -340,48 +340,6 @@ body[data-conf="rebuilding"] .conf-tag {
   max-width: 58ch;
 }
 
-/* Living record */
-.tri {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--s5);
-}
-.tri__col--bet .tri__head { color: var(--accent-deep); }
-.tri__list { list-style: none; margin: 0; padding: 0; }
-.tri__list li {
-  font-size: 13.5px;
-  line-height: 1.35;
-  color: var(--ink-soft);
-  margin-bottom: var(--s1);
-}
-.tri__list li:last-child { margin-bottom: 0; }
-.tri__list b { color: var(--ink); font-weight: 600; }
-.tri__list .bet--new,
-.tri__list [data-bet="pricing"] {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--s2);
-}
-
-body[data-run="1"] .bet--new,
-body[data-run="2"] .bet--new { display: none; }
-body[data-run="4"] .bet--bounded,
-body[data-run="5"] .bet--bounded { display: none; }
-body[data-run="1"] .bet--bounded,
-body[data-run="2"] .bet--bounded { display: list-item; }
-body[data-run="3"] .bet--new,
-body[data-run="4"] .bet--new,
-body[data-run="5"] .bet--new { display: list-item; }
-body[data-run="3"] .bet--bounded,
-body[data-run="4"] .bet--bounded,
-body[data-run="5"] .bet--bounded { display: none; }
-body[data-run="1"] [data-bet="pricing"] .bet-tag,
-body[data-run="2"] [data-bet="pricing"] .bet-tag { display: none; }
-body[data-run="3"] [data-bet="pricing"] .bet-tag,
-body[data-run="4"] [data-bet="pricing"] .bet-tag,
-body[data-run="5"] [data-bet="pricing"] .bet-tag { display: inline; }
-
 .cap {
   display: flex;
   align-items: center;

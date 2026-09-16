@@ -285,9 +285,14 @@ number.
 | Compare against the flat-yard baseline | not scheduled | follows |
 | Hold or revise the capture method | not scheduled | ~2 Jun |
 
-**If it holds:** confidence recovers and the range tightens toward
-`$180–220K · directional`. **If it doesn't:** the method changes before
-pricing moves off the rep. Both are illustrative.
+Each step carries its own status, and the two outcomes are stated plainly —
+what closing it buys, and what happens if it doesn't hold. Both are
+illustrative.
+
+| | At rest | After the review |
+| --- | --- | --- |
+| **If it holds** | The flat-yard limit comes off capture. | Confidence recovers and the range tightens toward `$180–220K · directional`. |
+| **If it doesn't** | Capture stays limited to flat, rectangular yards. | The capture method changes before pricing moves off the rep. |
 
 ### Delivery, against the client's target
 

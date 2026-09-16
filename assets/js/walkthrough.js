@@ -153,16 +153,6 @@
     setHidden(document.querySelector(".pending-block"), run !== 5);
     setHidden(askEl, run < 3);
 
-    document.querySelectorAll(".bet--bounded").forEach(function (el) {
-      setHidden(el, priced);
-    });
-    document.querySelectorAll(".bet--new").forEach(function (el) {
-      setHidden(el, !priced);
-    });
-    document.querySelectorAll("[data-bet=\"pricing\"] .bet-tag").forEach(function (el) {
-      setHidden(el, !priced);
-    });
-
     document.querySelectorAll(".doorbell").forEach(function (d) {
       setHidden(d.querySelector(".doorbell__empty"), reachOn);
       setHidden(d.querySelector(".doorbell__msg"), !reachOn);

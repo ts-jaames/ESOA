@@ -114,26 +114,22 @@
     </article>
 
     <section class="portal__section">
-      <div class="tri">
-        <div class="tri__col">
-          <h2 class="tri__head">What’s true</h2>
-          <ul class="tri__list">
-            <li><b>Auth</b> — in production, limited to the pilot.</li>
-            <li><b>Catalogue</b> — shipped. Designs sync across devices.</li>
-            <li><b>AR capture</b> — holds on flat, rectangular yards.</li>
-            <li><b>Pricing</b> — a rep confirms every number.</li>
-          </ul>
-        </div>
-        <div class="tri__col tri__col--bet">
-          <h2 class="tri__head">Still a bet</h2>
-          <ul class="tri__list">
-            <li class="bet--bounded" data-bet="accuracy"><b>Measurement accuracy</b> — holds on flat yards. Untested on slopes, curves, or obstructions.</li>
-            <li class="bet--new" hidden data-bet="accuracy"><span><b>Measurement accuracy</b> on slope / curve / obstruction</span> <span class="bet-tag">new</span></li>
-            <li data-bet="pricing"><span><b>Pricing</b> in unseen regions.</span> <span class="bet-tag" hidden>escalated</span></li>
-            <li><b>Rep adoption</b> — whether reps will quote from a scan.</li>
-          </ul>
-        </div>
-      </div>
+      <h2 class="portal__h">What’s true</h2>
+      <ul class="truth">
+        <li><b>Auth</b> — in production, limited to the pilot.</li>
+        <li><b>Catalogue</b> — shipped. Designs sync across devices.</li>
+        <li><b>AR capture</b> — holds on flat, rectangular yards.</li>
+        <li><b>Pricing</b> — a rep confirms every number.</li>
+      </ul>
+    </section>
+
+    <section class="portal__section" aria-label="Still a bet">
+      <h2 class="portal__h portal__h--bet">Still a bet</h2>
+      <div class="ledger" id="ledgerBets"></div>
+    </section>
+
+    <section class="portal__section" aria-label="Path to close">
+      <div class="path" id="pathClose"></div>
     </section>
 
     <div class="inbound" hidden>
