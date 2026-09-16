@@ -49,6 +49,14 @@ to the next port. This is the failure that hides work: a second
 `python3 -m http.server 8080` exits with "Address already in use" while the
 first one keeps answering.
 
+**When an edit doesn't show.** `serve.sh` sends `Cache-Control: no-store` on
+every response, so editing a stylesheet and reloading is enough — no hard reload
+needed. If an edit still doesn't appear, check the `serving` line it printed:
+that is the folder on screen, and it is the one you have to be editing. Two
+copies of this repo on one machine is the usual answer. (On a machine with no
+`python3`, `serve.sh` falls back to a server it can't set headers on and says so
+— there, hard-reload after an edit.)
+
 **When the checkout is behind.** `serve.sh` compares `HEAD` against
 `origin/main` and prints the drift. To land on the current build:
 

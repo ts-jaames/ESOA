@@ -84,23 +84,50 @@ printf 'press P on the page to see the commit it is serving\n\n'
 
 # ── whatever static server this machine has ──────────────────
 
+# Edit a stylesheet, reload, see the edit. Python's plain http.server sends no
+# Cache-Control at all, which lets a browser decide for itself how long to keep
+# a file — so an edit can sit there invisible until a hard reload. This says
+# no-store on every response instead.
+no_cache_server='
+import sys, http.server, socketserver
+
+class Handler(http.server.SimpleHTTPRequestHandler):
+    def end_headers(self):
+        self.send_header("Cache-Control", "no-store, must-revalidate")
+        self.send_header("Pragma", "no-cache")
+        super().end_headers()
+
+socketserver.TCPServer.allow_reuse_address = True
+with socketserver.TCPServer(("0.0.0.0", int(sys.argv[1])), Handler) as httpd:
+    print("serving with no-store on port " + sys.argv[1], flush=True)
+    httpd.serve_forever()
+'
+
 server=()
+may_cache=""
 if command -v python3 >/dev/null 2>&1; then
-  server=(python3 -m http.server "$port")
+  server=(python3 -c "$no_cache_server" "$port")
 elif command -v python >/dev/null 2>&1; then
+  may_cache="yes"
   if python -c 'import sys; sys.exit(0 if sys.version_info[0] > 2 else 1)' 2>/dev/null; then
     server=(python -m http.server "$port")
   else
     server=(python -m SimpleHTTPServer "$port")
   fi
 elif command -v npx >/dev/null 2>&1; then
+  may_cache="yes"
   server=(npx --yes serve -l "$port" .)
 elif command -v php >/dev/null 2>&1; then
+  may_cache="yes"
   server=(php -S "localhost:$port")
 else
   printf 'no static server found. Install python3, node, or php.\n' >&2
   rm -f build.txt
   exit 1
+fi
+
+if [ -n "$may_cache" ]; then
+  printf 'note: no python3 here, so this server may cache — hard-reload after an edit\n\n'
 fi
 
 "${server[@]}" &
