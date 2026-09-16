@@ -80,6 +80,54 @@ persistent thing anyone can open, with confidence as a first-class element on
 it. Right: the system working — what it read, what it reasoned, what it did,
 including what it deliberately didn't say.
 
+## The barometer — what a change needs
+
+Every change that arrives is read on two coarse readings, and those two
+readings decide who touches it. **This is the premise of the whole run.**
+
+- **Confidence** — how clear it is what the ask touches.
+  `clear · partly clear · unclear`
+- **Consequence** — what it costs if we're wrong.
+  `reversible · costly · a commitment`
+
+| Confidence | Consequence | What it needs | Who touches it |
+| --- | --- | --- | --- |
+| clear | reversible | **absorbed** | nobody |
+| clear | costly, but recoverable if a boundary holds | **one confirmation** | one person |
+| partly clear or unclear | anything | **the room** | the conversation |
+| anything | a commitment | **the room** | the conversation |
+
+A **commitment** means the range, a date, or what the estimate leans on. It is
+never absorbed and never settled by one person. That is the Friday email.
+
+Three avenues in, one barometer. An email, a message in a channel, a transcript
+from the room — the reading is the same in all three.
+
+| Beat | Avenue | Confidence | Consequence | Route |
+| --- | --- | --- | --- | --- |
+| 1a · Absorbs | email | clear | reversible | **absorbed** |
+| 1b · Confirms | the delivery channel | clear | costly | **one confirmation** |
+| 2 · The Friday email | email | partly clear | a commitment | **the room** |
+| 3 · The change | the room's transcript | — | — | the room's output, applied |
+
+### How the barometer renders — honesty rules
+
+- **Two coarse readings, three options each, one lit.** Never a score, never a
+  position on a chart, never a percentage. The two roads not taken stay
+  visible: a system that shows only the route it took reads as a rule, and a
+  system that shows the ladder reads as judgment.
+- **This confidence is about the ask, not the engagement.** It is labelled
+  *what it touches* on screen and never shares a device with the envelope's
+  confidence state. Two different confidences must never blur into one.
+- **Consequence is stated in the client's terms** — a wrong price in front of a
+  buyer, a date that slips — never as a severity label or a number.
+- **The route is named as what it needs**, not as who the system decided to
+  bother: `absorbed`, `one confirmation`, `the room`.
+- **A confirmation is attributed.** It carries the role of the person who gave
+  it and the time it took, and it leaves a decision on the record. A confirmed
+  boundary that leaves no trace is scope absorbed silently, which is the
+  failure this whole thing exists to prevent.
+
 ## The run (sequence)
 
 ### 1 · Resting state (the pull surface at rest)
@@ -117,6 +165,34 @@ knows the difference, and it can say which rule it applied.
 - **Build status:** `FAKED`
 - **Why it's here:** without it, "the system handles change" reads as "the
   system escalates change." Absorption is the other half of the claim.
+
+### 1b · Confirms (the change that takes one person, not the room)
+
+Left-column action: **Confirms**. Wed 14 May, 2:20pm, in the shared delivery
+channel — the client's ops lead mentions that the two Québec crews join the
+pilot Monday and will quote from the app. It isn't even phrased as an ask.
+
+The reading: **clear** — the price book is proved in the pilot region only, and
+that bet is already open and named. **Costly** — a wrong price in front of a
+buyer, in one region, recoverable if the boundary holds. Clear and costly is
+the middle rung: not absorbed, not the room. It takes **one confirmation**.
+
+So the system drafts the boundary, asks the delivery lead one question, and
+**holds the reply until it comes back** — 44 minutes. Then it goes out: the
+Québec crews quote from the proved price book until regional data lands. The
+range does not move. Confidence stays steady.
+
+The confirmation leaves a decision on the record, dated and attributed to the
+role that gave it. That trace is the difference between a confirmed boundary
+and scope absorbed silently.
+
+- **Middle column:** the asks ledger, the open bet's boundary, and a decision
+  on record. The envelope does not move.
+- **On-screen honesty:** the hold is shown as a hold — the reply waited on a
+  person, and the wait is stamped. Attributed to a role, not to the system.
+- **Build status:** `FAKED`
+- **Why it's here:** the middle rung. Without it the barometer reads as a
+  switch — absorb or meeting — when the premise is a ladder.
 
 ### 2 · The trigger (triage many, drill one)
 
@@ -202,6 +278,7 @@ Each state is a **tag** (orb + word), not a labelled row. Orbs only appear on co
 | --- | --- | --- | --- |
 | 1 · Rest | **Steady** | $180–220K | Calm. One bounded risk open. |
 | 1a · Absorbs | **Steady** (unmoved — that is the signal) | $180–220K held | A change came in and cost me nothing. |
+| 1b · Confirms | **Steady** | $180–220K held | Somebody checked a boundary, and it's on the record. |
 | 2 · Email | **Reassessing** | unchanged (pending) | They caught it. They're already re-checking. |
 | 3 · Loop | **Provisional** (reason lives in the change item, once) | $180–220K → $260–340K (widens on this screen) | The number moved *because* tightness came off — and I can see why. |
 | 4 · Radiation | **Provisional** | wide | Same truth, now at the doorbells. |
@@ -294,7 +371,7 @@ figure. It is the one thing to look at.
 | Bet | At rest | After the change | What would close it | Waiting on |
 | --- | --- | --- | --- | --- |
 | **Measurement accuracy** — holds on flat yards, untested on slopes, curves, obstructions | bounded | escalated · `new` on slope / curve / obstruction | Measure slope, curve and obstruction yards against tape | Yard access in the pilot region |
-| **Pricing in unseen regions** | open | escalated | Check the price book against two more regions | Regional price data from the client |
+| **Pricing in unseen regions** — the price book is proved in the pilot region only; from 14 May the Québec crews quote from it under a confirmed boundary | open | escalated | Check the price book against two more regions | Regional price data from the client |
 | **Rep adoption** — whether reps will quote from a scan | open | open | Pilot reps quoting from a scan without reverting | Pilot usage, week 3 |
 
 ### The path to close
@@ -339,6 +416,7 @@ the run on their own.
 | Designs sync across devices | review · 6 Mar | delivered 12 Mar | — | — | — |
 | Limit sign-in to pilot users | email · 20 Mar | delivered 2 Apr | — | — | — |
 | Show metres alongside yards | email · Tue 13 May 9:12am | absorbed 13 May — range held | — | — | in the build |
+| Add the Québec crews to the pilot | delivery channel · Wed 14 May 2:20pm | answered 14 May — confirmed by delivery lead | — | — | in the pilot |
 | Price off the scan, no rep in the loop | email · Fri 16 May 4:47pm | — | scoping — affects estimate | repriced · captured from Monday review | answered · decision pending |
 | Before fall selling season | email · Fri 16 May 4:47pm | — | timeline noted | checked against the plan | target held · tight |
 | A number by early next week | email · Fri 16 May 4:47pm | — | estimate in progress | sent 19 May | delivered |
@@ -349,6 +427,7 @@ the run on their own.
 | --- | --- | --- | --- |
 | 10 Mar | Ship the catalogue before capture | scope agreement · 10 Mar | 1 |
 | 4 Apr | Hold AR capture to flat, rectangular yards until accuracy is tested | capture test review · 4 Apr | 1 |
+| 14 May | New pilot crews quote from the proved price book until regional data lands — confirmed by the delivery lead | delivery channel · 14 May | 1 |
 | 19 May | Don't run pricing off the scan until measurement accuracy is proven — **pending** | Monday review · 19 May | 5 |
 
 ### As-of stamps
@@ -357,6 +436,7 @@ the run on their own.
 | --- | --- |
 | 1 | current as of Thu 15 May · 6:02pm |
 | 1a | current as of Tue 13 May · 9:14am · absorbed without repricing |
+| 1b | current as of Wed 14 May · 3:04pm · answered on one confirmation |
 | 2 | current as of Fri 16 May · 4:47pm · new signal received |
 | 3 | current as of Mon 19 May · 11:30am |
 | 4 | current as of Mon 19 May · 11:34am |
@@ -392,6 +472,7 @@ system doing right now," in two plain words.
 | --- | --- | --- |
 | 1 · Rest | `passive monitoring` | Reading continuously. Interrupting no one. |
 | 1a · Absorbs | `auto-resolving` | A change arrived and closed itself. |
+| 1b · Confirms | `confirming` | One question to one person, and the reply held until it came back. |
 | 2 · Email | `strategic hold` | This one needs the room. Acknowledge now, price later. |
 | 3 · Loop | `applying the decision` | The room decided; the record is being written. |
 | 4 · Radiation | `dispatching` | One event reaching the people it affects. |
@@ -446,14 +527,21 @@ claim.
 **1a · Absorbs — `auto-resolving`**
 
 - **In:** email, Tue 13 May 9:12am — metres alongside yards for the Ontario crews · ambient sources still reading.
-- **Reasoning:** read as an ask about how a quote displays. Checked against capture, pricing, the open bets and the dates — it touches none of them. **Rule: an ask that doesn't touch an open bet or a date is absorbed inside the range.** So the range holds at $180–220K and confidence stays steady.
+- **Reasoning:** read as an ask about how a quote displays. **Confidence: clear** — nothing it touches is open, not capture, not pricing, not a date. **Consequence: reversible** — if we're wrong, a label changes back. **What it needs: absorbed.** Clear and reversible is absorbed inside the range, so it holds at $180–220K and confidence stays steady.
 - **Out:** `wrote` the asks ledger — logged and answered, no reprice · `sent` the client thread, 9:14am — it's in the current build, no change to the range or the dates · `sent` the delivery channel, one line, no reply needed · `held` the Monday agenda, nothing to decide.
 - **Net:** absorbed in two minutes, without a person in the loop.
+
+**1b · Confirms — `confirming`**
+
+- **In:** the delivery channel, Wed 14 May 2:20pm — the client's ops lead, the two Québec crews join the pilot Monday and will quote from the app · ambient sources still reading.
+- **Reasoning:** read as a change to who quotes from the app. **Confidence: clear** — the price book is proved in the pilot region only, and that bet is already named. **Consequence: costly** — a wrong price in front of a buyer, in one region, recoverable if the boundary holds. **What it needs: one confirmation.** Clear and costly takes one person, not the room.
+- **Out:** `sent` the delivery lead one question — hold the new crews to the proved price book? · `held` the reply to the channel for 44 minutes, until the boundary came back confirmed · `sent` the channel at 3:04pm — the answer with the boundary attached · `wrote` the asks ledger, the bet's boundary, and a decision on record, attributed to the delivery lead.
+- **Net:** answered on one confirmation. The range never moved, and the boundary is on the record.
 
 **2 · The trigger — `strategic hold`**
 
 - **In:** email, Fri 16 May 4:47pm — the client's words, unprocessed · ambient sources still reading.
-- **Reasoning:** read as three asks, not one. Pricing off the scan removes the rep's catch on a bad measurement, which lands on measurement accuracy — untested on slopes, curves, obstructions (`capture test · 4 Apr`). **Rule: an ask that lands on an open bet is never absorbed — it goes to the room.** Confidence moves to reassessing; the range is held, not changed.
+- **Reasoning:** read as three asks, not one. **Confidence: partly clear** — it lands on measurement accuracy, untested off flat ground (`capture test · 4 Apr`), but whether they mean every yard type or only the flat ones they've seen is not stated. **Consequence: a commitment** — a wrong price ships to a buyer, and the estimate is a commitment. **What it needs: the room.** Confidence moves to reassessing; the range is held, not changed.
 - **Out:** `sent` the client thread at 4:51pm — received, here's what we're looking at, and no number, because there isn't an honest one yet · `sent` the delivery channel — the ask and what it leans on · `wrote` three asks with statuses, and confidence steady → reassessing · `scheduled` Monday review, first item, accuracy evidence attached · `held` **the new range — it needs the room, not an algorithm.**
 - **Net:** acknowledged in four minutes on a Friday evening. Nobody's weekend went into it.
 
@@ -484,9 +572,11 @@ claim.
   without evidence.
 - **`held` is never decoration.** It names the channel it didn't ring and the
   reason. If there's no reason, it was a send that didn't happen.
-- **The reasoning zone states the rule it applied**, in one client-readable
-  sentence. It never shows a score, a weight, a confidence percentage, or a
-  derivation.
+- **The reasoning zone carries the barometer** when a change arrives: the two
+  coarse readings and the route, each as three options with one lit. It never
+  shows a score, a weight, a confidence percentage, or a derivation. In states
+  where nothing arrived, there is no route to show and the zone says what it
+  is watching instead.
 - **No queue counts, no throughput, no "signals processed."** The band shows
   *what* was read, not *how much*.
 - **`wrote` rows point at the record.** Every one of them corresponds to

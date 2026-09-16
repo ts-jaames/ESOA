@@ -128,7 +128,7 @@ dispatch zone. Do not build N channel UIs.
 
 | Chrome | When | Looks like |
 | --- | --- | --- |
-| `.nav` | Always | Floating left column. Six plain actions, no numbers. Active = left hairline accent, not a filled chip. |
+| `.nav` | Always | Floating left column. Seven plain actions, no numbers: rest, the three routes a change can take, the reach, the new rest. Active = left hairline accent, not a filled chip. |
 | `.portal` | Always | Boundless living record. Pull. Pointable. Always current. Not a document page. Confidence sits with the envelope. **One prioritized scroll** — no tabs, no grid. |
 | `.system` | Always | The system working: loop state, then ingestion → reasoning → dispatch. Hairline rows, mono stamps. Channels are named inside dispatch — never Slack/Teams branding or chrome. |
 | Presenter | <kbd>P</kbd> | Team-only overlay, restyled for dark. Illustrative disclaimer and PARTWAY REAL live here. |
@@ -156,6 +156,35 @@ should feel like something that takes information in and keeps process moving:
 **ingestion is stamped, every open item says what it waits on, statuses advance
 on their own.** The client never files anything.
 
+### The barometer — the premise, on screen
+
+A change that arrives is read on two coarse readings, and those two readings
+decide who touches it. Three routes, never two:
+
+| Confidence — what it touches | Consequence — if we're wrong | What it needs |
+| --- | --- | --- |
+| clear | reversible | **absorbed** — nobody |
+| clear | costly, recoverable if a boundary holds | **one confirmation** — one person |
+| partly clear or unclear | anything | **the room** |
+| anything | **a commitment** (the range, a date, what the estimate leans on) | **the room** |
+
+- **Two confidences must never blur.** The envelope's confidence is a coarse
+  state of the engagement, carried with orbs. The barometer's confidence is
+  about *the ask*, labelled **what it touches**, and it never shares a device,
+  a colour ramp, or a word with the envelope's.
+- **Three options per reading, one lit.** The roads not taken stay visible —
+  showing only the route taken reads as a rule; showing the ladder reads as
+  judgment. Never a score, a percentage, or a position on a chart.
+- **Consequence is in the client's terms** — a wrong price in front of a
+  buyer, a date that slips. Never a severity label, never a number.
+- **Three avenues in, one barometer:** an email, a message in a channel, a
+  transcript from the room. The reading is the same in all three.
+- **A confirmation is attributed and leaves a trace** — the role that gave it,
+  the time it took, and a decision on the record. A confirmed boundary with no
+  trace is scope absorbed silently, which is the failure this exists to stop.
+- **No route where nothing arrived.** At rest and after, the reasoning zone
+  says what it is watching. The barometer is for an arrival.
+
 ### The right column — the system working
 
 Three zones, same order, always all three: **ingestion → reasoning →
@@ -167,7 +196,7 @@ model.
 
 | Allowed here | Still never |
 | --- | --- |
-| Loop state as two plain words — `passive monitoring`, `auto-resolving`, `strategic hold`, `dispatching`, `watching the close` | Levels, capability names, caliber, intensity states, the change runner, seams |
+| Loop state as two plain words — `passive monitoring`, `auto-resolving`, `confirming`, `strategic hold`, `dispatching`, `watching the close` | Levels, capability names, caliber, intensity states, the change runner, seams |
 | The rule it applied, in one client-readable sentence | Scores, weights, confidence percentages, any derivation |
 | What it read, and when — every intake row is stamped | Queue counts, throughput, "signals processed", volumes |
 | Named channels inside dispatch | Slack/Teams chrome, logos, message bubbles |
@@ -223,8 +252,10 @@ effect: the ask leans on an untested risk, so the range widens.
 6. **Do not pretend rest is fully confident.** A headline risk is open;
    the range is directional.
 7. **The system is shown absorbing, not only escalating.** One beat closes a
-   real change without a person in it, and states the rule that let it. A
+   real change without a person in it, and states the reading that let it. A
    system that escalates everything is a tripwire, not judgment.
+   **Three routes, never two** — absorbed, one confirmation, the room. Two
+   routes is a switch; the premise is a ladder.
 8. **Every state holds something back.** Dispatch always shows a `held` with
    its reason. What the system chose not to say is as load-bearing as what it
    sent.
