@@ -34,9 +34,25 @@
 .nav__actions {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 2px;
 }
+
+/* the routes a change can take, grouped under one plain heading */
+.nav__group {
+  margin: var(--s3) 0 4px;
+  padding: 0 0 0 var(--s2);
+  font-size: 13.5px;
+  line-height: 1.35;
+  color: var(--ink-muted);
+  max-width: none;
+}
+.nav__group + .nav__act { margin-top: 0; }
+.nav__act--sub {
+  padding-left: var(--s3);
+  font-size: 13px;
+}
+.nav__act--sub + .nav__act:not(.nav__act--sub) { margin-top: var(--s3); }
 
 .nav__act {
   appearance: none;
@@ -251,10 +267,12 @@ body[data-run="5"] .change { display: block; }
   align-items: baseline;
   gap: var(--s2);
   flex-wrap: wrap;
+  padding-bottom: var(--s3);
+  border-bottom: 1px solid var(--rule);
 }
 .envelope__figure {
   font-family: var(--font-mono);
-  font-size: 28px;
+  font-size: 34px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.025em;
@@ -296,37 +314,47 @@ body[data-run="3"] .envelope--after {
 }
 
 .confidence {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
   margin-top: var(--s3);
-  padding-top: var(--s2);
-  border-top: 1px solid var(--rule);
+  padding-bottom: var(--s3);
+  border-bottom: 1px solid var(--rule);
 }
+.confidence__orbs {
+  flex: none;
+  width: 64px;
+  height: 64px;
+  position: relative;
+}
+.confidence__orbs .orb {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+}
+body[data-conf="steady"] .orb[data-orb-when="conf-steady"],
+body[data-conf="reassessing"] .orb[data-orb-when="conf-reassessing"],
+body[data-conf="provisional"] .orb[data-orb-when="conf-provisional"],
+body[data-conf="rebuilding"] .orb[data-orb-when="conf-rebuilding"] { opacity: 1; }
+.confidence__read { min-width: 0; }
 .conf-tag {
   display: none;
-  align-items: center;
-  gap: var(--s1);
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink);
-  border: 1px solid var(--rule);
-  padding: 4px 10px 4px 4px;
+  color: var(--accent);
 }
 body[data-conf="steady"] .conf-tag[data-conf-tag="steady"],
 body[data-conf="reassessing"] .conf-tag[data-conf-tag="reassessing"],
 body[data-conf="provisional"] .conf-tag[data-conf-tag="provisional"],
 body[data-conf="rebuilding"] .conf-tag[data-conf-tag="rebuilding"] {
-  display: inline-flex;
-}
-body[data-conf="reassessing"] .conf-tag,
-body[data-conf="provisional"] .conf-tag,
-body[data-conf="rebuilding"] .conf-tag {
-  color: var(--accent-deep);
-  border-color: var(--rule-strong);
+  display: inline-block;
 }
 .confidence__note {
-  margin-top: var(--s1);
+  margin-top: 2px;
   font-size: 13.5px;
   color: var(--ink-soft);
   max-width: 58ch;

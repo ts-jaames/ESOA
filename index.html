@@ -24,13 +24,16 @@
 
 <nav class="nav" aria-label="Actions">
   <div class="nav__actions" id="actions">
-    <button class="nav__act" type="button" data-go="0">Resting</button>
-    <button class="nav__act" type="button" data-go="1">Absorbs</button>
-    <button class="nav__act" type="button" data-go="2">Confirms</button>
-    <button class="nav__act" type="button" data-go="3">The Friday email</button>
-    <button class="nav__act" type="button" data-go="4">The change</button>
-    <button class="nav__act" type="button" data-go="5">Everyone hears</button>
-    <button class="nav__act" type="button" data-go="6">After</button>
+    <button class="nav__act" type="button" data-go="0">When nothing’s on fire</button>
+
+    <p class="nav__group">When something changes</p>
+    <button class="nav__act nav__act--sub" type="button" data-go="1">Absorbed</button>
+    <button class="nav__act nav__act--sub" type="button" data-go="2">Confirm</button>
+    <button class="nav__act nav__act--sub" type="button" data-go="3">Reprice + human</button>
+    <button class="nav__act nav__act--sub" type="button" data-go="4">The new number</button>
+    <button class="nav__act nav__act--sub" type="button" data-go="5">Everyone hears</button>
+
+    <button class="nav__act" type="button" data-go="6">What lasts</button>
   </div>
 </nav>
 
@@ -53,23 +56,19 @@
         <span class="money money--was">was $180–220K</span>
       </div>
       <div class="confidence" aria-label="Confidence" aria-live="polite">
-        <span class="conf-tag" data-conf-tag="steady">
-          <canvas class="orb" data-orb="working" data-orb-when="conf-steady" data-orb-size="20" width="20" height="20" aria-hidden="true"></canvas>
-          Steady
-        </span>
-        <span class="conf-tag" data-conf-tag="reassessing">
-          <canvas class="orb" data-orb="listening" data-orb-when="conf-reassessing" data-orb-size="20" width="20" height="20" aria-hidden="true"></canvas>
-          Reassessing
-        </span>
-        <span class="conf-tag" data-conf-tag="provisional">
-          <canvas class="orb" data-orb="searching" data-orb-when="conf-provisional" data-orb-size="20" width="20" height="20" aria-hidden="true"></canvas>
-          Provisional
-        </span>
-        <span class="conf-tag" data-conf-tag="rebuilding">
-          <canvas class="orb" data-orb="composing" data-orb-when="conf-rebuilding" data-orb-size="20" width="20" height="20" aria-hidden="true"></canvas>
-          Rebuilding
-        </span>
-        <p class="confidence__note" id="confNote" hidden></p>
+        <div class="confidence__orbs" aria-hidden="true">
+          <canvas class="orb" data-orb="working" data-orb-when="conf-steady" data-orb-size="64" width="64" height="64"></canvas>
+          <canvas class="orb" data-orb="listening" data-orb-when="conf-reassessing" data-orb-size="64" width="64" height="64"></canvas>
+          <canvas class="orb" data-orb="searching" data-orb-when="conf-provisional" data-orb-size="64" width="64" height="64"></canvas>
+          <canvas class="orb" data-orb="composing" data-orb-when="conf-rebuilding" data-orb-size="64" width="64" height="64"></canvas>
+        </div>
+        <div class="confidence__read">
+          <span class="conf-tag" data-conf-tag="steady">Steady</span>
+          <span class="conf-tag" data-conf-tag="reassessing">Reassessing</span>
+          <span class="conf-tag" data-conf-tag="provisional">Provisional</span>
+          <span class="conf-tag" data-conf-tag="rebuilding">Rebuilding</span>
+          <p class="confidence__note" id="confNote"></p>
+        </div>
       </div>
     </section>
 
@@ -193,9 +192,9 @@
   </article>
 </main>
 
-<aside class="system" aria-label="The system working">
+<aside class="system" aria-label="The control loop">
   <div class="system__loop">
-    <span class="system__k">Loop state</span>
+    <span class="system__k">The control loop</span>
     <span class="system__state" id="loopState">passive monitoring</span>
   </div>
   <div class="zones" id="zones" aria-live="polite"></div>

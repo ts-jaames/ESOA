@@ -14,7 +14,7 @@
   var RUNS = [
     {
       id: "rest",
-      label: "Resting",
+      label: "When nothing’s on fire",
       run: 1,
       conf: "steady",
       tool: "confidence-lineage → artifact agent",
@@ -24,7 +24,7 @@
     },
     {
       id: "absorbs",
-      label: "Absorbs",
+      label: "Absorbed",
       run: 1,
       beat: "absorbs",
       conf: "steady",
@@ -35,7 +35,7 @@
     },
     {
       id: "confirms",
-      label: "Confirms",
+      label: "Confirm",
       run: 1,
       beat: "confirms",
       conf: "steady",
@@ -46,7 +46,7 @@
     },
     {
       id: "trigger",
-      label: "The Friday email",
+      label: "Reprice + human",
       run: 2,
       conf: "reassessing",
       tool: "channel (ingest) → portal",
@@ -56,7 +56,7 @@
     },
     {
       id: "loop",
-      label: "The change",
+      label: "The new number",
       run: 3,
       conf: "provisional",
       tool: "change runner → artifact agent",
@@ -76,7 +76,7 @@
     },
     {
       id: "rest-now",
-      label: "After",
+      label: "What lasts",
       run: 5,
       conf: "rebuilding",
       tool: "confidence-lineage → artifact agent",
@@ -96,7 +96,7 @@
   var CONF = {
     steady: {
       word: "Steady",
-      note: ""
+      note: "Nothing open has moved the range."
     },
     reassessing: {
       word: "Reassessing",
@@ -104,7 +104,7 @@
     },
     provisional: {
       word: "Provisional",
-      note: ""
+      note: "Wider while measurement accuracy stays untested off flat ground."
     },
     rebuilding: {
       word: "Rebuilding",
