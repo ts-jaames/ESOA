@@ -121,7 +121,7 @@
         rest: "Holds on flat yards. Untested on slopes, curves, or obstructions.",
         after: "On slope, curve and obstruction. A wrong measurement is no longer caught by a person."
       },
-      state: { 1: "bounded", 2: "bounded", 3: "new", 4: "new", 5: "new" },
+      state: { 1: "bounded", 2: "this request", 3: "new", 4: "new", 5: "new" },
       closes: "Measure slope, curve and obstruction yards against tape",
       waits: { rest: "Yard access in the pilot region", after: "Starts 20 May" },
       source: { rest: "capture test · 4 Apr", after: "Monday review · 19 May" },

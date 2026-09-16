@@ -1,7 +1,8 @@
 /* ─────────────────────────────────────────────────────────────
-   system.css — the right column: the system working.
-   One spine of hairline rows. Mono is the metadata voice:
-   the source, the verb, the stamp. Sans carries the sentence.
+   system.css — the right column: the control loop.
+   Three sections, hairline-separated, full-width lines. Mono is
+   the metadata voice: the stamp, the reading, the route. Sans
+   carries the sentence. Dispatch reads target → state (detail).
    ───────────────────────────────────────────────────────────── */
 
 .system {
@@ -11,7 +12,7 @@
   min-width: var(--reach-w);
   height: 100vh;
   height: 100dvh;
-  padding: var(--s4) var(--s3) 0 var(--s2);
+  padding: var(--s5) var(--s3) 0 0;
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -19,13 +20,15 @@
 }
 
 /* ═══════════════════════════════════════════════════════════
-   LOOP STATE — what the system is doing right now, in two words
+   THE CONTROL LOOP — what the system is doing right now
    ═══════════════════════════════════════════════════════════ */
 
 .system__loop {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
+  padding-bottom: var(--s2);
+  border-bottom: 1px solid var(--rule);
 }
 
 .system__k {
@@ -42,13 +45,13 @@
   align-self: flex-start;
   padding-bottom: 5px;
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 11.5px;
   font-weight: 500;
-  letter-spacing: 0.03em;
-  color: var(--ink);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
   transition: color var(--dur) var(--ease);
 }
-.system__state.is-acting { color: var(--accent-deep); }
 
 /* the state changing is an arrival, not a flash */
 .system__state::after {
@@ -79,8 +82,13 @@
 .zones {
   display: flex;
   flex-direction: column;
-  gap: var(--s1);
+  gap: var(--s3);
   flex: 0 0 auto;
+}
+
+.zone + .zone {
+  padding-top: var(--s3);
+  border-top: 1px solid var(--rule);
 }
 
 .zone__h {
@@ -90,85 +98,68 @@
   letter-spacing: var(--track-label);
   text-transform: uppercase;
   color: var(--ink-muted);
-  margin: 0 0 2px;
-  padding-bottom: var(--s1);
-  border-bottom: 1px solid var(--rule);
+  margin: 0 0 var(--s1);
 }
 
-.zone__flow {
-  font-size: 11px;
-  line-height: 1;
-  color: var(--ink-faint);
-  padding: 2px 0 2px 26px;
-  user-select: none;
-}
-
-/* ── rows ─────────────────────────────────────────────────── */
+/* ── rows: one line each, no boxes, no key column ─────────── */
 
 .row {
-  display: grid;
-  grid-template-columns: 80px minmax(0, 1fr);
-  gap: var(--s1);
+  display: block;
   width: 100%;
   margin: 0;
-  padding: 7px 0 7px 9px;
+  padding: 0 0 0 9px;
   border: 0;
-  border-bottom: 1px solid var(--rule);
   border-left: 1px solid transparent;
   background: none;
   text-align: left;
   font-family: var(--font-sans);
   color: inherit;
 }
-
-.row:last-child { border-bottom: 0; }
+.row + .row { margin-top: 7px; }
 
 .row.is-accent { border-left-color: var(--accent); }
 
-.row__k {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  line-height: 1.5;
-  padding-top: 2px;
-  overflow-wrap: break-word;
-}
-.row--out .row__k { color: var(--ink-muted); }
-.row--out.is-accent .row__k,
-.row--why.is-accent .row__k { color: var(--accent); }
-.row.is-event .row__k { color: var(--ink); }
-
-.row__body {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-
-.row__text {
+.row__line {
+  margin: 0;
+  max-width: none;
   font-size: 12.5px;
-  line-height: 1.4;
+  line-height: 1.45;
   color: var(--ink-soft);
 }
-.row--why .row__text { color: var(--ink); }
+.row--why .row__line { color: var(--ink-soft); }
 
+.row__src,
+.row__lead,
 .row__to {
   font-weight: 600;
   color: var(--ink);
 }
+.row.is-event .row__src { color: var(--accent-deep); }
+
+/* dispatch: target → state (why it went that way) */
+.row__arrow {
+  font-family: var(--font-mono);
+  color: var(--ink-faint);
+  padding: 0 3px;
+}
+.row__state {
+  font-weight: 600;
+  color: var(--ink);
+}
+.row--out.is-accent .row__state { color: var(--accent); }
+.row__text { color: var(--ink-soft); }
 
 /* ── the barometer: two readings, then the route ───────────── */
 
 .row__gauge {
   display: block;
+  margin-top: 2px;
   font-family: var(--font-mono);
   font-size: 10.5px;
   letter-spacing: 0.03em;
   color: var(--ink-faint);
   opacity: 0.75;
+  white-space: nowrap;
 }
 .row__gauge .gauge__o.is-lit {
   color: var(--ink);
@@ -181,7 +172,8 @@
 }
 
 .call {
-  padding: var(--s1) 0 7px 9px;
+  margin-top: var(--s2);
+  padding-left: 9px;
   border-left: 1px solid transparent;
 }
 
@@ -202,6 +194,7 @@
   font-size: 11.5px;
   letter-spacing: 0.03em;
   color: var(--ink-faint);
+  white-space: nowrap;
 }
 .call__track .gauge__o { opacity: 0.7; }
 .call__track .gauge__o.is-lit {
@@ -213,7 +206,7 @@
 .call__why {
   display: block;
   font-size: 12.5px;
-  line-height: 1.4;
+  line-height: 1.45;
   color: var(--ink-soft);
 }
 
@@ -225,35 +218,32 @@
   color: var(--ink-faint);
 }
 
-/* how the system read what arrived, kept with the thing that arrived */
-.row__as {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.02em;
-  color: var(--ink-muted);
-}
-.row__as::before {
-  content: "read as · ";
-  color: var(--ink-faint);
-}
-
-.row__when,
-.row__cite {
+/* the stamp inside the sentence, and how the system read it below */
+.row__when {
   font-family: var(--font-mono);
   font-size: 10.5px;
   letter-spacing: 0.02em;
   color: var(--ink-faint);
+  padding-left: 4px;
 }
 
-/* a held channel stays quiet — the reason carries it, not colour */
-.row--out .row__k,
-.row--out .row__text { transition: color var(--dur) var(--ease); }
+.row__meta {
+  margin: 1px 0 0;
+  max-width: none;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  color: var(--ink-faint);
+}
 
 /* ── rows that point at the record ────────────────────────── */
 
 .row--tap { cursor: pointer; }
 /* the affordance stays quiet — the accent belongs to the one thing to look at */
 .row__go {
+  display: block;
+  margin-top: 1px;
   font-family: var(--font-mono);
   font-size: 10.5px;
   letter-spacing: 0.02em;
@@ -262,7 +252,7 @@
 }
 .row__go::before { content: "↳ "; }
 .row--tap:hover .row__go { color: var(--accent-deep); }
-.row--tap:hover .row__text { color: var(--ink); }
+.row--tap:hover .row__line { color: var(--ink); }
 .row--tap:focus-visible {
   outline: 1px solid var(--rule-strong);
   outline-offset: 2px;
@@ -300,47 +290,42 @@
 /* a short screen compacts the band rather than hiding the last hold */
 @media (max-height: 1000px) {
   .system {
-    padding-top: var(--s3);
+    padding-top: var(--s4);
     gap: var(--s2);
   }
-  .row { padding-top: 5px; padding-bottom: 5px; }
-  .row__text { font-size: 12px; line-height: 1.35; }
-  .zone__h { padding-bottom: 5px; }
-  .zone__flow { padding-top: 0; padding-bottom: 0; }
+  .zones { gap: var(--s2); }
+  .zone + .zone { padding-top: var(--s2); }
+  .row + .row { margin-top: 6px; }
+  .row__line { font-size: 12px; line-height: 1.4; }
   .system__net { padding-top: var(--s1); padding-bottom: var(--s2); }
 }
 
-/* shorter still: the arrows go, the metadata voice drops a half step */
+/* shorter still: the metadata voice drops a half step */
 @media (max-height: 940px) {
-  .system { padding-top: var(--s2); gap: var(--s1); }
-  .zones { gap: 4px; }
-  .zone__flow { display: none; }
-  .zone__h { padding-bottom: 4px; }
-  .row { padding-top: 4px; padding-bottom: 4px; }
-  .row__text { font-size: 12px; line-height: 1.32; }
-  .row__k,
-  .row__as,
+  .system { padding-top: var(--s3); gap: var(--s2); }
+  .row + .row { margin-top: 5px; }
+  .row__line { font-size: 12px; line-height: 1.35; }
   .row__when,
-  .row__cite,
+  .row__meta,
+  .row__go,
   .row__gauge,
   .call__k,
   .call__cite { font-size: 10px; }
-  .call { padding-top: 5px; }
+  .call { margin-top: var(--s1); }
   .call__track { margin: 3px 0 3px; font-size: 11px; }
-  .call__why { font-size: 12px; line-height: 1.32; }
+  .call__why { font-size: 12px; line-height: 1.35; }
   .system__net { font-size: 12px; }
 }
 
 /* the record keeps the room when the window tightens */
 @media (max-width: 1180px) {
-  :root { --reach-w: 296px; }
-  .row { grid-template-columns: 76px minmax(0, 1fr); }
+  :root { --reach-w: 288px; }
 }
 
 @media (max-width: 980px) {
-  :root { --reach-w: 268px; }
+  :root { --reach-w: 264px; }
   .system { padding-right: var(--s2); }
-  .row__text { font-size: 12px; }
+  .row__line { font-size: 12px; }
 }
 
 @media (max-width: 720px) {

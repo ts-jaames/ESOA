@@ -1,5 +1,5 @@
 /* ─────────────────────────────────────────────────────────────
-   system.js — the right column: the system working.
+   system.js — the right column: the control loop.
 
    Three zones, always in this order and always all three:
    ingestion → reasoning → dispatch, under a two-word loop state.
@@ -13,6 +13,9 @@
      channel it didn't ring and why
    · a `wrote` row points at something visible in the record; if
      it isn't there, it didn't happen
+   · dispatch reads target → state, one line each. The state word
+     is plain (Sent, Suppressed, Queued, Staged, Standby, Written,
+     Armed); the verb underneath it is one of five kinds.
    · no queue counts, no throughput, no scores, no derivation
    ───────────────────────────────────────────────────────────── */
 
@@ -36,24 +39,24 @@
       loop: "passive monitoring",
       in: [
         {
-          src: "field app",
-          text: "Yard scans, with the tape measurement beside each one.",
-          when: "continuous · read 11:40am"
+          src: "Field app",
+          when: "read 11:40am",
+          text: "yard scans, each with the tape measurement beside it."
         },
         {
-          src: "the build",
-          text: "Design changes and shipped work.",
-          when: "continuous · read 5:55pm"
+          src: "The build",
+          when: "read 5:55pm",
+          text: "design changes and shipped work."
         },
         {
-          src: "price book",
-          text: "The client's export — quotes price off their numbers.",
-          when: "nightly · read 2:10am"
+          src: "Price book",
+          when: "nightly · 2:10am",
+          text: "the client's own export. Every quote prices off their numbers."
         },
         {
-          src: "threads",
-          text: "The client thread and the delivery channel.",
-          when: "quiet since Tue"
+          src: "Threads",
+          when: "quiet since Tue",
+          text: "the client thread and the delivery channel."
         }
       ],
       why: [
@@ -71,17 +74,33 @@
       out: [
         {
           verb: "held",
-          to: "slack, email, monday sync",
-          text: "nothing worth an interruption"
+          to: "Slack",
+          state: "Suppressed",
+          text: "nothing crossed a line worth an interruption"
+        },
+        {
+          verb: "scheduled",
+          to: "Email",
+          state: "Queued",
+          text: "into Friday's digest, 4:00pm"
+        },
+        {
+          verb: "held",
+          to: "Monday sync",
+          state: "Standby",
+          text: "no agenda item yet, and a candidate to cancel"
         },
         {
           verb: "wrote",
-          to: "nothing",
-          text: "the record was already current"
+          to: "The record",
+          state: "Unchanged",
+          text: "already current as of 6:02pm",
+          point: "figure"
         },
         {
           verb: "armed",
-          to: "the accuracy bet",
+          to: "Accuracy bet",
+          state: "Armed",
           text: "re-check when a slope scan first lands",
           point: "bets"
         }
@@ -94,17 +113,18 @@
       acting: true,
       in: [
         {
-          src: "email",
+          src: "Email",
           kind: "event",
-          text: "Show metres as well as yards — two Ontario crews work metric.",
-          when: "Tue 13 May · 9:12am",
-          as: "an ask about how a quote displays"
+          who: "crew lead · Tue 13 May, 9:12am",
+          text: "“Show metres as well as yards — two Ontario crews work metric.”",
+          as: "read as an ask about how a quote displays"
         }
       ],
       why: [
         {
           k: "confidence",
-          text: "Nothing it touches is open — not capture, not pricing, not a date.",
+          lead: "What it touches",
+          text: "nothing open. Not capture, not pricing, not a date.",
           gauge: CLEAR,
           lit: 0,
           cite: "open bets · read 13 May",
@@ -112,7 +132,8 @@
         },
         {
           k: "consequence",
-          text: "If we're wrong, a label changes back.",
+          lead: "If we're wrong",
+          text: "a label changes back.",
           gauge: COST,
           lit: 0
         }
@@ -124,25 +145,29 @@
       },
       out: [
         {
-          verb: "wrote",
-          to: "the asks ledger",
-          text: "logged and answered, no reprice",
-          point: "asks"
-        },
-        {
           verb: "sent",
-          to: "the client thread",
+          to: "Client thread",
+          state: "Sent",
           text: "9:14am — it's in the current build"
         },
         {
           verb: "sent",
-          to: "the delivery channel",
+          to: "Delivery channel",
+          state: "Sent",
           text: "one line, no reply needed"
         },
         {
           verb: "held",
-          to: "the monday agenda",
-          text: "nothing to decide"
+          to: "Monday sync",
+          state: "Standby",
+          text: "nothing here to decide"
+        },
+        {
+          verb: "wrote",
+          to: "The asks ledger",
+          state: "Written",
+          text: "logged and answered, no reprice",
+          point: "asks"
         }
       ],
       net: "Absorbed in two minutes, without a person in the loop."
@@ -153,17 +178,18 @@
       acting: true,
       in: [
         {
-          src: "delivery channel",
+          src: "Delivery channel",
           kind: "event",
-          text: "The two Québec crews join the pilot Monday, quoting from the app.",
-          when: "Wed 14 May · 2:20pm",
-          as: "a change to who quotes from the app"
+          who: "delivery lead · Wed 14 May, 2:20pm",
+          text: "two Québec crews join the pilot Monday, quoting from the app.",
+          as: "read as a change to who quotes from the app"
         }
       ],
       why: [
         {
           k: "confidence",
-          text: "It lands on a bet already named: the price book is proved in one region.",
+          lead: "What it touches",
+          text: "a bet already named — the price book is proved in one region.",
           gauge: CLEAR,
           lit: 0,
           cite: "still a bet · scope agreement 10 Mar",
@@ -171,7 +197,8 @@
         },
         {
           k: "consequence",
-          text: "A wrong price in front of a buyer, in one region.",
+          lead: "If we're wrong",
+          text: "a wrong price in front of a buyer, in one region.",
           gauge: COST,
           lit: 1
         }
@@ -184,23 +211,27 @@
       out: [
         {
           verb: "sent",
-          to: "the delivery lead",
-          text: "one question: hold the new crews to the proved price book?"
+          to: "Slack",
+          state: "Sent",
+          text: "one question to the delivery lead — hold the new crews to the proved price book?"
         },
         {
           verb: "held",
           accent: true,
-          to: "the reply",
-          text: "44 minutes, until the boundary came back confirmed"
+          to: "The answer",
+          state: "Held",
+          text: "44 minutes, until the lead confirmed the boundary"
         },
         {
           verb: "sent",
-          to: "the channel",
+          to: "Delivery channel",
+          state: "Sent",
           text: "3:04pm — yes, with the boundary attached"
         },
         {
           verb: "wrote",
-          to: "the record",
+          to: "The record",
+          state: "Written",
           text: "the ask, the bet's boundary, and a decision attributed to the lead",
           point: "decisions"
         }
@@ -213,25 +244,27 @@
       acting: true,
       in: [
         {
-          src: "email",
+          src: "Email",
           kind: "event",
-          text: "Price off the scan, no rep in the loop, before the fall season.",
-          when: "Fri 16 May · 4:47pm",
-          as: "three asks, not one",
+          who: "Dana Kellner · Fri 16 May, 4:47pm",
+          text: "“Price off the scan, no rep in the loop, before the fall season.”",
+          as: "read as three asks, not one",
           point: "inbound"
         }
       ],
       why: [
         {
           k: "confidence",
-          text: "It lands on measurement accuracy — but not which yard types they mean.",
+          lead: "What it touches",
+          text: "measurement accuracy — but not which yard types they mean.",
           gauge: CLEAR,
           lit: 1,
           cite: "capture test · 4 Apr"
         },
         {
           k: "consequence",
-          text: "A wrong price ships to a buyer, and the estimate is a commitment.",
+          lead: "If we're wrong",
+          text: "a wrong price ships to a buyer, and the estimate is a commitment.",
           gauge: COST,
           lit: 2
         }
@@ -243,25 +276,35 @@
       out: [
         {
           verb: "sent",
-          to: "the client thread",
-          text: "4:51pm — received. No number yet; there isn't an honest one."
+          to: "Email",
+          state: "Auto-ack sent",
+          text: "4:51pm — received, and what we're looking at. No number yet; there isn't an honest one."
         },
         {
-          verb: "wrote",
-          to: "the record",
-          text: "three asks with statuses; confidence reassessing",
-          point: "asks"
+          verb: "held",
+          to: "Slack",
+          state: "Suppressed",
+          text: "the weekend buffer holds — nothing here needs Saturday"
         },
         {
           verb: "scheduled",
-          to: "monday review",
-          text: "first item, accuracy evidence attached"
+          to: "Monday review",
+          state: "Staged",
+          text: "first item, with the accuracy evidence attached"
         },
         {
           verb: "held",
           accent: true,
-          to: "the new range",
+          to: "The new range",
+          state: "Held",
           text: "it needs the room, not an algorithm"
+        },
+        {
+          verb: "wrote",
+          to: "The record",
+          state: "Written",
+          text: "three asks with statuses; confidence reassessing",
+          point: "asks"
         }
       ],
       net: "Acknowledged in four minutes on a Friday evening. Nobody's weekend went into it."
@@ -272,15 +315,16 @@
       acting: true,
       in: [
         {
-          src: "the room",
+          src: "The room",
           kind: "event",
-          text: "Monday review transcript — delivery, engineering, sponsor.",
-          when: "Mon 19 May · 10:00–11:25am"
+          who: "delivery, engineering, sponsor",
+          when: "Mon 19 May · 10:00–11:25am",
+          text: "the Monday review transcript."
         },
         {
-          src: "documents",
-          text: "Capture test and scope agreement, pulled into the room.",
-          when: "on file · 10:12am"
+          src: "Documents",
+          when: "on file · 10:12am",
+          text: "capture test and scope agreement, pulled into the room."
         }
       ],
       why: [
@@ -303,25 +347,29 @@
         {
           verb: "wrote",
           accent: true,
-          to: "the envelope",
+          to: "The envelope",
+          state: "Written",
           text: "$180–220K → $260–340K · provisional",
           point: "figure"
         },
         {
           verb: "wrote",
-          to: "the open bets",
+          to: "The open bets",
+          state: "Written",
           text: "accuracy on slope added; unseen regions escalated",
           point: "bets"
         },
         {
           verb: "wrote",
-          to: "the path to close",
+          to: "The path to close",
+          state: "Written",
           text: "three steps, starting 20 May",
           point: "path"
         },
         {
           verb: "held",
-          to: "every channel",
+          to: "Every channel",
+          state: "Held",
           text: "four minutes — it goes out complete or not at all"
         }
       ],
@@ -333,9 +381,9 @@
       acting: true,
       in: [
         {
-          src: "nothing new",
-          text: "The same event, still moving.",
-          when: "Mon 19 May · 11:34am"
+          src: "Nothing new",
+          when: "Mon 19 May · 11:34am",
+          text: "the same event, still moving."
         }
       ],
       why: [
@@ -352,28 +400,33 @@
       out: [
         {
           verb: "sent",
-          to: "slack · delivery lead",
-          text: "the ask is in; revised range is on the record"
+          to: "Slack",
+          state: "Sent",
+          text: "delivery lead — the ask is in, and the revised range is on the record"
         },
         {
           verb: "sent",
-          to: "email · client sponsor",
-          text: "the change, the range, and the plan to close it"
+          to: "Email",
+          state: "Sent",
+          text: "client sponsor — the change, the range, and the plan to close it"
         },
         {
           verb: "scheduled",
-          to: "the monday sync",
+          to: "Monday sync",
+          state: "Staged",
           text: "accuracy validation, first on the agenda"
         },
         {
           verb: "held",
-          to: "the pilot crews",
+          to: "Pilot crews",
+          state: "Suppressed",
           text: "nothing changes for them this week"
         },
         {
           verb: "armed",
-          to: "the same three",
-          text: "they hear the accuracy result without asking"
+          to: "Accuracy result",
+          state: "Armed",
+          text: "the same three hear it without asking"
         }
       ],
       net: "One event, three doorbells, one record. Nobody had to catch the email."
@@ -383,27 +436,27 @@
       loop: "watching the close",
       in: [
         {
-          src: "field app",
+          src: "Field app",
           kind: "event",
-          text: "From 20 May: slope, curve and obstruction scans against tape.",
-          when: "new stream · opened by the plan",
+          when: "new stream · from 20 May",
+          text: "slope, curve and obstruction scans, against tape.",
           point: "path"
         },
         {
-          src: "the rest",
-          text: "Scans, build, price book, threads.",
-          when: "continuous"
+          src: "The rest",
+          when: "continuous",
+          text: "scans, build, price book, threads."
         },
         {
-          src: "waiting on",
-          text: "The client, for yard access in the pilot region.",
-          when: "asked 19 May · 5:38pm"
+          src: "Waiting on",
+          when: "asked 19 May · 5:38pm",
+          text: "the client, for yard access in the pilot region."
         }
       ],
       why: [
         {
           k: "watching",
-          text: "Watching how far a scan sits from the tape off flat ground.",
+          text: "How far a scan sits from the tape off flat ground.",
           cite: "plan · 19 May"
         },
         {
@@ -415,25 +468,29 @@
         {
           verb: "armed",
           accent: true,
-          to: "the estimate",
+          to: "The estimate",
+          state: "Armed",
           text: "re-price when the slope results land",
           point: "figure"
         },
         {
           verb: "armed",
-          to: "the fall selling season",
+          to: "Fall selling season",
+          state: "Armed",
           text: "flag the target if it slips",
           point: "delivery"
         },
         {
           verb: "scheduled",
-          to: "the pending decision",
+          to: "The pending decision",
+          state: "Queued",
           text: "back to review when accuracy reports",
           point: "decisions"
         },
         {
           verb: "held",
-          to: "everyone",
+          to: "Everyone",
+          state: "Standby",
           text: "nothing needs a person until evidence lands"
         }
       ],
@@ -473,6 +530,8 @@
     node.className += " row--" + zone;
     if (d.accent) node.className += " is-accent";
     if (d.kind === "event") node.className += " is-event";
+    if (d.verb) node.setAttribute("data-verb", d.verb);
+    if (d.k) node.setAttribute("data-k", d.k);
     if (d.point) {
       node.setAttribute("type", "button");
       node.addEventListener("click", function () {
@@ -481,24 +540,38 @@
     }
     if (!reduceMotion) node.style.animationDelay = i * 45 + "ms";
 
-    node.appendChild(tag("span", "row__k", d.src || d.verb || d.k || ""));
+    var line = tag("p", "row__line");
 
-    var b = tag("span", "row__body");
-    var line = tag("span", "row__text");
-    if (d.to) {
-      line.appendChild(tag("b", "row__to", d.to));
+    if (zone === "in") {
+      line.appendChild(tag("b", "row__src", d.src));
+      if (d.who || d.when) {
+        line.appendChild(tag("span", "row__when", "(" + (d.who || d.when) + ")"));
+      }
       line.appendChild(document.createTextNode(" — "));
+      line.appendChild(tag("span", "row__text", d.text));
+    } else if (zone === "out") {
+      line.appendChild(tag("b", "row__to", d.to));
+      line.appendChild(tag("span", "row__arrow", "→"));
+      line.appendChild(tag("span", "row__state", d.state));
+      line.appendChild(tag("span", "row__text", " (" + d.text + ")"));
+    } else {
+      if (d.lead) {
+        line.appendChild(tag("b", "row__lead", d.lead));
+        line.appendChild(document.createTextNode(" — "));
+      }
+      line.appendChild(tag("span", "row__text", d.text));
     }
-    line.appendChild(document.createTextNode(d.text));
-    b.appendChild(line);
+    node.appendChild(line);
 
-    if (d.as) b.appendChild(tag("span", "row__as", d.as));
-    if (d.gauge) b.appendChild(gauge(d.gauge, d.lit, "row__gauge"));
-    if (d.when) b.appendChild(tag("span", "row__when", d.when));
-    if (d.cite) b.appendChild(tag("span", "row__cite", d.cite));
-    if (d.point) b.appendChild(tag("span", "row__go", "in the record"));
+    if (d.gauge) node.appendChild(gauge(d.gauge, d.lit, "row__gauge"));
 
-    node.appendChild(b);
+    var meta = [];
+    if (d.as) meta.push(d.as);
+    if (d.who && d.when) meta.push(d.when);
+    if (d.cite) meta.push(d.cite);
+    if (meta.length) node.appendChild(tag("p", "row__meta", meta.join(" · ")));
+    if (d.point) node.appendChild(tag("span", "row__go", "in the record"));
+
     return node;
   }
 
@@ -539,8 +612,6 @@
     while (host.firstChild) host.removeChild(host.firstChild);
 
     ZONES.forEach(function (z, zi) {
-      if (zi) host.appendChild(tag("div", "zone__flow", "↓"));
-
       var section = tag("section", "zone");
       section.setAttribute("data-zone", z.k);
       section.appendChild(tag("h2", "zone__h", z.label));
