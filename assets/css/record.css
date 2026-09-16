@@ -59,6 +59,42 @@
   .stamp.is-arriving::after { animation: none; }
 }
 
+/* an arrival: the same hairline, wherever the record moved */
+.portal__h,
+.fig__head,
+.change__eyebrow,
+.inbound__when {
+  position: relative;
+}
+.portal__h::after,
+.fig__head::after,
+.change__eyebrow::after,
+.inbound__when::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  opacity: 0;
+  pointer-events: none;
+}
+.portal__h.is-arriving::after,
+.fig__head.is-arriving::after,
+.change__eyebrow.is-arriving::after,
+.inbound__when.is-arriving::after {
+  animation: stamp-arrive 1500ms var(--ease) forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .portal__h.is-arriving::after,
+  .fig__head.is-arriving::after,
+  .change__eyebrow.is-arriving::after,
+  .inbound__when.is-arriving::after { animation: none; }
+}
+
 /* ═══════════════════════════════════════════════════════════
    FIGURES
    ═══════════════════════════════════════════════════════════ */
@@ -287,6 +323,14 @@
 }
 .fig__step--now { stroke-dasharray: 3 3; }
 .fig__step--open { stroke: var(--accent); }
+
+.fig__stepdot {
+  fill: var(--ground);
+  stroke: var(--ink-muted);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.fig__stepdot.is-open { fill: var(--accent); stroke: var(--accent); }
 
 .fig__confword {
   font-family: var(--font-mono);
@@ -600,4 +644,29 @@
   font-size: 13.5px;
   color: var(--ink-soft);
   max-width: 58ch;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   NARROW — the record still reads; nothing is cut
+   ═══════════════════════════════════════════════════════════ */
+
+@media (max-width: 860px) {
+  .ledger__meta,
+  .path__out { grid-template-columns: 84px minmax(0, 1fr); }
+}
+
+@media (max-width: 720px) {
+  .truth { columns: 1; }
+  .ledger__meta,
+  .path__out { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .ledger__k,
+  .path__k { margin-top: 6px; }
+  .asks__line,
+  .path__row { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .asks__state,
+  .path__status { text-align: left; }
+  .log__when { width: auto; }
+  .log__why,
+  .log__src { margin-left: 0; }
+  .fig__note { min-height: 0; }
 }

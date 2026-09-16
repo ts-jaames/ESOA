@@ -98,6 +98,26 @@ Open space. Hairlines. No cards.
 - No icon sets, no gradient chrome, no "enterprise blue".
 - Title is one line: **Imaginova**.
 
+### Figures
+Charts are hand-drawn SVG in the same register: hairlines, one accent, mono
+labels, nothing off the 8px grid. **A figure is not a card.** No frames, no
+legends in boxes, no gridlines beyond one or two faint seams for scale.
+
+| Register | Means | Drawn as |
+| --- | --- | --- |
+| **History** | what a review actually left behind | solid fill, solid hairline edges, stepped — it holds until something moved it |
+| **As it stands** | the same value carried forward from today | same fill, **dotted** edges |
+| **Projection** | what would happen if a bet closes | **hairline outline only**, labelled `if accuracy holds` |
+| **The move** | the one thing to look at | the accent — never more than one per figure |
+
+- **No midline on a range band.** A midline is a point estimate we do not have.
+- Confidence is a **categorical step track**, in the order the states occurred.
+  Not a ranked scale, never a curve, never a number.
+- Every figure carries a source with a date, and says `illustrative`.
+- Motion: paths tween under `requestAnimationFrame`; an arrival is a **hairline
+  that fades**, never a flash. `prefers-reduced-motion` jumps to the end state.
+- At most three arrivals per state, so a state change reads as a sweep.
+
 ---
 
 ## Chrome rules
@@ -108,12 +128,32 @@ is the destination; the channels are the doorbells. Do not build N channel UIs.
 | Chrome | When | Looks like |
 | --- | --- | --- |
 | `.nav` | Always | Floating left column. Five plain actions, no numbers. Active = left hairline accent, not a filled chip. |
-| `.portal` | Always | Boundless living record. Pull. Pointable. Always current. Not a document page. Confidence sits with the envelope. |
+| `.portal` | Always | Boundless living record. Pull. Pointable. Always current. Not a document page. Confidence sits with the envelope. **One prioritized scroll** — no tabs, no grid. |
 | `.radiation` | Always; lights in states 4–5 | Hairline rows. Named Slack / email / Monday sync as *reach* — never Slack/Teams branding or chrome. No “Reach” label. |
 | Presenter | <kbd>P</kbd> | Team-only overlay, restyled for dark. Illustrative disclaimer and PARTWAY REAL live here. |
 
 Anti-Auctor: no sharing, approvals, comment threads, branded landing pages.
 If a minute isn't serving change → reprice → confidence, or the radiation, cut it.
+
+### The middle column — order is priority
+
+The scroll order never changes. What changes per state is emphasis and density.
+`SPINE.md` → **What the record holds** is the source for every cell.
+
+1. Where do we stand — envelope, confidence, as-of stamp
+2. How it moved — the range over time, confidence on the same axis
+3. Why it moved — the change item (the inbound email and its triage take this
+   slot before the review)
+4. What's open — the open bets, each with what would close it and what it waits on
+5. What's being done — the path to close, and the range it returns to
+6. What it hits — delivery, against the client's fall selling season target
+7. What's on record — the client's asks, and decisions captured from reviews
+8. Ask — one cited question
+
+Do not add a module that does not answer one of those questions. The record
+should feel like something that takes information in and keeps process moving:
+**ingestion is stamped, every open item says what it waits on, statuses advance
+on their own.** The client never files anything.
 
 ---
 

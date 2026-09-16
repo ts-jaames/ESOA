@@ -199,6 +199,7 @@
       {
         id: "catalogue",
         name: "Catalogue and design sync",
+        short: "Catalogue sync",
         from: "2025-02-14",
         to: "2025-03-12",
         state: "shipped",
@@ -207,6 +208,7 @@
       {
         id: "auth",
         name: "Sign-in, pilot-limited",
+        short: "Sign-in · pilot",
         from: "2025-03-10",
         to: "2025-04-02",
         state: "shipped",
@@ -215,6 +217,7 @@
       {
         id: "capture",
         name: "AR capture · flat yards",
+        short: "AR capture · flat",
         from: "2025-03-10",
         to: "2025-04-04",
         state: "live",
@@ -224,6 +227,7 @@
       {
         id: "accuracy",
         name: "Accuracy on slope, curve, obstruction",
+        short: "Accuracy · slopes",
         from: "2025-05-20",
         to: "2025-06-02",
         state: { rest: "queued", after: "planned" },
@@ -232,6 +236,7 @@
       {
         id: "pricing",
         name: "Pricing off the scan",
+        short: "Pricing off the scan",
         from: "2025-06-03",
         to: "2025-09-01",
         fromRun: 2,
@@ -315,6 +320,17 @@
     }
   ];
 
+  /* What moved when the state advanced. Restraint: three at most, so an
+     arrival reads as a sweep and not a light show. Rest and the reach
+     state move nothing in the record. */
+  var MOVED = {
+    1: [],
+    2: ["figure", "inbound", "asks"],
+    3: ["figure", "change", "bets"],
+    4: [],
+    5: ["figure", "path", "decisions"]
+  };
+
   var STAMP = {
     1: { when: "current as of Thu 15 May · 6:02pm" },
     2: { when: "current as of Fri 16 May · 4:47pm", fresh: "new signal received" },
@@ -329,6 +345,8 @@
     window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   var SVG_NS = "http://www.w3.org/2000/svg";
+
+  var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   function ms(date) {
     return new Date(date + "T00:00:00Z").getTime();
@@ -706,16 +724,19 @@
               ])
           })
         );
+        /* two lines, so the label stays inside the projection's own span */
         g.appendChild(
           el(
             "text",
-            {
-              class: "fig__projlabel",
-              x: px1,
-              y: pl + 15,
-              "text-anchor": "end"
-            },
-            "if accuracy holds · " + range(geo.projection)
+            { class: "fig__projlabel", x: px1, y: ph - 24, "text-anchor": "end" },
+            "if accuracy holds"
+          )
+        );
+        g.appendChild(
+          el(
+            "text",
+            { class: "fig__projlabel", x: px1, y: ph - 10, "text-anchor": "end" },
+            range(geo.projection)
           )
         );
       }
@@ -969,6 +990,27 @@
         );
       });
 
+      /* a mark at every confidence transition, so a brief state still reads */
+      geo.events.forEach(function (e) {
+        if (!e.conf) return;
+        self.markers.appendChild(
+          el("circle", {
+            class: "fig__stepdot",
+            cx: f.X(e.t),
+            cy: f.row(e.conf),
+            r: 2.5
+          })
+        );
+      });
+      self.markers.appendChild(
+        el("circle", {
+          class: "fig__stepdot" + (geo.confNow !== "steady" ? " is-open" : ""),
+          cx: geo.todayX,
+          cy: geo.confNowY,
+          r: 2.5
+        })
+      );
+
       /* current range, in the gutter, tied to the band edges */
       var current = geo.latest;
       [
@@ -1017,8 +1059,12 @@
       this.noteFig.textContent = range(e);
       this.noteTier.textContent = e.tier;
       this.noteSpread.textContent = spread(e) + (e.held ? " · held" : "");
-      this.noteConf.textContent = e.conf ? "confidence " + e.conf : "";
-      this.noteConf.classList.toggle("is-open", !!e.conf && e.conf !== "steady");
+      /* on the latest point, confidence reads as it stands now — the record
+         must not say "provisional" while the surface says "rebuilding" */
+      var conf =
+        this.geo && e === this.geo.latest ? this.geo.confNow : e.conf;
+      this.noteConf.textContent = conf ? "confidence " + conf : "";
+      this.noteConf.classList.toggle("is-open", !!conf && conf !== "steady");
       this.noteMoved.textContent = e.moved;
       this.noteSrc.textContent = e.source;
       this.host.classList.toggle("is-pinned", this.pinned);
@@ -1159,7 +1205,7 @@
           el(
             "text",
             { class: "fig__phase", x: f.padL - 14, y: y + 1, "text-anchor": "end" },
-            r.name
+            f.narrow ? r.short || r.name : r.name
           )
         );
         g.appendChild(
@@ -1245,10 +1291,7 @@
       );
       DELIVERY.ticks.concat([DELIVERY.marker.t]).forEach(function (t) {
         var x = f.X(t);
-        var label = new Date(t + "T00:00:00Z").toLocaleDateString("en-GB", {
-          month: "short",
-          timeZone: "UTC"
-        });
+        var label = MONTHS[new Date(t + "T00:00:00Z").getUTCMonth()];
         var half = 20;
         var clash = placed.some(function (p) {
           return Math.abs(p.x - x) < p.half + half;
@@ -1482,6 +1525,43 @@
     }
   };
 
+  /* ── arrivals: the record says which part of it just moved ──────── */
+
+  var Arrivals = {
+    heads: {},
+
+    collect: function () {
+      var heads = this.heads;
+      Array.prototype.slice
+        .call(document.querySelectorAll("[data-record]"))
+        .forEach(function (section) {
+          var head = section.querySelector(".portal__h, .fig__head, .change__eyebrow, .inbound__when");
+          if (head) heads[section.getAttribute("data-record")] = head;
+        });
+    },
+
+    paint: function (run) {
+      var heads = this.heads;
+      Object.keys(heads).forEach(function (k) {
+        heads[k].classList.remove("is-arriving");
+      });
+      if (this.first) {
+        this.first = false;
+        return;
+      }
+      (MOVED[run] || []).forEach(function (k, i) {
+        var head = heads[k];
+        if (!head) return;
+        void head.offsetWidth;
+        window.setTimeout(function () {
+          head.classList.add("is-arriving");
+        }, i * 90);
+      });
+    },
+
+    first: true
+  };
+
   /* ── wiring ──────────────────────────────────────────────── */
 
   var MODULES = [
@@ -1502,10 +1582,13 @@
     mounted.push(m.mod);
   });
 
+  Arrivals.collect();
+
   function paint(run) {
     mounted.forEach(function (m) {
       m.paint(run);
     });
+    Arrivals.paint(run);
   }
 
   document.addEventListener("portal:state", function (e) {

@@ -36,9 +36,20 @@ Also: deep-link with `#rest`, `#trigger`, `#loop`, `#radiation`,
 
 One tap after the loop: **Ask** returns a cited answer.
 
+Inside the estimate figure: hover or focus it and <kbd>←</kbd> <kbd>→</kbd>
+scrub the review points instead of changing state; click a point to pin it.
+An open bet with `see it on the estimate` points at the moment it moved the
+number.
+
 ---
 
 ## The run
+
+The middle column is **one prioritized scroll** of what the system holds as
+truth — envelope, the range over time with confidence on the same axis, the
+change, the open bets and what would close each, the path to close, delivery
+against the client's own target, their asks, and the decisions on record. The
+order never changes; the emphasis does. See `CLAUDE.md` → *The middle column*.
 
 | # | State | What you see |
 | --- | --- | --- |
@@ -92,7 +103,9 @@ assets/css/tokens.css       brand as variables — colour, 8px scale, type.
 assets/css/base.css         reset, ground, the chip vocabulary (tiers, states).
 assets/css/chrome.css       three columns: left actions, portal, reach; presenter.
 assets/css/beats.css        inbound, ask.
+assets/css/record.css       the middle column: figures, ledgers, the log.
 assets/js/walkthrough.js    data-run / data-loop state machine.
+assets/js/record.js         the record: its data model and its SVG figures.
 assets/js/orbs.js           vanilla mount of vendored thinking-orbs engine.
 assets/vendor/thinking-orbs/  MIT canvas engine (no React at runtime).
 ```

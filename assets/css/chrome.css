@@ -85,8 +85,7 @@
 
 .portal__section { margin-bottom: var(--s6); }
 
-.portal__h,
-.tri__head {
+.portal__h {
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 500;
@@ -246,13 +245,6 @@ body[data-run="5"] .change { display: block; }
 }
 .why-range b { color: var(--ink); font-weight: 600; }
 
-.provenance {
-  margin-top: var(--s2);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--ink-muted);
-}
-
 /* Envelope — numbers in the open */
 .envelope {
   display: flex;
@@ -364,19 +356,6 @@ body[data-run="3"][data-loop="2"] .cap--before,
 body[data-run="3"][data-loop="3"] .cap--before { display: none; }
 body[data-run="3"][data-loop="2"] .cap--after,
 body[data-run="3"][data-loop="3"] .cap--after { display: flex; }
-
-body[data-run="1"] .pending-block,
-body[data-run="2"] .pending-block,
-body[data-run="3"] .pending-block,
-body[data-run="4"] .pending-block { display: none; }
-
-.pending__lede {
-  font-size: 17px;
-  line-height: 1.4;
-  color: var(--ink);
-  margin-bottom: 8px;
-}
-.pending__why { font-size: 13.5px; color: var(--ink-soft); max-width: 58ch; }
 
 .tap {
   appearance: none;
@@ -557,9 +536,6 @@ body[data-run="5"] .doorbell__empty { display: none; }
     grid-template-columns: var(--nav-w) minmax(0, 1fr) var(--reach-w);
   }
   .stage { padding: var(--s3); }
-  .tri { grid-template-columns: 1fr; gap: var(--s4); }
-  .asks__item { grid-template-columns: 1fr; gap: 4px; }
-  .asks__status { text-align: left; }
 }
 
 @media (max-width: 720px) {
