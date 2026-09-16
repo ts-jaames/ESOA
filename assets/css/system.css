@@ -84,6 +84,8 @@
   flex-direction: column;
   gap: var(--s3);
   flex: 0 0 auto;
+  /* the last hold clears the net line when the column has to scroll */
+  padding-bottom: var(--s4);
 }
 
 .zone + .zone {
