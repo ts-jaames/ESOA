@@ -150,7 +150,6 @@
     setHidden(document.querySelector(".inbound"), run !== 2);
     setHidden(document.querySelector(".triage"), run !== 2);
     setHidden(document.querySelector(".change"), run < 3);
-    setHidden(document.querySelector(".pending-block"), run !== 5);
     setHidden(askEl, run < 3);
 
     document.querySelectorAll(".doorbell").forEach(function (d) {

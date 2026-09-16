@@ -186,6 +186,135 @@
     source: { rest: "capture test · 4 Apr", after: "Monday review · 19 May" }
   };
 
+  /* Delivery, against the client's own target. */
+  var DELIVERY = {
+    domain: { from: "2025-02-07", to: "2025-09-15" },
+    ticks: ["2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01"],
+    marker: {
+      t: "2025-09-01",
+      label: "fall selling season",
+      status: { rest: "client target", after: "target held · tight" }
+    },
+    rows: [
+      {
+        id: "catalogue",
+        name: "Catalogue and design sync",
+        from: "2025-02-14",
+        to: "2025-03-12",
+        state: "shipped",
+        status: "shipped 12 Mar"
+      },
+      {
+        id: "auth",
+        name: "Sign-in, pilot-limited",
+        from: "2025-03-10",
+        to: "2025-04-02",
+        state: "shipped",
+        status: "shipped 2 Apr"
+      },
+      {
+        id: "capture",
+        name: "AR capture · flat yards",
+        from: "2025-03-10",
+        to: "2025-04-04",
+        state: "live",
+        carry: true,
+        status: "in market since 4 Apr"
+      },
+      {
+        id: "accuracy",
+        name: "Accuracy on slope, curve, obstruction",
+        from: "2025-05-20",
+        to: "2025-06-02",
+        state: { rest: "queued", after: "planned" },
+        status: { rest: "queued behind the pilot", after: "20 May – ~2 Jun" }
+      },
+      {
+        id: "pricing",
+        name: "Pricing off the scan",
+        from: "2025-06-03",
+        to: "2025-09-01",
+        fromRun: 2,
+        state: { rest: "waiting", after: "waiting" },
+        status: { 2: "received — not scoped", after: "waits on accuracy" },
+        open: true
+      }
+    ]
+  };
+
+  /* The client's asks. Permanent record; statuses advance on their own. */
+  var ASKS = [
+    {
+      id: "sync",
+      ask: "Designs sync across devices",
+      came: "review · 6 Mar",
+      status: "delivered 12 Mar",
+      done: true,
+      from: 1
+    },
+    {
+      id: "signin",
+      ask: "Limit sign-in to pilot users",
+      came: "email · 20 Mar",
+      status: "delivered 2 Apr",
+      done: true,
+      from: 1
+    },
+    {
+      id: "scan",
+      ask: "Price off the scan, no rep in the loop",
+      came: "email · Fri 16 May 4:47pm",
+      status: {
+        2: "scoping — affects estimate",
+        after: "repriced · captured from Monday review",
+        5: "answered · decision pending"
+      },
+      scope: true,
+      from: 2
+    },
+    {
+      id: "season",
+      ask: "Before fall selling season",
+      came: "email · Fri 16 May 4:47pm",
+      status: { 2: "timeline noted", after: "checked against the plan", 5: "target held · tight" },
+      from: 2
+    },
+    {
+      id: "number",
+      ask: "A number by early next week",
+      came: "email · Fri 16 May 4:47pm",
+      status: { 2: "estimate in progress", after: "sent 19 May", 5: "delivered" },
+      from: 2
+    }
+  ];
+
+  /* Decisions, with the review that produced them. */
+  var DECISIONS = [
+    {
+      id: "catalogue-first",
+      when: "10 Mar",
+      decision: "Ship the catalogue before capture.",
+      source: "Captured from scope agreement · 10 Mar",
+      from: 1
+    },
+    {
+      id: "flat-only",
+      when: "4 Apr",
+      decision: "Hold AR capture to flat, rectangular yards until accuracy is tested.",
+      source: "Captured from capture test review · 4 Apr",
+      from: 1
+    },
+    {
+      id: "no-autoprice",
+      when: "19 May",
+      decision: "Don’t run pricing off the scan until measurement accuracy is proven.",
+      why: "Proving accuracy is cheaper than unwinding a wrong price in front of a buyer.",
+      source: "Captured from Monday review · transcript on file",
+      pending: true,
+      from: 5
+    }
+  ];
+
   var STAMP = {
     1: { when: "current as of Thu 15 May · 6:02pm" },
     2: { when: "current as of Fri 16 May · 4:47pm", fresh: "new signal received" },
@@ -240,6 +369,13 @@
 
   function spread(e) {
     return "$" + (e.high - e.low) + "k spread";
+  }
+
+  /* One value, read for a run: a constant, a per-run key, or rest/after. */
+  function pick(value, run) {
+    if (value === null || typeof value !== "object") return value;
+    if (value[run] !== undefined) return value[run];
+    return run >= 3 ? value.after : value.rest;
   }
 
   function lerp(a, b, k) {
@@ -895,6 +1031,245 @@
     }
   };
 
+  /* ── delivery, against the client's target ──────────────────────── */
+
+  var DeliveryFigure = {
+    mount: function (host) {
+      this.host = host;
+      this.widths = {};
+
+      var head = tag("div", "fig__head");
+      head.appendChild(tag("span", "fig__k", "Delivery"));
+      head.appendChild(tag("span", "fig__src", "plan of record · illustrative"));
+      host.appendChild(head);
+
+      var plot = tag("div", "fig__plot fig__plot--delivery");
+      this.svg = el("svg", {
+        class: "fig__svg",
+        role: "img",
+        "aria-label":
+          "Delivery phases against the client's fall selling season target."
+      });
+      plot.appendChild(this.svg);
+      host.appendChild(plot);
+      this.plot = plot;
+
+      if (window.ResizeObserver) {
+        var self = this;
+        var w = plot.clientWidth;
+        new ResizeObserver(function () {
+          if (Math.abs(plot.clientWidth - w) < 2) return;
+          w = plot.clientWidth;
+          self.draw(self.run, true);
+        }).observe(plot);
+      }
+    },
+
+    frame: function (rows) {
+      var w = Math.max(280, this.plot.clientWidth);
+      var narrow = w < 640;
+      var padL = narrow ? 150 : 248;
+      var padR = narrow ? 22 : 40;
+      var top = 30;
+      var rowH = 34;
+      var axisY = top + rows * rowH + 2;
+      var x0 = ms(DELIVERY.domain.from);
+      var x1 = ms(DELIVERY.domain.to);
+      return {
+        w: w,
+        h: axisY + 24,
+        narrow: narrow,
+        padL: padL,
+        padR: padR,
+        top: top,
+        rowH: rowH,
+        axisY: axisY,
+        X: function (t) {
+          var k = (ms(t) - x0) / (x1 - x0);
+          return padL + k * (w - padL - padR);
+        }
+      };
+    },
+
+    draw: function (run, immediate) {
+      if (!run) run = 1;
+      this.run = run;
+      var rows = DELIVERY.rows.filter(function (r) {
+        return !r.fromRun || run >= r.fromRun;
+      });
+      var f = this.frame(rows.length);
+      var self = this;
+
+      this.svg.setAttribute("viewBox", "0 0 " + f.w + " " + f.h);
+      this.svg.setAttribute("height", f.h);
+      this.svg.style.height = f.h + "px";
+      while (this.svg.firstChild) this.svg.removeChild(this.svg.firstChild);
+
+      var g = el("g");
+      this.svg.appendChild(g);
+
+      var todayX = f.X(TODAY[run] || TODAY[1]);
+      var markerX = f.X(DELIVERY.marker.t);
+      var markerHot = run >= 3;
+
+      /* the client's target — the thing delivery is measured against */
+      g.appendChild(
+        el("line", {
+          class: "fig__marker" + (markerHot ? " fig__marker--hot" : ""),
+          x1: markerX,
+          x2: markerX,
+          y1: f.top - 14,
+          y2: f.axisY
+        })
+      );
+      g.appendChild(
+        el(
+          "text",
+          {
+            class: "fig__markerlabel" + (markerHot ? " is-hot" : ""),
+            x: markerX - 7,
+            y: f.top - 16,
+            "text-anchor": "end"
+          },
+          DELIVERY.marker.label + " · " + pick(DELIVERY.marker.status, run)
+        )
+      );
+
+      g.appendChild(
+        el("line", {
+          class: "fig__today",
+          x1: todayX,
+          x2: todayX,
+          y1: f.top - 14,
+          y2: f.axisY
+        })
+      );
+
+      rows.forEach(function (r, i) {
+        var y = f.top + i * f.rowH + 13;
+        var state = pick(r.state, run);
+        var x0 = f.X(r.from);
+        var x1 = f.X(r.to);
+        var h = 7;
+
+        g.appendChild(
+          el("line", { class: "fig__rowline", x1: f.padL, x2: f.w - f.padR, y1: y, y2: y })
+        );
+        g.appendChild(
+          el(
+            "text",
+            { class: "fig__phase", x: f.padL - 14, y: y + 1, "text-anchor": "end" },
+            r.name
+          )
+        );
+        g.appendChild(
+          el(
+            "text",
+            {
+              class: "fig__phasestatus" + (r.open && run >= 3 ? " is-open" : ""),
+              x: f.padL - 14,
+              y: y + 15,
+              "text-anchor": "end"
+            },
+            pick(r.status, run)
+          )
+        );
+
+        /* the bar: solid where it happened, dashed where it is still a plan */
+        var bar = el("path", { class: "fig__bar fig__bar--" + state });
+        g.appendChild(bar);
+        if (r.carry) {
+          g.appendChild(
+            el("line", {
+              class: "fig__carry",
+              x1: x1,
+              x2: todayX,
+              y1: y - h / 2 + 0.5,
+              y2: y - h / 2 + 0.5
+            })
+          );
+        }
+
+        var was = self.widths[r.id];
+        var start = immediate || was === undefined ? x1 : was;
+        var barPath = function (right) {
+          var t = y - h / 2;
+          var b = y + h / 2;
+          if (r.open) {
+            /* open-ended: no right cap, because the duration is not known */
+            return (
+              path([[x0, t], [right, t]]) +
+              " " +
+              path([[x0, b], [right, b]]) +
+              " " +
+              path([[x0, t], [x0, b]])
+            );
+          }
+          return path([[x0, t], [right, t], [right, b], [x0, b]]) + " Z";
+        };
+
+        tween(
+          immediate ? 0 : 520,
+          function (k) {
+            bar.setAttribute("d", barPath(lerp(start, x1, k)));
+          },
+          function () {
+            return self.run === run;
+          }
+        );
+        self.widths[r.id] = x1;
+      });
+
+      g.appendChild(
+        el("line", {
+          class: "fig__axis",
+          x1: f.padL,
+          x2: f.w - f.padR,
+          y1: f.axisY,
+          y2: f.axisY
+        })
+      );
+
+      var placed = [{ x: todayX, half: 28 }];
+      g.appendChild(
+        el(
+          "text",
+          {
+            class: "fig__date fig__date--today",
+            x: todayX,
+            y: f.axisY + 15,
+            "text-anchor": "middle"
+          },
+          "today"
+        )
+      );
+      DELIVERY.ticks.concat([DELIVERY.marker.t]).forEach(function (t) {
+        var x = f.X(t);
+        var label = new Date(t + "T00:00:00Z").toLocaleDateString("en-GB", {
+          month: "short",
+          timeZone: "UTC"
+        });
+        var half = 20;
+        var clash = placed.some(function (p) {
+          return Math.abs(p.x - x) < p.half + half;
+        });
+        if (clash) return;
+        placed.push({ x: x, half: half });
+        g.appendChild(
+          el(
+            "text",
+            { class: "fig__date", x: x, y: f.axisY + 15, "text-anchor": "middle" },
+            label
+          )
+        );
+      });
+    },
+
+    paint: function (run) {
+      this.draw(run, false);
+    }
+  };
+
   /* ── open bets: what would close each, and what it waits on ─────── */
 
   var QUIET_STATES = { bounded: true, open: true };
@@ -1018,6 +1393,67 @@
     }
   };
 
+  /* ── the client's asks: a permanent record, statuses advancing ───── */
+
+  var AskLedger = {
+    mount: function (host) {
+      this.host = host;
+      this.rows = ASKS.map(function (ask) {
+        var row = tag("div", "asks__row" + (ask.scope ? " asks__row--scope" : ""));
+        row.setAttribute("data-ask", ask.id);
+
+        var line = tag("div", "asks__line");
+        line.appendChild(tag("span", "asks__text", ask.ask));
+        var status = tag("span", "asks__state");
+        line.appendChild(status);
+        row.appendChild(line);
+        row.appendChild(tag("p", "asks__came", "picked up from " + ask.came));
+
+        host.appendChild(row);
+        return { ask: ask, row: row, status: status };
+      });
+    },
+
+    paint: function (run) {
+      this.rows.forEach(function (r) {
+        var on = run >= r.ask.from;
+        setHidden(r.row, !on);
+        if (!on) return;
+        r.status.textContent = pick(r.ask.status, run) || "";
+        r.row.classList.toggle("is-done", !!r.ask.done);
+      });
+    }
+  };
+
+  /* ── decisions: what the reviews settled, and what is still pending ── */
+
+  var DecisionLog = {
+    mount: function (host) {
+      this.host = host;
+      this.rows = DECISIONS.map(function (d) {
+        var row = tag("div", "log__row" + (d.pending ? " log__row--pending" : ""));
+
+        var line = tag("div", "log__line");
+        line.appendChild(tag("span", "log__when", d.when));
+        line.appendChild(tag("span", "log__what", d.decision));
+        if (d.pending) line.appendChild(tag("span", "bet-tag", "pending"));
+        row.appendChild(line);
+
+        if (d.why) row.appendChild(tag("p", "log__why", d.why));
+        row.appendChild(tag("p", "log__src", d.source));
+
+        host.appendChild(row);
+        return { data: d, row: row };
+      });
+    },
+
+    paint: function (run) {
+      this.rows.forEach(function (r) {
+        setHidden(r.row, run < r.data.from);
+      });
+    }
+  };
+
   /* ── the as-of stamp: the record says when it was last current ──── */
 
   var Stamp = {
@@ -1052,7 +1488,10 @@
     { sel: "#stamp", mod: Stamp },
     { sel: "#figRange", mod: RangeFigure },
     { sel: "#ledgerBets", mod: BetLedger },
-    { sel: "#pathClose", mod: PathToClose }
+    { sel: "#pathClose", mod: PathToClose },
+    { sel: "#figDelivery", mod: DeliveryFigure },
+    { sel: "#ledgerAsks", mod: AskLedger },
+    { sel: "#logDecisions", mod: DecisionLog }
   ];
   var mounted = [];
 

@@ -416,6 +416,146 @@
 .trace:hover { color: var(--accent); }
 
 /* ═══════════════════════════════════════════════════════════
+   DELIVERY
+   ═══════════════════════════════════════════════════════════ */
+
+.fig__plot--delivery { margin-top: var(--s3); }
+
+.fig__phase {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  fill: var(--ink-soft);
+}
+.fig__phasestatus {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  fill: var(--ink-faint);
+}
+.fig__phasestatus.is-open { fill: var(--accent-deep); }
+
+.fig__bar {
+  fill: rgba(237, 234, 228, 0.10);
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.fig__bar--queued,
+.fig__bar--waiting {
+  fill: none;
+  stroke-dasharray: 3 3;
+}
+.fig__bar--planned { fill: rgba(237, 234, 228, 0.06); }
+.fig__carry {
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  stroke-dasharray: 2 3;
+  vector-effect: non-scaling-stroke;
+}
+
+.fig__marker {
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.fig__marker--hot { stroke: var(--accent); }
+.fig__markerlabel {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  fill: var(--ink-muted);
+}
+.fig__markerlabel.is-hot { fill: var(--accent-deep); }
+
+/* ═══════════════════════════════════════════════════════════
+   THE CLIENT'S ASKS
+   ═══════════════════════════════════════════════════════════ */
+
+.asks__row {
+  padding: 10px 0;
+  border-top: 1px solid var(--rule);
+}
+.asks__row:last-child { border-bottom: 1px solid var(--rule); }
+
+.asks__line {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--s2) var(--s3);
+  align-items: baseline;
+}
+.asks__text {
+  font-size: 14px;
+  color: var(--ink);
+}
+.asks__row--scope .asks__text { font-weight: 500; }
+.asks__row.is-done .asks__text { color: var(--ink-muted); }
+
+.asks__state {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--ink-muted);
+  text-align: right;
+}
+.asks__row--scope .asks__state { color: var(--accent-deep); }
+.asks__row.is-done .asks__state { color: var(--ink-faint); }
+
+.asks__came {
+  margin: 2px 0 0;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DECISIONS ON RECORD
+   ═══════════════════════════════════════════════════════════ */
+
+.log__row {
+  padding: var(--s2) 0;
+  border-top: 1px solid var(--rule);
+}
+.log__row:last-child { border-bottom: 1px solid var(--rule); }
+
+.log__line {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s2);
+  flex-wrap: wrap;
+}
+.log__when {
+  flex: none;
+  width: 72px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.log__what {
+  flex: 1 1 24ch;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+.log__row--pending .log__what {
+  font-size: 15px;
+  color: var(--ink);
+}
+.log__why {
+  margin: 6px 0 0 72px;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  max-width: 54ch;
+}
+.log__src {
+  margin: 4px 0 0 72px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+}
+
+/* ═══════════════════════════════════════════════════════════
    THE PATH TO CLOSE
    ═══════════════════════════════════════════════════════════ */
 
