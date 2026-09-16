@@ -13,14 +13,58 @@ The portal is the **stage**. The change loop is the **show**. Not a portal tour.
 ## Run it
 
 ```
+./serve.sh
+```
+
+It serves its own folder — not whatever directory you happen to be in — finds a
+free port between 8080 and 8090, names the commit it is serving, and prints the
+URL with that commit in the query so a new build is never a cached one. A local
+server is required for the orbs (ES modules). No build step, no install, no
+framework.
+
+Anything equivalent works, if you'd rather:
+
+```
 python3 -m http.server 8080 --bind 127.0.0.1
 ```
 
-Then open `http://127.0.0.1:8080/`. A local server is required for the orbs
-(ES modules). No build step, no install, no framework.
-
 Fonts come from Google Fonts with complete local fallback stacks, so it still
 reads correctly with no network — useful in a client meeting room.
+
+## Seeing the right build
+
+The demo is static, so there are only two ways to end up reading the wrong
+screen: a server rooted in the wrong folder, or a browser handing you a cached
+file. Both look like the work is missing.
+
+**Which build is on screen.** Press <kbd>P</kbd>. The first line of the
+presenter overlay is the commit, branch, time and port `serve.sh` started with.
+`unversioned` means the page wasn't served by `serve.sh` — so nothing can vouch
+for what you're looking at. If the port in the stamp isn't the port in your
+address bar, another server wrote it and you're reading a different folder.
+
+**When a port is already taken.** `serve.sh` says so, names the process, and
+tells you whether the thing answering is this demo or something else, then moves
+to the next port. This is the failure that hides work: a second
+`python3 -m http.server 8080` exits with "Address already in use" while the
+first one keeps answering.
+
+**When the checkout is behind.** `serve.sh` compares `HEAD` against
+`origin/main` and prints the drift. To land on the current build:
+
+```
+git fetch --prune origin
+git checkout main && git reset --hard origin/main
+```
+
+`--prune` matters: merged branches are deleted on the remote, and a checkout
+still sitting on one can't be pulled at all.
+
+**Two tells you can read without the overlay.** The left column has seven
+actions, including *The new number* and *Everyone hears* under *When something
+changes*; and the right column is headed **the control loop**, with dispatch
+reading `Slack → Suppressed (reason)`. A `LOOP STATE` heading with a column of
+keys down the left is an older build.
 
 ## Show it
 

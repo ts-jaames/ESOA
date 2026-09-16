@@ -485,6 +485,12 @@ body[data-run="3"][data-loop="3"] .cap--after { display: flex; }
   text-transform: uppercase;
 }
 .presenter__v { flex: 1 1 auto; min-width: 0; color: var(--ink); }
+.presenter__v--stamp {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+}
 .presenter__status {
   display: inline-block;
   font-size: 12px;
