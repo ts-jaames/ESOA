@@ -4,6 +4,62 @@
    ───────────────────────────────────────────────────────────── */
 
 /* ═══════════════════════════════════════════════════════════
+   THE AS-OF STAMP — the record says when it was last current
+   ═══════════════════════════════════════════════════════════ */
+
+.portal__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s3);
+  flex-wrap: wrap;
+  margin-bottom: var(--s2);
+}
+.portal__head .portal__title { margin-bottom: 0; }
+
+.stamp {
+  position: relative;
+  margin: 0;
+  padding-bottom: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+}
+.stamp__fresh {
+  color: var(--accent-deep);
+}
+.stamp.has-fresh .stamp__fresh::before {
+  content: " · ";
+  color: var(--ink-faint);
+}
+
+/* an arrival is a hairline that fades, not a flash */
+.stamp::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  opacity: 0;
+}
+.stamp.is-arriving::after {
+  animation: stamp-arrive 1400ms var(--ease) forwards;
+}
+@keyframes stamp-arrive {
+  0%   { transform: scaleX(0); opacity: 0; }
+  18%  { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stamp.is-arriving::after { animation: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════
    FIGURES
    ═══════════════════════════════════════════════════════════ */
 
@@ -201,6 +257,45 @@
   fill: var(--ink-muted);
 }
 .fig__date--accent { fill: var(--accent-deep); }
+
+/* ── the confidence track ── */
+
+.fig__rowhead,
+.fig__rowlabel {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  fill: var(--ink-faint);
+}
+.fig__rowhead { fill: var(--ink-muted); }
+.fig__rowlabel { fill: rgba(237, 234, 228, 0.34); }
+.fig__rowlabel.is-active { fill: var(--ink); }
+.fig__rowlabel.is-open { fill: var(--accent-deep); }
+
+.fig__rowline {
+  stroke: rgba(237, 234, 228, 0.05);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.fig__step {
+  fill: none;
+  stroke: var(--ink-muted);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.fig__step--now { stroke-dasharray: 3 3; }
+.fig__step--open { stroke: var(--accent); }
+
+.fig__confword {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.fig__confword.is-open { color: var(--accent-deep); }
 
 /* ── markers ── */
 

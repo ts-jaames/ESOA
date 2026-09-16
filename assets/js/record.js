@@ -18,6 +18,7 @@
       low: 150,
       high: 210,
       tier: "order-of-magnitude",
+      conf: "provisional",
       moved: "Shaped before anyone had walked a yard.",
       source: "kickoff note · 14 Feb",
       from: 1
@@ -29,6 +30,7 @@
       low: 170,
       high: 210,
       tier: "directional",
+      conf: "steady",
       moved: "Scope agreed.",
       source: "scope agreement · 10 Mar",
       from: 1
@@ -40,6 +42,7 @@
       low: 180,
       high: 220,
       tier: "directional",
+      conf: "steady",
       moved: "AR capture held on flat, rectangular yards.",
       source: "capture test · 4 Apr",
       from: 1
@@ -51,6 +54,7 @@
       low: 180,
       high: 220,
       tier: "directional · pending",
+      conf: "reassessing",
       held: true,
       moved: "Change received. Range held for the review.",
       source: "client email · Fri 16 May 4:47pm",
@@ -63,6 +67,7 @@
       low: 260,
       high: 340,
       tier: "directional",
+      conf: "provisional",
       accent: true,
       moved: "Pricing off the scan leans on measurement accuracy — untested on slopes, curves, obstructions.",
       source: "Monday review · 19 May",
@@ -93,6 +98,25 @@
   var DOMAIN = { from: "2025-02-07", to: "2025-06-30" };
   var Y_DOMAIN = { low: 140, high: 360 };
   var Y_TICKS = [200, 300];
+
+  /* Confidence is a coarse state, never a score. The rows run in the order
+     the states occur — this is not a ranked scale. */
+  var CONF_ROWS = ["steady", "reassessing", "provisional", "rebuilding"];
+  var CONF_NOW = {
+    1: "steady",
+    2: "reassessing",
+    3: "provisional",
+    4: "provisional",
+    5: "rebuilding"
+  };
+
+  var STAMP = {
+    1: { when: "current as of Thu 15 May · 6:02pm" },
+    2: { when: "current as of Fri 16 May · 4:47pm", fresh: "new signal received" },
+    3: { when: "current as of Mon 19 May · 11:30am", fresh: "estimate re-issued" },
+    4: { when: "current as of Mon 19 May · 11:34am", fresh: "sent to everyone on the engagement" },
+    5: { when: "current as of Mon 19 May · 5:40pm", fresh: "plan attached" }
+  };
 
   /* ── helpers ─────────────────────────────────────────────── */
 
@@ -201,6 +225,7 @@
       this.noteFig = tag("span", "fig__figure");
       this.noteTier = tag("span", "tier");
       this.noteSpread = tag("span", "fig__spread");
+      this.noteConf = tag("span", "fig__confword");
       this.noteMoved = tag("p", "fig__moved");
       this.noteSrc = tag("p", "fig__prov");
 
@@ -209,6 +234,7 @@
       line.appendChild(this.noteFig);
       line.appendChild(this.noteTier);
       line.appendChild(this.noteSpread);
+      line.appendChild(this.noteConf);
       note.appendChild(line);
       note.appendChild(this.noteMoved);
       note.appendChild(this.noteSrc);
@@ -268,16 +294,17 @@
     frame: function () {
       var w = Math.max(280, this.plot.clientWidth);
       var narrow = w < 520;
-      var padL = narrow ? 38 : 48;
+      var padL = narrow ? 76 : 96;
       var padR = narrow ? 52 : 64;
       var top = 18;
       var bandH = narrow ? 150 : 196;
       var axisY = top + bandH;
-      var h = axisY + 26;
+      var rowH = 17;
+      var trackY = axisY + 38;
+      var h = trackY + rowH * CONF_ROWS.length + 6;
 
       var x0 = ms(DOMAIN.from);
       var x1 = ms(DOMAIN.to);
-      var self = this;
       return {
         w: w,
         h: h,
@@ -286,6 +313,11 @@
         padR: padR,
         top: top,
         axisY: axisY,
+        rowH: rowH,
+        trackY: trackY,
+        row: function (conf) {
+          return trackY + CONF_ROWS.indexOf(conf) * rowH;
+        },
         X: function (t) {
           var k = (ms(t) - x0) / (x1 - x0);
           return padL + k * (w - padL - padR);
@@ -336,6 +368,20 @@
             ]
           : null;
 
+      /* the confidence track — coarse states, in the order they occurred.
+         An intra-day move has no width, so it reads as the present instead. */
+      var steps = [];
+      events.forEach(function (e, i) {
+        var a = f.X(e.t);
+        var b = i + 1 < events.length ? f.X(events[i + 1].t) : todayX;
+        if (b - a < 1) return;
+        var y = f.row(e.conf);
+        if (steps.length) steps.push([a, steps[steps.length - 1][1]], [a, y]);
+        steps.push([a, y], [b, y]);
+      });
+
+      var confNow = CONF_NOW[run] || "steady";
+
       return {
         run: run,
         events: events,
@@ -349,7 +395,11 @@
         jump: jump,
         accent: !!latest.accent,
         held: latest.held ? todayX : null,
-        projection: projection
+        projection: projection,
+        steps: steps,
+        confNow: confNow,
+        confNowY: f.row(confNow),
+        confFromY: steps.length ? steps[steps.length - 1][1] : f.row(confNow)
       };
     },
 
@@ -493,6 +543,44 @@
         );
       }
 
+      /* confidence — a coarse state on the same axis as the range */
+      g.appendChild(
+        el(
+          "text",
+          { class: "fig__rowhead", x: f.padL - 10, y: f.trackY - 13, "text-anchor": "end" },
+          "confidence"
+        )
+      );
+      CONF_ROWS.forEach(function (conf) {
+        var y = f.row(conf);
+        g.appendChild(
+          el("line", { class: "fig__rowline", x1: f.padL, x2: f.w - f.padR, y1: y, y2: y })
+        );
+        var active = conf === geo.confNow;
+        g.appendChild(
+          el(
+            "text",
+            {
+              class:
+                "fig__rowlabel" +
+                (active ? " is-active" : "") +
+                (active && conf !== "steady" ? " is-open" : ""),
+              x: f.padL - 10,
+              y: y + 3.5,
+              "text-anchor": "end"
+            },
+            conf
+          )
+        );
+      });
+
+      this.steps = el("path", { class: "fig__step" });
+      this.stepNow = el("path", {
+        class: "fig__step fig__step--now" + (geo.confNow !== "steady" ? " fig__step--open" : "")
+      });
+      g.appendChild(this.steps);
+      g.appendChild(this.stepNow);
+
       this.markers = el("g", { class: "fig__markers" });
       g.appendChild(this.markers);
       this.labels = el("g", { class: "fig__labels" });
@@ -513,6 +601,9 @@
       var nowBand = this.nowBand;
       var nowEdge = this.nowEdge;
       var jumpEl = this.jump;
+      var steps = this.steps;
+      var stepNow = this.stepNow;
+      var confFrom = previous && !immediate ? previous.confNowY : geo.confNowY;
       var token = (this.token || 0) + 1;
       this.token = token;
 
@@ -540,6 +631,16 @@
                 .join(" ")
             );
           }
+          steps.setAttribute("d", geo.steps.length ? path(geo.steps) : "");
+          var cy = lerp(confFrom, geo.confNowY, k);
+          stepNow.setAttribute(
+            "d",
+            path([
+              [geo.todayX, geo.confFromY],
+              [geo.todayX, cy],
+              [geo.plotRight, cy]
+            ])
+          );
           if (k === 1) self.decorate();
         },
         function () {
@@ -683,6 +784,8 @@
       this.noteFig.textContent = range(e);
       this.noteTier.textContent = e.tier;
       this.noteSpread.textContent = spread(e) + (e.held ? " · held" : "");
+      this.noteConf.textContent = e.conf ? "confidence " + e.conf : "";
+      this.noteConf.classList.toggle("is-open", !!e.conf && e.conf !== "steady");
       this.noteMoved.textContent = e.moved;
       this.noteSrc.textContent = e.source;
       this.host.classList.toggle("is-pinned", this.pinned);
@@ -695,9 +798,40 @@
     }
   };
 
+  /* ── the as-of stamp: the record says when it was last current ──── */
+
+  var Stamp = {
+    mount: function (host) {
+      this.host = host;
+      this.when = tag("span", "stamp__when");
+      this.fresh = tag("span", "stamp__fresh");
+      host.appendChild(this.when);
+      host.appendChild(this.fresh);
+      host.setAttribute("aria-live", "polite");
+    },
+
+    paint: function (run) {
+      var s = STAMP[run] || STAMP[1];
+      var moved = this.when.textContent && this.when.textContent !== s.when;
+      this.when.textContent = s.when;
+      this.fresh.textContent = s.fresh || "";
+      this.host.classList.toggle("has-fresh", !!s.fresh);
+
+      if (!moved) return;
+      var host = this.host;
+      host.classList.remove("is-arriving");
+      /* restart the hairline so a repeat visit still reads as an arrival */
+      void host.offsetWidth;
+      host.classList.add("is-arriving");
+    }
+  };
+
   /* ── wiring ──────────────────────────────────────────────── */
 
-  var MODULES = [{ sel: "#figRange", mod: RangeFigure }];
+  var MODULES = [
+    { sel: "#stamp", mod: Stamp },
+    { sel: "#figRange", mod: RangeFigure }
+  ];
   var mounted = [];
 
   MODULES.forEach(function (m) {
