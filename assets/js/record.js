@@ -89,6 +89,7 @@
 
   var TODAY = {
     1: "2025-05-15",
+    "1a": "2025-05-13",
     2: "2025-05-16",
     3: "2025-05-19",
     4: "2025-05-19",
@@ -266,6 +267,18 @@
       from: 1
     },
     {
+      id: "metric",
+      ask: "Show metres alongside yards",
+      came: "email · Tue 13 May 9:12am",
+      status: {
+        "1a": "absorbed 9:14am — the range held",
+        rest: "absorbed 13 May — the range held",
+        after: "in the build"
+      },
+      done: true,
+      from: 1
+    },
+    {
       id: "scan",
       ask: "Price off the scan, no rep in the loop",
       came: "email · Fri 16 May 4:47pm",
@@ -325,6 +338,7 @@
      state move nothing in the record. */
   var MOVED = {
     1: [],
+    "1a": ["asks"],
     2: ["figure", "inbound", "asks"],
     3: ["figure", "change", "bets"],
     4: [],
@@ -333,6 +347,7 @@
 
   var STAMP = {
     1: { when: "current as of Thu 15 May · 6:02pm" },
+    "1a": { when: "current as of Tue 13 May · 9:14am", fresh: "absorbed without repricing" },
     2: { when: "current as of Fri 16 May · 4:47pm", fresh: "new signal received" },
     3: { when: "current as of Mon 19 May · 11:30am", fresh: "estimate re-issued" },
     4: { when: "current as of Mon 19 May · 11:34am", fresh: "sent to everyone on the engagement" },
@@ -389,9 +404,24 @@
     return "$" + (e.high - e.low) + "k spread";
   }
 
+  /* A beat is a moment inside a run: the record holds the same truth, read at
+     a different minute. "Absorbs" reads run 1 on 13 May, under the key 1a. */
+  var beat = "";
+
+  function key(run) {
+    return beat === "absorbs" ? "1a" : run;
+  }
+
+  function keyed(table, run) {
+    var k = key(run);
+    return table[k] !== undefined ? table[k] : table[run];
+  }
+
   /* One value, read for a run: a constant, a per-run key, or rest/after. */
   function pick(value, run) {
     if (value === null || typeof value !== "object") return value;
+    var k = key(run);
+    if (value[k] !== undefined) return value[k];
     if (value[run] !== undefined) return value[run];
     return run >= 3 ? value.after : value.rest;
   }
@@ -585,7 +615,7 @@
         return e.from <= run;
       });
       var latest = events[events.length - 1];
-      var todayX = f.X(TODAY[run] || TODAY[1]);
+      var todayX = f.X(keyed(TODAY, run) || TODAY[1]);
       var plotRight = f.w - f.padR;
       var projection = run >= PROJECTION.from ? PROJECTION : null;
       /* the range as it stands runs forward from today; a projection, if the
@@ -1154,7 +1184,7 @@
       var g = el("g");
       this.svg.appendChild(g);
 
-      var todayX = f.X(TODAY[run] || TODAY[1]);
+      var todayX = f.X(keyed(TODAY, run) || TODAY[1]);
       var markerX = f.X(DELIVERY.marker.t);
       var markerHot = run >= 3;
 
@@ -1510,7 +1540,7 @@
     },
 
     paint: function (run) {
-      var s = STAMP[run] || STAMP[1];
+      var s = keyed(STAMP, run) || STAMP[1];
       var moved = this.when.textContent && this.when.textContent !== s.when;
       this.when.textContent = s.when;
       this.fresh.textContent = s.fresh || "";
@@ -1549,7 +1579,7 @@
         this.first = false;
         return;
       }
-      (MOVED[run] || []).forEach(function (k, i) {
+      (keyed(MOVED, run) || []).forEach(function (k, i) {
         var head = heads[k];
         if (!head) return;
         void head.offsetWidth;
@@ -1557,6 +1587,14 @@
           head.classList.add("is-arriving");
         }, i * 90);
       });
+    },
+
+    flash: function (name) {
+      var head = this.heads[name];
+      if (!head) return;
+      head.classList.remove("is-arriving");
+      void head.offsetWidth;
+      head.classList.add("is-arriving");
     },
 
     first: true
@@ -1584,7 +1622,8 @@
 
   Arrivals.collect();
 
-  function paint(run) {
+  function paint(run, nextBeat) {
+    beat = nextBeat || "";
     mounted.forEach(function (m) {
       m.paint(run);
     });
@@ -1592,8 +1631,24 @@
   }
 
   document.addEventListener("portal:state", function (e) {
-    paint((e.detail && e.detail.run) || 1);
+    var d = e.detail || {};
+    paint(d.run || 1, d.beat);
   });
 
-  paint(Number(document.body.getAttribute("data-run")) || 1);
+  /* the band asks the record to show what a dispatch wrote */
+  document.addEventListener("record:point", function (e) {
+    var name = e.detail && e.detail.section;
+    var host = name && document.querySelector('[data-record="' + name + '"]');
+    if (!host) return;
+    host.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "center"
+    });
+    Arrivals.flash(name);
+  });
+
+  paint(
+    Number(document.body.getAttribute("data-run")) || 1,
+    document.body.getAttribute("data-beat")
+  );
 })();
