@@ -19,6 +19,15 @@
 (function () {
   "use strict";
 
+  /* The barometer. Two coarse readings of an arriving change, three
+     options each, one lit — and the route those two readings decide.
+     Never a score, never a position on a chart. The confidence here
+     is about the ask ("what it touches"), and it must never be read
+     as the envelope's confidence state. */
+  var CLEAR = ["clear", "partly clear", "unclear"];
+  var COST = ["reversible", "costly", "commitment"];
+  var ROUTES = ["absorbed", "one confirmation", "the room"];
+
   /* Loop state: two plain words for what the system is doing.
      `acting` lights the word, the way a channel lights when it
      carries something. */
@@ -88,31 +97,31 @@
           src: "email",
           kind: "event",
           text: "Show metres as well as yards — two Ontario crews work metric.",
-          when: "Tue 13 May · 9:12am"
-        },
-        {
-          src: "the rest",
-          text: "Scans, build, price book — still reading.",
-          when: "continuous"
+          when: "Tue 13 May · 9:12am",
+          as: "an ask about how a quote displays"
         }
       ],
       why: [
         {
-          k: "read",
-          text: "Read as an ask about how a quote displays.",
-          cite: "client thread · 13 May"
+          k: "confidence",
+          text: "Nothing it touches is open — not capture, not pricing, not a date.",
+          gauge: CLEAR,
+          lit: 0,
+          cite: "open bets · read 13 May",
+          point: "bets"
         },
         {
-          k: "checked",
-          text: "Capture, pricing, the open bets, the dates: touches none."
-        },
-        {
-          k: "rule",
-          accent: true,
-          text: "An ask that touches no open bet and no date is absorbed.",
-          cite: "range held · $180–220K · steady"
+          k: "consequence",
+          text: "If we're wrong, a label changes back.",
+          gauge: COST,
+          lit: 0
         }
       ],
+      call: {
+        lit: 0,
+        text: "Clear and reversible is absorbed inside the range.",
+        cite: "range held · $180–220K · steady"
+      },
       out: [
         {
           verb: "wrote",
@@ -139,6 +148,66 @@
       net: "Absorbed in two minutes, without a person in the loop."
     },
 
+    confirms: {
+      loop: "confirming",
+      acting: true,
+      in: [
+        {
+          src: "delivery channel",
+          kind: "event",
+          text: "The two Québec crews join the pilot Monday, quoting from the app.",
+          when: "Wed 14 May · 2:20pm",
+          as: "a change to who quotes from the app"
+        }
+      ],
+      why: [
+        {
+          k: "confidence",
+          text: "It lands on a bet already named: the price book is proved in one region.",
+          gauge: CLEAR,
+          lit: 0,
+          cite: "still a bet · scope agreement 10 Mar",
+          point: "bets"
+        },
+        {
+          k: "consequence",
+          text: "A wrong price in front of a buyer, in one region.",
+          gauge: COST,
+          lit: 1
+        }
+      ],
+      call: {
+        lit: 1,
+        text: "Clear and costly takes one person, not the room.",
+        cite: "range held · $180–220K · steady"
+      },
+      out: [
+        {
+          verb: "sent",
+          to: "the delivery lead",
+          text: "one question: hold the new crews to the proved price book?"
+        },
+        {
+          verb: "held",
+          accent: true,
+          to: "the reply",
+          text: "44 minutes, until the boundary came back confirmed"
+        },
+        {
+          verb: "sent",
+          to: "the channel",
+          text: "3:04pm — yes, with the boundary attached"
+        },
+        {
+          verb: "wrote",
+          to: "the record",
+          text: "the ask, the bet's boundary, and a decision attributed to the lead",
+          point: "decisions"
+        }
+      ],
+      net: "Answered on one confirmation. The range never moved, and the boundary is on the record."
+    },
+
     trigger: {
       loop: "strategic hold",
       acting: true,
@@ -148,30 +217,29 @@
           kind: "event",
           text: "Price off the scan, no rep in the loop, before the fall season.",
           when: "Fri 16 May · 4:47pm",
+          as: "three asks, not one",
           point: "inbound"
-        },
-        {
-          src: "the rest",
-          text: "Scans, build, price book — still reading.",
-          when: "continuous"
         }
       ],
       why: [
         {
-          k: "read",
-          text: "Read as three asks, not one.",
-          cite: "client email · 16 May"
+          k: "confidence",
+          text: "It lands on measurement accuracy — but not which yard types they mean.",
+          gauge: CLEAR,
+          lit: 1,
+          cite: "capture test · 4 Apr"
         },
         {
-          k: "checked",
-          text: "No rep means no catch on a bad measurement.",
-          cite: "accuracy · untested off flat ground"
-        },
-        {
-          k: "rule",
-          text: "An ask that lands on an open bet is never absorbed."
+          k: "consequence",
+          text: "A wrong price ships to a buyer, and the estimate is a commitment.",
+          gauge: COST,
+          lit: 2
         }
       ],
+      call: {
+        lit: 2,
+        text: "A commitment, or unclear scope, goes to the room."
+      },
       out: [
         {
           verb: "sent",
@@ -424,11 +492,34 @@
     line.appendChild(document.createTextNode(d.text));
     b.appendChild(line);
 
+    if (d.as) b.appendChild(tag("span", "row__as", d.as));
+    if (d.gauge) b.appendChild(gauge(d.gauge, d.lit, "row__gauge"));
     if (d.when) b.appendChild(tag("span", "row__when", d.when));
     if (d.cite) b.appendChild(tag("span", "row__cite", d.cite));
     if (d.point) b.appendChild(tag("span", "row__go", "in the record"));
 
     node.appendChild(b);
+    return node;
+  }
+
+  /* three coarse options, one lit — the two not taken stay readable */
+  function gauge(options, lit, cls) {
+    var track = tag("span", cls);
+    options.forEach(function (word, i) {
+      var o = tag("span", "gauge__o" + (i === lit ? " is-lit" : ""), word);
+      if (i === lit) o.setAttribute("aria-current", "true");
+      track.appendChild(o);
+    });
+    return track;
+  }
+
+  /* what the two readings decided this change needs */
+  function call(d) {
+    var node = tag("div", "call");
+    node.appendChild(tag("span", "call__k", "What it needs"));
+    node.appendChild(gauge(ROUTES, d.lit, "call__track"));
+    node.appendChild(tag("span", "call__why", d.text));
+    if (d.cite) node.appendChild(tag("span", "call__cite", d.cite));
     return node;
   }
 
@@ -458,6 +549,9 @@
       rows.forEach(function (d, i) {
         section.appendChild(row(z.k, d, i + zi));
       });
+
+      /* the route closes the reasoning, when something arrived to route */
+      if (z.k === "why" && state.call) section.appendChild(call(state.call));
 
       host.appendChild(section);
     });

@@ -26,13 +26,13 @@ reads correctly with no network — useful in a client meeting room.
 
 | Key | Does |
 | --- | --- |
-| Left column | six actions — Resting, Absorbs, The Friday email, The change, Everyone hears, After |
+| Left column | seven actions — Resting, Absorbs, Confirms, The Friday email, The change, Everyone hears, After |
 | <kbd>←</kbd> <kbd>→</kbd> | previous / next state |
 | <kbd>Home</kbd> <kbd>End</kbd> | first / last state |
 | <kbd>P</kbd> | presenter overlay — **team only** |
 
-Also: deep-link with `#rest`, `#absorbs`, `#trigger`, `#loop`, `#radiation`,
-`#rest-now`. Scroll inside a view does not change the view.
+Also: deep-link with `#rest`, `#absorbs`, `#confirms`, `#trigger`, `#loop`,
+`#radiation`, `#rest-now`. Scroll inside a view does not change the view.
 
 One tap after the loop: **Ask** returns a cited answer.
 
@@ -45,6 +45,26 @@ middle column to the thing that moved.
 ---
 
 ## The run
+
+### The barometer — what a change needs
+
+Every arriving change is read on two coarse readings, and those decide who
+touches it. Three routes, never two:
+
+| Confidence — what it touches | Consequence — if we're wrong | What it needs |
+| --- | --- | --- |
+| clear | reversible | **absorbed** — nobody |
+| clear | costly, recoverable if a boundary holds | **one confirmation** — one person |
+| partly clear or unclear | anything | **the room** |
+| anything | **a commitment** — the range, a date, what the estimate leans on | **the room** |
+
+Each reading shows all three options with one lit, so the roads not taken stay
+visible: a system that shows only the route it took reads as a rule. Three
+avenues in — an email, a message in a channel, a transcript from the room —
+and the same reading in all three.
+
+The barometer's confidence is about **the ask**, labelled *what it touches*.
+It is not the envelope's confidence state, and the two never share a device.
 
 The right column is **the system working**: a two-word loop state, then
 ingestion → reasoning → dispatch. Four dispatch verbs and no others — `sent`,
@@ -61,7 +81,8 @@ order never changes; the emphasis does. See `CLAUDE.md` → *The middle column*.
 | # | State | What you see |
 | --- | --- | --- |
 | 1 | Resting | Portal at rest. Envelope `$180–220k` directional. Confidence **Steady** (orb tag). Measurement accuracy already in still-a-bet. The band reads continuously and sends nothing. |
-| 1a | **Absorbs** | A real change — metres alongside yards — closes itself. The band states the rule that absorbed it; the range holds and confidence does not move. In the record, only the asks ledger and the stamp move. |
+| 1a | **Absorbs** | A real change — metres alongside yards — closes itself. Clear and reversible, so nobody touches it. The range holds and confidence does not move; in the record, only the asks ledger and the stamp move. |
+| 1b | **Confirms** | Québec crews join the pilot. Clear but costly, so it takes **one confirmation**: one question to the delivery lead, the client reply held 44 minutes until it comes back. The range still doesn't move, and the boundary lands on the record as a dated, attributed decision. |
 | 2 | The Friday email | Inbound words, then received / triaged asks / what it touches (risk terms) / confidence **Reassessing**. New range held, **awaiting Monday review**. |
 | 3 | **The change** ★ | One change item, captured from Monday review. Estimate **moves** `$180–220k` → `$260–340k` (range *widens*). Confidence **Provisional** (reason once, in the item). Opened bets tagged `[new]` / `[escalated]` in still-a-bet. |
 | 4 | Everyone hears | Dispatch carries it: Slack, email, the Monday sync — and a hold on the pilot crews. Confidence stays **Provisional**. |
@@ -93,9 +114,10 @@ behind <kbd>P</kbd>, along with levels, capabilities, and the L-move.
   exists, nothing real behind it. Not “nearly working.”
 - **The L-move is team-only.** Speak it from <kbd>P</kbd>. The surface never
   names levels, capabilities, or caliber.
-- **Absorbs and the Friday email are the same machinery.** One ask touches no
-  open bet, so it closes itself; one lands on an open bet, so it goes to the
-  room. Narrate the threshold, not two behaviours.
+- **Absorbs, Confirms and the Friday email are the same machinery.** One
+  reading of two axes routes all three. Narrate the barometer, not three
+  behaviours — and note that the middle rung exists, because "absorb or
+  meeting" is a switch, not judgment.
 - **The right column is represented, not integrated.** Nothing in it is claimed
   live. The stamps are illustrative; the shape of what it reads is real.
 

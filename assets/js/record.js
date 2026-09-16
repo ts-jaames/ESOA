@@ -90,6 +90,7 @@
   var TODAY = {
     1: "2025-05-15",
     "1a": "2025-05-13",
+    "1b": "2025-05-14",
     2: "2025-05-16",
     3: "2025-05-19",
     4: "2025-05-19",
@@ -130,7 +131,7 @@
       id: "pricing",
       name: "Pricing in unseen regions",
       detail: {
-        rest: "The price book is proved in the pilot region only.",
+        rest: "The price book is proved in the pilot region only. The Québec crews quote from it under a boundary confirmed 14 May.",
         after: "Pricing off the scan would carry the price book into regions it hasn't been checked against."
       },
       state: { 1: "open", 2: "open", 3: "escalated", 4: "escalated", 5: "escalated" },
@@ -279,6 +280,18 @@
       from: 1
     },
     {
+      id: "quebec",
+      ask: "Add the Québec crews to the pilot",
+      came: "delivery channel · Wed 14 May 2:20pm",
+      status: {
+        "1b": "answered 3:04pm — confirmed by the delivery lead",
+        rest: "answered 14 May — confirmed by the delivery lead",
+        after: "in the pilot"
+      },
+      done: true,
+      from: 1
+    },
+    {
       id: "scan",
       ask: "Price off the scan, no rep in the loop",
       came: "email · Fri 16 May 4:47pm",
@@ -323,6 +336,13 @@
       from: 1
     },
     {
+      id: "quebec-boundary",
+      when: "14 May",
+      decision: "New pilot crews quote from the proved price book until regional data lands.",
+      source: "Confirmed by the delivery lead · delivery channel · 14 May",
+      from: 1
+    },
+    {
       id: "no-autoprice",
       when: "19 May",
       decision: "Don’t run pricing off the scan until measurement accuracy is proven.",
@@ -339,6 +359,7 @@
   var MOVED = {
     1: [],
     "1a": ["asks"],
+    "1b": ["asks", "bets", "decisions"],
     2: ["figure", "inbound", "asks"],
     3: ["figure", "change", "bets"],
     4: [],
@@ -348,6 +369,7 @@
   var STAMP = {
     1: { when: "current as of Thu 15 May · 6:02pm" },
     "1a": { when: "current as of Tue 13 May · 9:14am", fresh: "absorbed without repricing" },
+    "1b": { when: "current as of Wed 14 May · 3:04pm", fresh: "answered on one confirmation" },
     2: { when: "current as of Fri 16 May · 4:47pm", fresh: "new signal received" },
     3: { when: "current as of Mon 19 May · 11:30am", fresh: "estimate re-issued" },
     4: { when: "current as of Mon 19 May · 11:34am", fresh: "sent to everyone on the engagement" },
@@ -408,8 +430,10 @@
      a different minute. "Absorbs" reads run 1 on 13 May, under the key 1a. */
   var beat = "";
 
+  var BEAT_KEY = { absorbs: "1a", confirms: "1b" };
+
   function key(run) {
-    return beat === "absorbs" ? "1a" : run;
+    return BEAT_KEY[beat] || run;
   }
 
   function keyed(table, run) {

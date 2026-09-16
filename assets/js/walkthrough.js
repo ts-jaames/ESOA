@@ -34,6 +34,17 @@
       why: "The other half of the claim. A system that escalates everything is a tripwire, not judgment. Narrate: no re-level, so no reprice."
     },
     {
+      id: "confirms",
+      label: "Confirms",
+      run: 1,
+      beat: "confirms",
+      conf: "steady",
+      tool: "channel (ingest) → change runner (routes, no re-level) → artifact agent",
+      status: "FAKED",
+      honesty: "The hold is a real hold: the reply waited on a person, and the wait is stamped. Attributed to a role, not to the system. No reprice, no re-level.",
+      why: "The middle rung. Consequence rose but clarity held, so it took one person instead of the room — and that is not a level move."
+    },
+    {
       id: "trigger",
       label: "The Friday email",
       run: 2,
