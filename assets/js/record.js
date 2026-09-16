@@ -1644,7 +1644,9 @@
       behavior: reduceMotion ? "auto" : "smooth",
       block: "center"
     });
-    Arrivals.flash(name);
+    /* the hairline marks the section once it has arrived, not while it travels */
+    if (reduceMotion) Arrivals.flash(name);
+    else window.setTimeout(function () { Arrivals.flash(name); }, 420);
   });
 
   paint(
