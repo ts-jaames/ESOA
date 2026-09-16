@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/chrome.css">
 <link rel="stylesheet" href="assets/css/beats.css">
+<link rel="stylesheet" href="assets/css/record.css">
 </head>
 <body data-run="1" data-loop="0" data-conf="steady">
 
@@ -64,6 +65,10 @@
         </span>
         <p class="confidence__note" id="confNote" hidden></p>
       </div>
+    </section>
+
+    <section class="portal__section" aria-label="Estimate over time">
+      <div class="fig" id="figRange" data-fig="range"></div>
     </section>
 
     <article class="change" hidden>
@@ -241,6 +246,7 @@
 </aside>
 
 <script type="module" src="assets/js/orbs.js"></script>
+<script src="assets/js/record.js"></script>
 <script src="assets/js/walkthrough.js"></script>
 </body>
 </html>

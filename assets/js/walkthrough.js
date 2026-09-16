@@ -206,6 +206,13 @@
     paintPresenter(askOpen && current >= 2 ? ASK_META : run);
     if (stage) stage.scrollTop = 0;
 
+    /* the record listens; the state machine stays the only source of state */
+    document.dispatchEvent(
+      new CustomEvent("portal:state", {
+        detail: { run: current + 1, conf: body.getAttribute("data-conf") }
+      })
+    );
+
     if (!skipHash && run.id) {
       try { history.replaceState(null, "", "#" + run.id); }
       catch (err) { /* sandboxed frame */ }

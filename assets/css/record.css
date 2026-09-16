@@ -1,0 +1,225 @@
+/* ─────────────────────────────────────────────────────────────
+   record.css — the middle column's figures and ledgers.
+   Hairlines and open space. No cards, no panels, one accent.
+   ───────────────────────────────────────────────────────────── */
+
+/* ═══════════════════════════════════════════════════════════
+   FIGURES
+   ═══════════════════════════════════════════════════════════ */
+
+.fig {
+  margin-top: var(--s2);
+}
+
+.fig__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s2);
+  flex-wrap: wrap;
+  padding-bottom: var(--s1);
+  border-bottom: 1px solid var(--rule);
+}
+
+.fig__k {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.fig__src {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+}
+
+/* the annotation strip — what the cursor is sitting on */
+.fig__note {
+  margin-top: var(--s2);
+  min-height: 62px;
+}
+
+.fig__noteline {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s2);
+  flex-wrap: wrap;
+}
+
+.fig__when {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.fig__figure {
+  font-family: var(--font-mono);
+  font-size: 17px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.fig__spread {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.fig__moved {
+  margin: 6px 0 0;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  max-width: 58ch;
+}
+
+.fig__prov {
+  margin: 4px 0 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+}
+
+.fig.is-pinned .fig__when { color: var(--accent-deep); }
+
+.fig__plot { margin-top: var(--s1); }
+
+.fig__svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
+  outline: none;
+}
+.fig__svg:focus-visible {
+  outline: 1px solid var(--rule-strong);
+  outline-offset: 4px;
+}
+
+/* ── the band ── */
+
+.fig__band {
+  fill: rgba(237, 234, 228, 0.07);
+  stroke: none;
+}
+.fig__band--now { fill: rgba(237, 234, 228, 0.04); }
+.fig__band--accent { fill: var(--accent-wash); }
+
+.fig__edge {
+  fill: none;
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.fig__edge--now { stroke-dasharray: 3 3; }
+.fig__edge--accent { stroke: var(--accent); }
+
+.fig__jump {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.fig__held {
+  stroke: var(--accent);
+  stroke-width: 1;
+  stroke-dasharray: 1 4;
+  vector-effect: non-scaling-stroke;
+}
+.fig__heldlabel {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  fill: var(--accent-deep);
+}
+
+.fig__proj {
+  fill: none;
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+  vector-effect: non-scaling-stroke;
+}
+.fig__projlabel {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  fill: var(--ink-faint);
+}
+
+/* ── scale and axis ── */
+
+.fig__grid {
+  stroke: rgba(237, 234, 228, 0.05);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.fig__axis {
+  stroke: var(--rule);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.fig__today {
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  stroke-dasharray: 1 3;
+  vector-effect: non-scaling-stroke;
+}
+.fig__leader {
+  stroke: rgba(237, 234, 228, 0.08);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.fig__tick,
+.fig__date,
+.fig__endpoint {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  fill: var(--ink-faint);
+}
+.fig__endpoint {
+  font-size: 11px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  fill: var(--ink-muted);
+}
+.fig__date--today {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  fill: var(--ink-muted);
+}
+.fig__date--accent { fill: var(--accent-deep); }
+
+/* ── markers ── */
+
+.fig__dot {
+  fill: var(--ground);
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  transition: r var(--dur) var(--ease), stroke var(--dur) var(--ease);
+}
+.fig__dot--held { stroke: var(--ink-muted); }
+.fig__dot--accent { fill: var(--accent); stroke: var(--accent); }
+.fig__dot.is-active { stroke: var(--ink); r: 4.5; }
+.fig__dot--accent.is-active { stroke: var(--accent-deep); }
+
+.fig__hit {
+  fill: transparent;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fig__dot { transition: none; }
+}

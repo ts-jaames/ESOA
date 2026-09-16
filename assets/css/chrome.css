@@ -71,7 +71,7 @@
   padding: var(--s5) var(--s6) var(--s8);
 }
 
-.portal { max-width: 720px; }
+.portal { max-width: 880px; }
 
 .portal__title {
   font-family: var(--font-mono);
